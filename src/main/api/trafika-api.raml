@@ -1,0 +1,114 @@
+#%RAML 1.0
+version: v1
+title: Trafika
+#baseUri: http://
+
+types: 
+  Proizvod: !include data_types/ProizvodDataType.raml
+  Racun: !include data_types/RacunDataType.raml
+
+/proizvodi:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 0
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Proizvod[]
+            example: !include examples/ProizvodiExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Proizvod
+        example: !include examples/ProizvodExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Proizvod dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Proizvod
+              example: !include examples/ProizvodExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Proizvod obrisan
+    put:
+      body:
+        application/json:
+          type: Proizvod
+          example: !include examples/ProizvodExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Proizvod azuriran
+                
+/racuni:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
