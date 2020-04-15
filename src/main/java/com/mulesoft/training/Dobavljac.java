@@ -2,50 +2,122 @@ package com.mulesoft.training;
 
 public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 	private static final long serialVersionUID = 5652428569906834393L;
-	int proizvodID;
-	double cena;
-	String sifra;
-	String naziv;
+	int dobavljacID;
+	String skraceniNaziv;
+	String punNaziv;
+	String kontaktDobavljaca;
+	String adresaDobavljaca;
+	String grad;
+	String drzava;
+	String postanskiBroj;
+	int PIB;
+	String kontaktOsoba;
+	String brojZiroRacuna;
 	int active;
-
-	public Dobavljac(int proizvodID, double cena, String sifra, String naziv, int active) {
-		this.proizvodID = proizvodID;
-		this.cena = cena;
-		this.sifra = sifra;
-		this.naziv = naziv;
+	
+	public Dobavljac(int dobavljacID, String skraceniNaziv, String punNaziv, String kontaktDobavljaca,
+			String adresaDobavljaca, String grad, String drzava, String postanskiBroj, int pIB, String kontaktOsoba,
+			String brojZiroRacuna, int active) {
+		this.dobavljacID = dobavljacID;
+		this.skraceniNaziv = skraceniNaziv;
+		this.punNaziv = punNaziv;
+		this.kontaktDobavljaca = kontaktDobavljaca;
+		this.adresaDobavljaca = adresaDobavljaca;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.postanskiBroj = postanskiBroj;
+		PIB = pIB;
+		this.kontaktOsoba = kontaktOsoba;
+		this.brojZiroRacuna = brojZiroRacuna;
 		this.active = active;
 	}
 
-	public int getProizvodID() {
-		return proizvodID;
+	public int getDobavljacID() {
+		return dobavljacID;
 	}
 
-	public void setProizvodID(int proizvodID) {
-		this.proizvodID = proizvodID;
+	public void setDobavljacID(int dobavljacID) {
+		this.dobavljacID = dobavljacID;
 	}
 
-	public double getCena() {
-		return cena;
+	public String getSkraceniNaziv() {
+		return skraceniNaziv;
 	}
 
-	public void setCena(double cena) {
-		this.cena = cena;
+	public void setSkraceniNaziv(String skraceniNaziv) {
+		this.skraceniNaziv = skraceniNaziv;
 	}
 
-	public String getSifra() {
-		return sifra;
+	public String getPunNaziv() {
+		return punNaziv;
 	}
 
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
+	public void setPunNaziv(String punNaziv) {
+		this.punNaziv = punNaziv;
 	}
 
-	public String getNaziv() {
-		return naziv;
+	public String getKontaktDobavljaca() {
+		return kontaktDobavljaca;
 	}
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
+	public void setKontaktDobavljaca(String kontaktDobavljaca) {
+		this.kontaktDobavljaca = kontaktDobavljaca;
+	}
+
+	public String getAdresaDobavljaca() {
+		return adresaDobavljaca;
+	}
+
+	public void setAdresaDobavljaca(String adresaDobavljaca) {
+		this.adresaDobavljaca = adresaDobavljaca;
+	}
+
+	public String getGrad() {
+		return grad;
+	}
+
+	public void setGrad(String grad) {
+		this.grad = grad;
+	}
+
+	public String getDrzava() {
+		return drzava;
+	}
+
+	public void setDrzava(String drzava) {
+		this.drzava = drzava;
+	}
+
+	public String getPostanskiBroj() {
+		return postanskiBroj;
+	}
+
+	public void setPostanskiBroj(String postanskiBroj) {
+		this.postanskiBroj = postanskiBroj;
+	}
+
+	public int getPIB() {
+		return PIB;
+	}
+
+	public void setPIB(int pIB) {
+		PIB = pIB;
+	}
+
+	public String getKontaktOsoba() {
+		return kontaktOsoba;
+	}
+
+	public void setKontaktOsoba(String kontaktOsoba) {
+		this.kontaktOsoba = kontaktOsoba;
+	}
+
+	public String getBrojZiroRacuna() {
+		return brojZiroRacuna;
+	}
+
+	public void setBrojZiroRacuna(String brojZiroRacuna) {
+		this.brojZiroRacuna = brojZiroRacuna;
 	}
 
 	public int getActive() {
@@ -61,7 +133,7 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 	}
 
 	@Override
-	public int compareTo(Dobavljac otherProizvod) {
-		return Integer.compare(this.getProizvodID(), otherProizvod.getProizvodID());
+	public int compareTo(Dobavljac otherDobavljac) {
+		return Integer.compare(this.getDobavljacID(), otherDobavljac.getDobavljacID());
 	}
 }

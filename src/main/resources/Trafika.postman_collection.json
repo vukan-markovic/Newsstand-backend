@@ -18,7 +18,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/",
+					"raw": "http://localhost:8080/api/proizvod/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -26,7 +26,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodi",
+						"proizvod",
 						""
 					]
 				}
@@ -39,7 +39,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/1",
+					"raw": "http://localhost:8080/api/proizvod/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -47,7 +47,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodi",
+						"proizvod",
 						"1"
 					]
 				}
@@ -60,7 +60,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/racuni/",
+					"raw": "http://localhost:8080/api/racun/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -68,7 +68,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni",
+						"racun",
 						""
 					]
 				}
@@ -76,33 +76,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodi/12",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/12",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"proizvodi",
-						"12"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/proizvodi/1",
+			"name": "http://localhost:8080/api/proizvodi/2",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/1",
+					"raw": "http://localhost:8080/api/proizvod/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -110,29 +89,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodi",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/proizvodi/12",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/12",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"proizvodi",
-						"12"
+						"proizvod",
+						"2"
 					]
 				}
 			},
@@ -152,10 +110,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"proizvodID\": 6,\r\n  \"cena\": 35, \r\n  \"sifra\": \"234235\", \r\n  \"naziv\": \"Smoki\", \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"proizvodID\": 6,\r\n  \"nazivProizvoda\": \"novine\",\r\n  \"cena\": 35, \r\n  \"barKod\": \"21424214\",\r\n  \"raspolozivaKolicina\": 12,\r\n  \"proizvodjacID\": 1, \r\n  \"vrstaProizvodaID\": 1, \r\n  \"active\": 1\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodi",
+					"raw": "http://localhost:8080/api/proizvod",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -163,7 +121,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodi"
+						"proizvod"
 					]
 				}
 			},
@@ -183,10 +141,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"proizvodID\": 8,\r\n  \"cena\": 35, \r\n  \"sifra\": \"234235\", \r\n  \"naziv\": \"Coca cola\", \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"proizvodID\": 6,\r\n  \"nazivProizvoda\": \"Dnevne novine\",\r\n  \"cena\": 35, \r\n  \"barKod\": \"21424214\",\r\n  \"raspolozivaKolicina\": 12,\r\n  \"proizvodjacID\": 1, \r\n  \"vrstaProizvodaID\": 1, \r\n  \"active\": 1\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/8",
+					"raw": "http://localhost:8080/api/proizvod/6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -194,131 +152,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodi",
-						"8"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/proizvodi/8",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"proizvodID\": 8,\r\n  \"cena\": 35, \r\n  \"sifra\": \"234235\", \r\n  \"naziv\": \"Smoki\", \r\n  \"active\": 1\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/8",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"proizvodi",
-						"8"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/proizvodi/",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "active",
-						"value": "0",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/proizvodi/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"proizvodi",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/racuni/",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "active",
-						"value": "1",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/racuni/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"racuni",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/proizvodi",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"proizvodID\": 6,\r\n  \"cena\": 35, \r\n  \"sifra\": \"234235\", \r\n  \"naziv\": \"Smoki\", \r\n  \"active\": 1\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/proizvodi",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"proizvodi"
+						"proizvod",
+						"6"
 					]
 				}
 			},
@@ -330,7 +165,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/racuni/1",
+					"raw": "http://localhost:8080/api/racun/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -338,7 +173,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni",
+						"racun",
 						"1"
 					]
 				}
@@ -346,33 +181,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni/12",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/racuni/12",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"racuni",
-						"12"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/racuni/1",
+			"name": "http://localhost:8080/api/racuni/2",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/racuni/1",
+					"raw": "http://localhost:8080/api/racun/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -380,29 +194,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/racuni/12",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/racuni/12",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"racuni",
-						"12"
+						"racun",
+						"2"
 					]
 				}
 			},
@@ -422,10 +215,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"racunID\": 7, \r\n  \"vremeIzdavanja\": \"16 November, 2019\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"iznos\": 501, \r\n  \"kolicina\": 1, \r\n  \"proizvodID\": 4, \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"racunID\": 7, \r\n  \"vremeIzdavanja\": \"16 November, 2019\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"ukupanIznosRacuna\": 501, \r\n  \"nazivProdavnice\": \"Trafika BBL\",\r\n  \"nacinPlacanja\": \"gotovina\",\r\n  \"brojRacuna\": \"23142142\", \r\n  \"prodavacID\": 1, \r\n  \"active\": 1\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/racuni",
+					"raw": "http://localhost:8080/api/racun",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -433,30 +226,155 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni"
+						"racun"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni",
+			"name": "http://localhost:8080/api/racuni/8",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"racunID\": 7, \r\n  \"vremeIzdavanja\": \"18 November, 2019\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"ukupanIznosRacuna\": 501, \r\n  \"nazivProdavnice\": \"Trafika BBL\",\r\n  \"nacinPlacanja\": \"gotovina\",\r\n  \"brojRacuna\": \"23142142\", \r\n  \"prodavacID\": 1, \r\n  \"active\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/racun/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"racun",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stavkaRacuna",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaRacuna/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaRacuna",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaRacuna/",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaRacuna/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaRacuna",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaRacuna/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaRacuna/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaRacuna",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaRacuna/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"racunID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicinaProizvoda\": 8\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaRacuna/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaRacuna",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaRacuna/",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"racunID\": 7, \r\n  \"vremeIzdavanja\": \"16 November, 2019\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"iznos\": 501, \r\n  \"kolicina\": 1, \r\n  \"proizvodID\": 4, \r\n  \"active\": 1\r\n}"
+					"raw": "{\n\t\"racunID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicinaProizvoda\": 7\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/racuni",
+					"raw": "http://localhost:8080/api/stavkaRacuna/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -464,30 +382,20 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni"
+						"stavkaRacuna",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni/8",
+			"name": "http://localhost:8080/api/proizvodjac/",
 			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"racunID\": 8, \r\n  \"vremeIzdavanja\": \"16 November, 2020\", \r\n  \"mestoIzdavanja\": \"Novi Sad\", \r\n  \"iznos\": 1050, \r\n  \"kolicina\": 2, \r\n  \"proizvodID\": 3, \r\n  \"active\": 0\r\n}"
-				},
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/racuni/8",
+					"raw": "http://localhost:8080/api/proizvodjac/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -495,31 +403,20 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni",
-						"8"
+						"proizvodjac",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni/8",
+			"name": "http://localhost:8080/api/proizvodjac/1",
 			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"racunID\": 8, \r\n  \"vremeIzdavanja\": \"16 November, 2020\", \r\n  \"mestoIzdavanja\": \"Novi Sad\", \r\n  \"iznos\": 1400, \r\n  \"kolicina\": 2, \r\n  \"proizvodID\": 3, \r\n  \"active\": 0\r\n}"
-				},
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/racuni/8",
+					"raw": "http://localhost:8080/api/proizvodjac/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -527,8 +424,1091 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racuni",
-						"8"
+						"proizvodjac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/proizvodjac/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/proizvodjac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"proizvodjac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/proizvodjac/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"proizvodjacID\": 1, \n\t\"nazivProizvodjaca\": \"Bambi\", \n\t\"kontaktProizvodjaca\": \"2142434355\",\n\t\"adresaProizvodjaca\": \"Banatska BB\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/proizvodjac/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"proizvodjac",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/proizvodjac/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"proizvodjacID\": 1, \n\t\"nazivProizvodjaca\": \"Bambi\", \n\t\"kontaktProizvodjaca\": \"27355\",\n\t\"adresaProizvodjaca\": \"Banatska BB\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/proizvodjac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"proizvodjac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/vrstaProizvoda/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vrstaProizvoda/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vrstaProizvoda",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/vrstaProizvoda/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vrstaProizvoda/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vrstaProizvoda",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/vrstaProizvoda/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vrstaProizvoda/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vrstaProizvoda",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/vrstaProizvoda/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vrstaProizvodaID\": 1, \n\t\"nazivVrsteProizvoda\": \"Stampa\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vrstaProizvoda/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vrstaProizvoda",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/vrstaProizvoda/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vrstaProizvodaID\": 1, \n\t\"nazivVrsteProizvoda\": \"Dnevna stampa\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vrstaProizvoda/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vrstaProizvoda",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/korisnik/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/korisnik/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"korisnik",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/korisnik/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/korisnik/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"korisnik",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/korisnik/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/korisnik/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"korisnik",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/korisnik/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"korisnikID\": 1, \n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"123456\", \n\t\"autentifikacioniToken\": \"5493834539805498059\", \n\t\"uloga\": \"prodavac\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/korisnik/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"korisnik",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/korisnik/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"korisnikID\": 1, \n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"1234568\", \n\t\"autentifikacioniToken\": \"5493834539805498059\", \n\t\"uloga\": \"prodavac\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/korisnik/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"korisnik",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaPorudzbine/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaPorudzbine",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaPorudzbine",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaPorudzbine",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaPorudzbine/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"porudzbinaID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicina\": 12\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaPorudzbine",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"porudzbinaID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicina\": 13\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaPorudzbine",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/dobavljac/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/dobavljac/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dobavljac",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/dobavljac/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/dobavljac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dobavljac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/dobavljac/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/dobavljac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dobavljac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/dobavljac/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"dobavljacID\": 1, \n\t\"skraceniNaziv\": \"RAS\", \n\t\"punNaziv\": \"Ringier Axel Springier\", \n\t\"kontaktDobavljaca\": \"34523532\",\n\t\"adresaDobavljaca\": \"Delibadska 6\", \n\t\"grad\": \"Beograd\", \n\t\"drzava\": \"Srbija\", \n\t\"postanskiBroj\": \"435323\",\n\t\"PIB\": 100000015,\n\t\"kontaktOsoba\": \"Milan\", \n\t\"brojZiroRacuna\": \"302553523\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/dobavljac/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dobavljac",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/dobavljac/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"dobavljacID\": 1, \n\t\"skraceniNaziv\": \"RAS\", \n\t\"punNaziv\": \"Ringier Axel Springier\", \n\t\"kontaktDobavljaca\": \"34523532\",\n\t\"adresaDobavljaca\": \"Delibadska 6\", \n\t\"grad\": \"Beograd\", \n\t\"drzava\": \"Srbija\", \n\t\"postanskiBroj\": \"435323\",\n\t\"PIB\": 100000415,\n\t\"kontaktOsoba\": \"Milan\", \n\t\"brojZiroRacuna\": \"302553523\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/dobavljac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dobavljac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/porudzbina/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/porudzbina/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"porudzbina",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/porudzbina/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/porudzbina/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"porudzbina",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/porudzbina/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/porudzbina/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"porudzbina",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/porudzbina/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"porudzbinaID\": 1,\n\t\"datumPorucivanja\": \"16 November, 2019\",\n\t\"datumIsporuke\": \"18 November, 2019\",\n\t\"ukupanIznosPorudzbine\": 123,\n\t\"statusPorudzbine\": \"poruceno\",\n\t\"dobavljacID\": 1,\n\t\"menadzerID\": 1, \n\t\"prodavacID\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/porudzbina/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"porudzbina",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/porudzbina/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"porudzbinaID\": 1,\n\t\"datumPorucivanja\": \"16 November, 2019\",\n\t\"datumIsporuke\": \"19 November, 2019\",\n\t\"ukupanIznosPorudzbine\": 123,\n\t\"statusPorudzbine\": \"poruceno\",\n\t\"dobavljacID\": 1,\n\t\"menadzerID\": 1, \n\t\"prodavacID\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/porudzbina/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"porudzbina",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/prodavac/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prodavac/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prodavac",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/prodavac/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prodavac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prodavac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/prodavac/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prodavac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prodavac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/prodavac/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"prodavacID\": 1, \n\t\"ime\": \"Pera\",\n\t\"prezime\": \"Peric\",\n\t\"pol\": \"musko\",\n\t\"datumRodjenja\": \"16 November, 1996\",\n\t\"adresaStanovanja\": \"Batinska 5\",\n\t\"telefon\": \"325325235\",\n\t\"JMBG\": \"1122223453125\", \n\t\"datumZaposlenja\": \"16 November, 2019\",\n\t\"strucnaSprema\": \"Srednja skola\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prodavac/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prodavac",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/prodavac/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"prodavacID\": 1, \n\t\"ime\": \"Pera\",\n\t\"prezime\": \"Peric\",\n\t\"pol\": \"musko\",\n\t\"datumRodjenja\": \"16 November, 1996\",\n\t\"adresaStanovanja\": \"Batinska 5\",\n\t\"telefon\": \"3235\",\n\t\"JMBG\": \"1122223453125\", \n\t\"datumZaposlenja\": \"16 November, 2019\",\n\t\"strucnaSprema\": \"Srednja skola\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prodavac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prodavac",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/menadzer/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/menadzer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"menadzer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/menadzer/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/menadzer/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"menadzer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/menadzer/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/menadzer/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"menadzer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/menadzer/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"menadzerID\": 1, \n\t\"adresaKancelarije\": \"Prvomajska 1\", \n\t\"brojKancelarije\": 219\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/menadzer/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"menadzer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/menadzer/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"menadzerID\": 1, \n\t\"adresaKancelarije\": \"Prvomajska 1\", \n\t\"brojKancelarije\": 214\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/menadzer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"menadzer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/izvestaj/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/izvestaj/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"izvestaj",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/izvestaj/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/izvestaj/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"izvestaj",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/izvestaj/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/izvestaj/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"izvestaj",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/izvestaj/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"izvestajID\": 1,\n\t\"datumOd\": \"16 November, 2019\", \n\t\"datumDo\": \"22 November, 2019\", \n\t\"menadzerID\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/izvestaj/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"izvestaj",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/izvestaj/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"izvestajID\": 1,\n\t\"datumOd\": \"16 November, 2019\", \n\t\"datumDo\": \"22 November, 2019\", \n\t\"menadzerID\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/izvestaj/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"izvestaj",
+						"1"
 					]
 				}
 			},

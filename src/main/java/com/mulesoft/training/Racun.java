@@ -1,25 +1,35 @@
 package com.mulesoft.training;
 
+import java.sql.Date;
+
 public class Racun implements java.io.Serializable, Comparable<Racun> {
 	private static final long serialVersionUID = 3915482165745124970L;
 	int racunID;
-	String vremeIzdavanja;
+	Date vremeIzdavanja;
 	String mestoIzdavanja;
-	double iznos;
-	int kolicina;
-	int proizvodID;
+	double ukupanIznosRacuna;
+	String nazivProdavnice;
+	String nacinPlacanja;
+	String brojRacuna;
+	String tipRacuna;
+	int prodavacID;
 	int active;
 	
-	public Racun(int racunID, String vremeIzdavanja, String mestoIzdavanja, double iznos, int kolicina, int proizvodID, int active) {
+	public Racun(int racunID, Date vremeIzdavanja, String mestoIzdavanja, double ukupanIznosRacuna,
+			String nazivProdavnice, String nacinPlacanja, String brojRacuna, String tipRacuna, int prodavacID,
+			int active) {
 		this.racunID = racunID;
 		this.vremeIzdavanja = vremeIzdavanja;
 		this.mestoIzdavanja = mestoIzdavanja;
-		this.iznos = iznos;
-		this.kolicina = kolicina;
-		this.proizvodID = proizvodID;
+		this.ukupanIznosRacuna = ukupanIznosRacuna;
+		this.nazivProdavnice = nazivProdavnice;
+		this.nacinPlacanja = nacinPlacanja;
+		this.brojRacuna = brojRacuna;
+		this.tipRacuna = tipRacuna;
+		this.prodavacID = prodavacID;
 		this.active = active;
 	}
-	
+
 	public int getRacunID() {
 		return racunID;
 	}
@@ -28,11 +38,11 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 		this.racunID = racunID;
 	}
 
-	public String getVremeIzdavanja() {
+	public Date getVremeIzdavanja() {
 		return vremeIzdavanja;
 	}
 
-	public void setVremeIzdavanja(String vremeIzdavanja) {
+	public void setVremeIzdavanja(Date vremeIzdavanja) {
 		this.vremeIzdavanja = vremeIzdavanja;
 	}
 
@@ -44,28 +54,52 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 		this.mestoIzdavanja = mestoIzdavanja;
 	}
 
-	public double getIznos() {
-		return iznos;
+	public double getUkupanIznosRacuna() {
+		return ukupanIznosRacuna;
 	}
 
-	public void setIznos(double iznos) {
-		this.iznos = iznos;
+	public void setUkupanIznosRacuna(double ukupanIznosRacuna) {
+		this.ukupanIznosRacuna = ukupanIznosRacuna;
 	}
 
-	public int getKolicina() {
-		return kolicina;
+	public String getNazivProdavnice() {
+		return nazivProdavnice;
 	}
 
-	public void setKolicina(int kolicina) {
-		this.kolicina = kolicina;
+	public void setNazivProdavnice(String nazivProdavnice) {
+		this.nazivProdavnice = nazivProdavnice;
 	}
 
-	public int getProizvodID() {
-		return proizvodID;
+	public String getNacinPlacanja() {
+		return nacinPlacanja;
 	}
 
-	public void setProizvodID(int proizvodID) {
-		this.proizvodID = proizvodID;
+	public void setNacinPlacanja(String nacinPlacanja) {
+		this.nacinPlacanja = nacinPlacanja;
+	}
+
+	public String getBrojRacuna() {
+		return brojRacuna;
+	}
+
+	public void setBrojRacuna(String brojRacuna) {
+		this.brojRacuna = brojRacuna;
+	}
+
+	public String getTipRacuna() {
+		return tipRacuna;
+	}
+
+	public void setTipRacuna(String tipRacuna) {
+		this.tipRacuna = tipRacuna;
+	}
+
+	public int getProdavacID() {
+		return prodavacID;
+	}
+
+	public void setProdavacID(int prodavacID) {
+		this.prodavacID = prodavacID;
 	}
 
 	public int getActive() {
@@ -74,6 +108,10 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 
 	public void setActive(int active) {
 		this.active = active;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

@@ -2,50 +2,40 @@ package com.mulesoft.training;
 
 public class VrstaProizvoda implements java.io.Serializable, Comparable<VrstaProizvoda> {
 	private static final long serialVersionUID = 5652428569906834393L;
-	int proizvodID;
-	double cena;
-	String sifra;
-	String naziv;
+	int vrstaProizvodaID;
+	String nazivVrsteProizvoda;
+	String opisVrsteProizvoda;
 	int active;
 
-	public VrstaProizvoda(int proizvodID, double cena, String sifra, String naziv, int active) {
-		this.proizvodID = proizvodID;
-		this.cena = cena;
-		this.sifra = sifra;
-		this.naziv = naziv;
+	public VrstaProizvoda(int vrstaProizvodaID, String nazivVrsteProizvoda, String opisVrsteProizvoda, int active) {
+		this.vrstaProizvodaID = vrstaProizvodaID;
+		this.nazivVrsteProizvoda = nazivVrsteProizvoda;
+		this.opisVrsteProizvoda = opisVrsteProizvoda;
 		this.active = active;
 	}
 
-	public int getProizvodID() {
-		return proizvodID;
+	public int getVrstaProizvodaID() {
+		return vrstaProizvodaID;
 	}
 
-	public void setProizvodID(int proizvodID) {
-		this.proizvodID = proizvodID;
+	public void setVrstaProizvodaID(int vrstaProizvodaID) {
+		this.vrstaProizvodaID = vrstaProizvodaID;
 	}
 
-	public double getCena() {
-		return cena;
+	public String getNazivVrsteProizvoda() {
+		return nazivVrsteProizvoda;
 	}
 
-	public void setCena(double cena) {
-		this.cena = cena;
+	public void setNazivVrsteProizvoda(String nazivVrsteProizvoda) {
+		this.nazivVrsteProizvoda = nazivVrsteProizvoda;
 	}
 
-	public String getSifra() {
-		return sifra;
+	public String getOpisVrsteProizvoda() {
+		return opisVrsteProizvoda;
 	}
 
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
-	}
-
-	public String getNaziv() {
-		return naziv;
-	}
-
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
+	public void setOpisVrsteProizvoda(String opisVrsteProizvoda) {
+		this.opisVrsteProizvoda = opisVrsteProizvoda;
 	}
 
 	public int getActive() {
@@ -61,7 +51,7 @@ public class VrstaProizvoda implements java.io.Serializable, Comparable<VrstaPro
 	}
 
 	@Override
-	public int compareTo(VrstaProizvoda otherProizvod) {
-		return Integer.compare(this.getProizvodID(), otherProizvod.getProizvodID());
+	public int compareTo(VrstaProizvoda otherVrstaProizvoda) {
+		return Integer.compare(this.getVrstaProizvodaID(), otherVrstaProizvoda.getVrstaProizvodaID());
 	}
 }

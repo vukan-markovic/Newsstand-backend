@@ -2,50 +2,51 @@ package com.mulesoft.training;
 
 public class Proizvodjac implements java.io.Serializable, Comparable<Proizvodjac> {
 	private static final long serialVersionUID = 5652428569906834393L;
-	int proizvodID;
-	double cena;
-	String sifra;
-	String naziv;
+	int proizvodjacID;
+	String nazivProizvodjaca;
+	String kontaktProizvodjaca;
+	String adresaProizvodjaca;
 	int active;
-
-	public Proizvodjac(int proizvodID, double cena, String sifra, String naziv, int active) {
-		this.proizvodID = proizvodID;
-		this.cena = cena;
-		this.sifra = sifra;
-		this.naziv = naziv;
+	
+	public Proizvodjac(int proizvodjacID, String nazivProizvodjaca, String kontaktProizvodjaca,
+			String adresaProizvodjaca, int active) {
+		this.proizvodjacID = proizvodjacID;
+		this.nazivProizvodjaca = nazivProizvodjaca;
+		this.kontaktProizvodjaca = kontaktProizvodjaca;
+		this.adresaProizvodjaca = adresaProizvodjaca;
 		this.active = active;
 	}
 
-	public int getProizvodID() {
-		return proizvodID;
+	public int getProizvodjacID() {
+		return proizvodjacID;
 	}
 
-	public void setProizvodID(int proizvodID) {
-		this.proizvodID = proizvodID;
+	public void setProizvodjacID(int proizvodjacID) {
+		this.proizvodjacID = proizvodjacID;
 	}
 
-	public double getCena() {
-		return cena;
+	public String getNazivProizvodjaca() {
+		return nazivProizvodjaca;
 	}
 
-	public void setCena(double cena) {
-		this.cena = cena;
+	public void setNazivProizvodjaca(String nazivProizvodjaca) {
+		this.nazivProizvodjaca = nazivProizvodjaca;
 	}
 
-	public String getSifra() {
-		return sifra;
+	public String getKontaktProizvodjaca() {
+		return kontaktProizvodjaca;
 	}
 
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
+	public void setKontaktProizvodjaca(String kontaktProizvodjaca) {
+		this.kontaktProizvodjaca = kontaktProizvodjaca;
 	}
 
-	public String getNaziv() {
-		return naziv;
+	public String getAdresaProizvodjaca() {
+		return adresaProizvodjaca;
 	}
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
+	public void setAdresaProizvodjaca(String adresaProizvodjaca) {
+		this.adresaProizvodjaca = adresaProizvodjaca;
 	}
 
 	public int getActive() {
@@ -61,7 +62,7 @@ public class Proizvodjac implements java.io.Serializable, Comparable<Proizvodjac
 	}
 
 	@Override
-	public int compareTo(Proizvodjac otherProizvod) {
-		return Integer.compare(this.getProizvodID(), otherProizvod.getProizvodID());
+	public int compareTo(Proizvodjac otherProizvodjac) {
+		return Integer.compare(this.getProizvodjacID(), otherProizvodjac.getProizvodjacID());
 	}
 }

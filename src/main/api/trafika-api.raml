@@ -6,6 +6,16 @@ title: Trafika
 types: 
   Proizvod: !include data_types/ProizvodDataType.raml
   Racun: !include data_types/RacunDataType.raml
+  Prodavac: !include data_types/ProdavacDataType.raml
+  Menadzer: !include data_types/MenadzerDataType.raml
+  Dobavljac: !include data_types/DobavljacDataType.raml
+  Porudzbina: !include data_types/PorudzbinaDataType.raml
+  Izvestaj: !include data_types/IzvestajDataType.raml
+  StavkaPorudzbine: !include data_types/StavkaPorudzbineDataType.raml
+  StavkaRacuna: !include data_types/StavkaRacunaDataType.raml
+  Korisnik: !include data_types/KorisnikDataType.raml
+  Proizvodjac: !include data_types/ProizvodjacDataType.raml
+  VrstaProizvoda: !include data_types/VrstaProizvodaDataType.raml
 
 /proizvod:
   get:
@@ -199,14 +209,14 @@ types:
           body: 
             application/json:
               type: Menadzer
-              example: !include examples/MendzerExample.raml
+              example: !include examples/MenadzerExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Mendzer obrisan
+                message: Menadzer obrisan
     put:
       body:
         application/json:
@@ -283,20 +293,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: Porudzbina[]
+            example: !include examples/PorudzbineExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: Porudzbina
+        example: !include examples/PorudzbinaExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Porudzbina dodata
 
   /{ID}:
     get:
@@ -304,28 +314,28 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: Porudzbina
+              example: !include examples/PorudzbinaExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Porudzbina obrisana
     put:
       body:
         application/json:
-          type: Racun
-          example: !include examples/RacunExample.raml
+          type: Porudzbina
+          example: !include examples/PorudzbinaExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Porudzbina azurirana
                 
-/racuni:
+/izvestaj:
   get:
     headers:
       active:
@@ -336,20 +346,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: Izvestaj[]
+            example: !include examples/IzvestajiExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: Izvestaj
+        example: !include examples/IzvestajExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Izvestaj dodat
 
   /{ID}:
     get:
@@ -357,28 +367,28 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: Izvestaj
+              example: !include examples/IzvestajExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Izvestaj obrisan
     put:
       body:
         application/json:
           type: Racun
-          example: !include examples/RacunExample.raml
+          example: !include examples/IzvestajExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Izvestaj azuriran
                 
-/racuni:
+/stavkaRacuna:
   get:
     headers:
       active:
@@ -389,20 +399,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: StavkaRacuna[]
+            example: !include examples/StavkeRacunaExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: StavkaRacuna
+        example: !include examples/StavkaRacunaExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Stavka racuna dodata
 
   /{ID}:
     get:
@@ -410,28 +420,28 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: StavkaRacuna
+              example: !include examples/StavkaRacunaExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Stavka racuna obrisana
     put:
       body:
         application/json:
-          type: Racun
-          example: !include examples/RacunExample.raml
+          type: StavkaRacuna
+          example: !include examples/StavkaRacunaExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Stavka racuna azurirana
                 
-/racuni:
+/stavkaPorudzbine:
   get:
     headers:
       active:
@@ -442,20 +452,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: StavkaPorudzbine[]
+            example: !include examples/StavkePorudzbineExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: StavkaPorudzbine
+        example: !include examples/StavkaPorudzbineExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Stavka porudzbine dodata
 
   /{ID}:
     get:
@@ -463,28 +473,28 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: StavkaPorudzbine
+              example: !include examples/StavkaPorudzbineExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Stavka porudzbine obrisana
     put:
       body:
         application/json:
-          type: Racun
-          example: !include examples/RacunExample.raml
+          type: StavkaPorudzbine
+          example: !include examples/StavkaPorudzbineExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Stavka porudzbine azurirana
                 
-/racuni:
+/korisnik:
   get:
     headers:
       active:
@@ -495,20 +505,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: Korisnik[]
+            example: !include examples/KorisniciExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: Korisnik
+        example: !include examples/KorisnikExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Korisnik dodat
 
   /{ID}:
     get:
@@ -516,28 +526,28 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: Korisnik
+              example: !include examples/KorisnikExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Korisnik obrisan
     put:
       body:
         application/json:
-          type: Racun
-          example: !include examples/RacunExample.raml
+          type: Korisnik
+          example: !include examples/KorisnikExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Korisnik azuriran
                 
-/racuni:
+/proizvodjac:
   get:
     headers:
       active:
@@ -548,20 +558,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: Proizvodjac[]
+            example: !include examples/ProizvodjaciExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: Proizvodjac
+        example: !include examples/ProizvodjacExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Proizvodjac dodat
 
   /{ID}:
     get:
@@ -569,28 +579,28 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: Proizvodjac
+              example: !include examples/ProizvodjacExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Proizvodjac obrisan
     put:
       body:
         application/json:
-          type: Racun
-          example: !include examples/RacunExample.raml
+          type: Proizvodjac
+          example: !include examples/ProizvodjacExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Proizvodjac azuriran
                 
-/racuni:
+/vrstaProizvoda:
   get:
     headers:
       active:
@@ -601,20 +611,20 @@ types:
       200:
         body: 
           application/json:
-            type: Racun[]
-            example: !include examples/RacuniExample.raml
+            type: VrstaProizvoda[]
+            example: !include examples/VrsteProizvodaExample.raml
 
   post:
     body: 
       application/json:
-        type: Racun
-        example: !include examples/RacunExample.raml
+        type: VrstaProizvoda
+        example: !include examples/VrstaProizvodaExample.raml
     responses: 
       201:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Vrsta proizvoda dodata
 
   /{ID}:
     get:
@@ -622,23 +632,23 @@ types:
         200:
           body: 
             application/json:
-              type: Racun
-              example: !include examples/RacunExample.raml
+              type: VrstaProizvoda
+              example: !include examples/VrstaProizvodaExample.raml
     delete:
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: Vrsta proizvoda obrisana
     put:
       body:
         application/json:
-          type: Racun
-          example: !include examples/RacunExample.raml
+          type: VrstaProizvoda
+          example: !include examples/VrstaProizvodaExample.raml
       responses:
         200:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: Vrsta proizvoda azurirana

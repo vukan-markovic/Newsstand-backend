@@ -1,51 +1,114 @@
 package com.mulesoft.training;
 
+import java.sql.Date;
+
 public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 	private static final long serialVersionUID = 5652428569906834393L;
-	int proizvodID;
-	double cena;
-	String sifra;
-	String naziv;
+	int prodavacID;
+	String ime;
+	String prezime;
+	String pol; 
+	Date datumRodjenja;
+	String adresaStanovanja;
+	String telefon;
+	String JMBG;
+	String datumZaposlenja;
+	String strucnaSprema;
 	int active;
 
-	public Prodavac(int proizvodID, double cena, String sifra, String naziv, int active) {
-		this.proizvodID = proizvodID;
-		this.cena = cena;
-		this.sifra = sifra;
-		this.naziv = naziv;
+	public Prodavac(int prodavacID, String ime, String prezime, String pol, Date datumRodjenja, String adresaStanovanja,
+			String telefon, String jMBG, String datumZaposlenja, String strucnaSprema, int active) {
+		this.prodavacID = prodavacID;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.pol = pol;
+		this.datumRodjenja = datumRodjenja;
+		this.adresaStanovanja = adresaStanovanja;
+		this.telefon = telefon;
+		JMBG = jMBG;
+		this.datumZaposlenja = datumZaposlenja;
+		this.strucnaSprema = strucnaSprema;
 		this.active = active;
 	}
 
-	public int getProizvodID() {
-		return proizvodID;
+	public int getProdavacID() {
+		return prodavacID;
 	}
 
-	public void setProizvodID(int proizvodID) {
-		this.proizvodID = proizvodID;
+	public void setProdavacID(int prodavacID) {
+		this.prodavacID = prodavacID;
 	}
 
-	public double getCena() {
-		return cena;
+	public String getIme() {
+		return ime;
 	}
 
-	public void setCena(double cena) {
-		this.cena = cena;
+	public void setIme(String ime) {
+		this.ime = ime;
 	}
 
-	public String getSifra() {
-		return sifra;
+	public String getPrezime() {
+		return prezime;
 	}
 
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
+	public void setPrezime(String prezime) {
+		this.prezime = prezime;
 	}
 
-	public String getNaziv() {
-		return naziv;
+	public String getPol() {
+		return pol;
 	}
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
+	public void setPol(String pol) {
+		this.pol = pol;
+	}
+
+	public Date getDatumRodjenja() {
+		return datumRodjenja;
+	}
+
+	public void setDatumRodjenja(Date datumRodjenja) {
+		this.datumRodjenja = datumRodjenja;
+	}
+
+	public String getAdresaStanovanja() {
+		return adresaStanovanja;
+	}
+
+	public void setAdresaStanovanja(String adresaStanovanja) {
+		this.adresaStanovanja = adresaStanovanja;
+	}
+
+	public String getTelefon() {
+		return telefon;
+	}
+
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+
+	public String getJMBG() {
+		return JMBG;
+	}
+
+	public void setJMBG(String jMBG) {
+		JMBG = jMBG;
+	}
+
+	public String getDatumZaposlenja() {
+		return datumZaposlenja;
+	}
+
+	public void setDatumZaposlenja(String datumZaposlenja) {
+		this.datumZaposlenja = datumZaposlenja;
+	}
+
+	public String getStrucnaSprema() {
+		return strucnaSprema;
+	}
+
+	public void setStrucnaSprema(String strucnaSprema) {
+		this.strucnaSprema = strucnaSprema;
 	}
 
 	public int getActive() {
@@ -61,7 +124,7 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 	}
 
 	@Override
-	public int compareTo(Prodavac otherProizvod) {
-		return Integer.compare(this.getProizvodID(), otherProizvod.getProizvodID());
+	public int compareTo(Prodavac otherProdavac) {
+		return Integer.compare(this.getProdavacID(), otherProdavac.getProdavacID());
 	}
 }
