@@ -11,5 +11,6 @@
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="lib" path="C:/Users/Win7/Google Drive/3. godina/6. semestar/Sistemi za podršku planiranju poslovnih resursa/Vežbe/trafika_vukan_markovic_it20-16/src/main/app/lib/mysql-connector-java-5.1.44.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Win7/Google Drive/4. godina/8. semestar/ERP eksploatacija, održavanje i nadogradnja/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

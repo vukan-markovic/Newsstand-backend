@@ -48,20 +48,20 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
-                <flow-ref name="errorFlow" doc:name="Flow Reference"/>
+                <flow-ref name="racunErrorFlow" doc:name="racunErrorFlow"/>
             </when>
             <otherwise>
-                <flow-ref name="successFlow" doc:name="Flow Reference"/>
+                <flow-ref name="racunSuccessFlow" doc:name="racunSuccessFlow"/>
             </otherwise>
         </choice>
 
     </flow>
-    <flow name="errorFlow">
+    <flow name="racunErrorFlow">
         <set-property propertyName="http.status" value="404" doc:name="Property"/>
         <set-payload value="Ne postoji racun sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
-    <flow name="successFlow">
+    <flow name="racunSuccessFlow">
         <dw:transform-message doc:name="Transform Message" metadata:id="215c4bd6-75df-4a1c-bbaa-1700cf6d8c38">
             <dw:input-payload mimeType="application/java"/>
             <dw:set-payload><![CDATA[%dw 1.0
@@ -118,7 +118,7 @@ active=values(active);]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
-                <flow-ref name="errorFlow" doc:name="Flow Reference"/>
+                <flow-ref name="racunErrorFlow" doc:name="Flow Reference"/>
             </when>
             <otherwise>
                 <db:delete config-ref="MySQL_Configuration" doc:name="Database">

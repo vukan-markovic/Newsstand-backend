@@ -7,7 +7,7 @@ types:
   Proizvod: !include data_types/ProizvodDataType.raml
   Racun: !include data_types/RacunDataType.raml
 
-/proizvodi:
+/proizvod:
   get:
     headers:
       active:
@@ -59,6 +59,536 @@ types:
             application/json:
               example:
                 message: Proizvod azuriran
+                
+/racun:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
+                
+/prodavac:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Prodavac[]
+            example: !include examples/ProdavciExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Prodavac
+        example: !include examples/ProdavacExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Prodavac dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Prodavac
+              example: !include examples/ProdavacExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Prodavac obrisan
+    put:
+      body:
+        application/json:
+          type: Prodavac
+          example: !include examples/ProdavacExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Prodavac azuriran
+                
+/menadzer:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Menadzer[]
+            example: !include examples/MenadzeriExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Menadzer
+        example: !include examples/MenadzerExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Menadzer dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Menadzer
+              example: !include examples/MendzerExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Mendzer obrisan
+    put:
+      body:
+        application/json:
+          type: Menadzer
+          example: !include examples/MenadzerExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Menadzer azuriran
+                
+/dobavljac:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Dobavljac[]
+            example: !include examples/DobavljaciExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Dobavljac
+        example: !include examples/DobavljacExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Dobavljac dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Dobavljac
+              example: !include examples/DobavljacExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Dobavljac obrisan
+    put:
+      body:
+        application/json:
+          type: Dobavljac
+          example: !include examples/DobavljacExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Dobavljac azuriran
+                
+/porudzbina:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
+                
+/racuni:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
+                
+/racuni:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
+                
+/racuni:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
+                
+/racuni:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
+                
+/racuni:
+  get:
+    headers:
+      active:
+        type: integer
+        example: 1
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Racun[]
+            example: !include examples/RacuniExample.raml
+
+  post:
+    body: 
+      application/json:
+        type: Racun
+        example: !include examples/RacunExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Racun dodat
+
+  /{ID}:
+    get:
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Racun
+              example: !include examples/RacunExample.raml
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun obrisan
+    put:
+      body:
+        application/json:
+          type: Racun
+          example: !include examples/RacunExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Racun azuriran
                 
 /racuni:
   get:
