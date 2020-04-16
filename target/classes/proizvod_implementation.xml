@@ -23,8 +23,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         </choice>
     </flow>
     <flow name="getProizvodiFlow2">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where active=#[flowVars.active];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Proizvod;]]></db:parameterized-query>
         </db:select>
         <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c726-4c0a-b760-6c9cbc9fdacb">
             <dw:input-payload doc:sample="sample_data\MyPojo.dwl" mimeType="application/java"/>
@@ -34,8 +34,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 
     </flow>
     <flow name="getProizvodiFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod;]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Proizvod;]]></db:parameterized-query>
         </db:select>
 
         <dw:transform-message doc:name="Transform Message" metadata:id="9e13650d-f9c2-4df5-b57f-e14aba196e7e">
@@ -46,8 +46,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 
     </flow>
     <flow name="getProizvodByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
@@ -72,7 +72,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <file:outbound-endpoint path="src/main/resources/output" outputPattern="Proizvod" connector-ref="FileConnector" responseTimeout="10000" doc:name="Proizvod" metadata:id="bdb6c06a-8ae0-438d-96d1-409bf41f0c76"/>
         <logger message="Dodat proizvod u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
 
@@ -84,14 +83,14 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active]);]]></db:parameterized-query>
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.Proizvod (proizvodID, nazivProizvoda, opisProizvoda, cena, tipPakovanja, velicinaPakovanja, barKod, masa, raspolozivaKolicina, proizvodjacID, vrstaProizvodaID) values (#[payload.proizvodID], #[payload.nazivProizvoda], #[payload.opisProizvoda], #[payload.cena], #[payload.tipPakovanja], #[payload.velicinaPakovanja], #[payload.tipPakovanja], #[payload.tipPakovanja], #[payload.barKod], #[payload.masa], #[payload.raspolozivaKolicina], #[payload.proizvodjacID], #[payload.vrstaProizvodaID]);]]></db:parameterized-query>
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
 
         <catch-exception-strategy doc:name="Catch Exception Strategy" >
             <set-property propertyName="http.status" value="400" doc:name="Property"/>
-            <set-payload value="Vec postoji proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
+            <set-payload value="Ve&#263; postoji proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
 
             <logger level="ERROR" doc:name="Logger" message="#[exception]"/>
         </catch-exception-strategy>
@@ -104,8 +103,8 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
 values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
 on duplicate key update 
 cena=values(cena), 
@@ -113,21 +112,23 @@ sifra=values(sifra),
 naziv=values(naziv), 
 active=values(active);]]></db:parameterized-query>
 
+
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
 
     </flow>
     <flow name="deleteProizvodByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
-                <flow-ref name="proizvodErrorFlow" doc:name="Flow Reference"/>
+                <flow-ref name="proizvodErrorFlow" doc:name="proizvodErrorFlow"/>
             </when>
             <otherwise>
-                <db:bulk-execute config-ref="MySQL_Configuration" doc:name="Database"><![CDATA[delete from racun where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];
-delete from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:bulk-execute>
+				<db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+				</db:delete>
                 <set-payload value="Obrisan proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>

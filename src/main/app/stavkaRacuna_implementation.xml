@@ -15,16 +15,16 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <set-variable variableName="active" value="#[message.inboundProperties.active]" doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
         <choice doc:name="Choice">
             <when expression="#[flowVars.active == empty]">
-                <flow-ref name="getProizvodiFlow" doc:name="getStavkeRacunaFlow"/>
+                <flow-ref name="getStavkeRacunaFlow" doc:name="getStavkeRacunaFlow"/>
             </when>
             <otherwise>
-                <flow-ref name="getProizvodiFlow2" doc:name="getStavkeRacunaFlow2"/>
+                <flow-ref name="getStavkeRacunaFlow2" doc:name="getStavkeRacunaFlow2"/>
             </otherwise>
         </choice>
     </flow>
     <flow name="getStavkeRacunaFlow2">
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from trafika.Dobavljac where active=#[flowVars.active];]]></db:parameterized-query>
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaRacuna;]]></db:parameterized-query>
         </db:select>
         <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c726-4c0a-b760-6c9cbc9fdacb">
             <dw:input-payload doc:sample="sample_data\MyPojo.dwl" mimeType="application/java"/>
@@ -35,7 +35,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
     </flow>
     <flow name="getStavkeRacunaFlow">
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from trafika.Dobavljac;]]></db:parameterized-query>
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaRacuna;]]></db:parameterized-query>
         </db:select>
 
         <dw:transform-message doc:name="Transform Message" metadata:id="9e13650d-f9c2-4df5-b57f-e14aba196e7e">
@@ -46,8 +46,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 
     </flow>
     <flow name="getStavkaRacunaByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaRacuna where stavkaRacunaID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
@@ -61,7 +61,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
     </flow>
     <flow name="stavkaRacunaErrorFlow">
         <set-property propertyName="http.status" value="404" doc:name="Property"/>
-        <set-payload value="Ne postoji proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
+        <set-payload value="Ne postoji stavka ra&#269;una sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="stavkaRacunaSuccessFlow">
@@ -72,7 +72,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <file:outbound-endpoint path="src/main/resources/output" outputPattern="StavkaRacuna" connector-ref="FileConnector" responseTimeout="10000" doc:name="Stavka racuna" metadata:id="bdb6c06a-8ae0-438d-96d1-409bf41f0c76"/>
         <logger message="Dodat proizvod u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
 
@@ -84,8 +83,8 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active]);]]></db:parameterized-query>
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.StavkaRacuna (stavkaRacunaID, cena, sifra, naziv, active) values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active]);]]></db:parameterized-query>
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
 

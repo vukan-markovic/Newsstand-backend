@@ -24,7 +24,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
     </flow>
     <flow name="getDobavljaciFlow2">
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Dobavljac where active=#[flowVars.active];]]></db:parameterized-query>
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Dobavljac;]]></db:parameterized-query>
         </db:select>
         <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c726-4c0a-b760-6c9cbc9fdacb">
             <dw:input-payload doc:sample="sample_data\MyPojo.dwl" mimeType="application/java"/>
@@ -72,8 +72,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <file:outbound-endpoint path="src/main/resources/output" outputPattern="Proizvod" connector-ref="FileConnector" responseTimeout="10000" doc:name="Dobavljac" metadata:id="bdb6c06a-8ae0-438d-96d1-409bf41f0c76"/>
-        <logger message="Dodat proizvod u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
+        <logger message="Dodat dobavlja&#269; u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
 
     <flow name="postDobavljacFlow">
@@ -84,14 +83,14 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active]);]]></db:parameterized-query>
-        </db:insert>
+		<db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.Dobavljac (dobavljacID, skraceniNaziv, punNaziv, kontaktDobavljaca, adresaDobavljaca, grad, drzava, postanskiBroj, PIB, kontaktOsoba, brojZiroRacuna) values (#[payload.dobavljacID], #[payload.skraceniNaziv], #[payload.punNaziv], #[payload.kontaktDobavljaca], #[payload.adresaDobavljaca], #[payload.grad], #[payload.drzava], #[payload.postanskiBroj], #[payload.PIB], #[payload.kontaktOsoba], #[payload.kontaktOsoba], #[payload.brojZiroRacuna]);]]></db:parameterized-query>
+		</db:insert>
         <logger level="INFO" doc:name="Logger"/>
 
         <catch-exception-strategy doc:name="Catch Exception Strategy" >
             <set-property propertyName="http.status" value="400" doc:name="Property"/>
-            <set-payload value="Vec postoji proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
+            <set-payload value="Vec postoji dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
 
             <logger level="ERROR" doc:name="Logger" message="#[exception]"/>
         </catch-exception-strategy>
@@ -104,8 +103,8 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
 values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
 on duplicate key update 
 cena=values(cena), 
@@ -113,22 +112,23 @@ sifra=values(sifra),
 naziv=values(naziv), 
 active=values(active);]]></db:parameterized-query>
 
+
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
 
     </flow>
     <flow name="deleteDobavljacByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Dobavljac where dobavljacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
                 <flow-ref name="dobavljacErrorFlow" doc:name="dobavljacErrorFlow"/>
             </when>
             <otherwise>
-                <db:bulk-execute config-ref="MySQL_Configuration" doc:name="Database"><![CDATA[delete from racun where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];
-delete from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:bulk-execute>
-                <set-payload value="Obrisan proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
+                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Dobavljac where dobavljacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query></db:delete>
+                <set-payload value="Obrisan dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>
         </choice>

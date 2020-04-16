@@ -72,7 +72,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <file:outbound-endpoint path="src/main/resources/output" outputPattern="StavkaPorudzbine" connector-ref="FileConnector" responseTimeout="10000" doc:name="Stavka porud&#382;bine" metadata:id="bdb6c06a-8ae0-438d-96d1-409bf41f0c76"/>
         <logger message="Dodat proizvod u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
 

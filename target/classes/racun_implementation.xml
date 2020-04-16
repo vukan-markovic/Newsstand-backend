@@ -23,8 +23,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         </choice>
     </flow>
     <flow name="getRacuniFlow2">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from racun where active=#[flowVars.active];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Racun;]]></db:parameterized-query>
         </db:select>
         <dw:transform-message doc:name="Transform Message" metadata:id="438432db-7d9b-4d5f-9573-0f9a340d0970">
             <dw:input-payload doc:sample="sample_data\list_map.dwl"/>
@@ -33,9 +33,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
     </flow>
     <flow name="getRacuniFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from racun;]]></db:parameterized-query>
-        </db:select>
+		<db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Racun;]]></db:parameterized-query>
+		</db:select>
         <dw:transform-message doc:name="Transform Message" metadata:id="9e13650d-f9c2-4df5-b57f-e14aba196e7e">
             <dw:input-payload doc:sample="sample_data\list_Proizvod.dwl" mimeType="application/java"/>
             <dw:set-payload resource="classpath:json_racun_playground.dwl"/>
@@ -43,8 +43,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
     </flow>
     <flow name="getRacunByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from racun where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Racun where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
@@ -58,7 +59,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
     </flow>
     <flow name="racunErrorFlow">
         <set-property propertyName="http.status" value="404" doc:name="Property"/>
-        <set-payload value="Ne postoji racun sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
+        <set-payload value="Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="racunSuccessFlow">
@@ -69,7 +70,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <file:outbound-endpoint path="src/main/resources/output" outputPattern="Racun" connector-ref="FileConnector" responseTimeout="10000" doc:name="Racun"/>
         <logger message="Dodat racun u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="postRacunFlow">
@@ -80,13 +80,14 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into racun (racunID, vremeIzdavanja, mestoIzdavanja, iznos, kolicina, proizvodID, active) values (#[payload.racunID], #[payload.vremeIzdavanja], #[payload.mestoIzdavanja], #[payload.iznos], #[payload.kolicina], #[payload.proizvodID], #[payload.active]);]]></db:parameterized-query>
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into racun (racunID, vremeIzdavanja, mestoIzdavanja, ukupanIznosRacuna, nazivProdavnice, nacinPlacanja, brojRacuna, tipRacuna, prodavacID) values (#[payload.racunID], #[payload.vremeIzdavanja], #[payload.mestoIzdavanja], #[payload.ukupanIznosRacuna], #[payload.nazivProdavnice], #[payload.nacinPlacanja], #[payload.brojRacuna], #[payload.tipRacuna], #[payload.prodavacID]);]]></db:parameterized-query>
+
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <set-property propertyName="http.status" value="400" doc:name="Property"/>
-            <set-payload doc:name="Set Payload" value="Vec postoji racun sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]"/>
+            <set-payload doc:name="Set Payload" value="Vec postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]"/>
 
             <logger level="INFO" doc:name="Logger"/>
         </catch-exception-strategy>
@@ -99,8 +100,8 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:update config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into racun (racunID, vremeIzdavanja, mestoIzdavanja, iznos, kolicina, proizvodID, active) values (#[payload.racunID], #[payload.vremeIzdavanja], #[payload.mestoIzdavanja], #[payload.iznos], #[payload.kolicina], #[payload.proizvodID], #[payload.active])
+        <db:update config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into racun (racunID, vremeIzdavanja, mestoIzdavanja, iznos, kolicina, proizvodID, active) values (#[payload.racunID], #[payload.vremeIzdavanja], #[payload.mestoIzdavanja], #[payload.iznos], #[payload.kolicina], #[payload.proizvodID], #[payload.active])
 on duplicate key update 
 vremeIzdavanja=values(vremeIzdavanja), 
 mestoIzdavanja=values(mestoIzdavanja), 
@@ -108,23 +109,24 @@ iznos=values(iznos),
 kolicina=values(kolicina), 
 proizvodID=values(proizvodID), 
 active=values(active);]]></db:parameterized-query>
+
         </db:update>
         <logger level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="deleteRacunByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from racun where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Racun where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
 
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
-                <flow-ref name="racunErrorFlow" doc:name="Flow Reference"/>
+                <flow-ref name="racunErrorFlow" doc:name="racunErrorFlow"/>
             </when>
             <otherwise>
-                <db:delete config-ref="MySQL_Configuration" doc:name="Database">
-                    <db:parameterized-query><![CDATA[delete from racun where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Racun where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
                 </db:delete>
-                <set-payload value="Obrisan racun sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
+                <set-payload value="Obrisan ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>
         </choice>
