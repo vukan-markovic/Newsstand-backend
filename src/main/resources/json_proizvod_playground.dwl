@@ -3,8 +3,14 @@
 ---
 payload map ((payload , indexOfPayload) -> {
 	proizvodID: payload.proizvodID,
-	cena: payload.cena as :number,
-	sifra: payload.sifra as :string,
-	naziv: payload.naziv as :string,
-	active: payload.active as :number
+	nazivProizvoda: payload.nazivProizvoda as :string,
+  	opisProizvoda: payload.opisProizvoda as :string,
+  	cena: payload.cena  as :number,
+  	tipPakovanja: payload.tipPakovanja as :string,
+  	velicinaPakovanja: payload.velicinaPakovanja as :string,
+  	barKod: payload.barKod as :string,
+  	masa: payload.masa as :number,
+  	raspolozivaKolicina: payload.raspolozivaKolicina as :integer,
+  	proizvodjacID: payload.proizvodjacID as :integer,
+  	vrstaProizvodaID: payload.vrstaProizvodaID as :integer
 })

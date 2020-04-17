@@ -12,10 +12,9 @@ public class Porudzbina implements java.io.Serializable, Comparable<Porudzbina> 
 	int dobavljacID;
 	int menadzerID;
 	int prodavacID;
-	int active;
 	
 	public Porudzbina(int porudzbinaID, Date datumPorucivanja, Date datumIsporuke, double ukupanIznosPorudzbine,
-			String statusPorudzbine, int dobavljacID, int menadzerID, int prodavacID, int active) {
+			String statusPorudzbine, int dobavljacID, int menadzerID, int prodavacID) {
 		this.porudzbinaID = porudzbinaID;
 		this.datumPorucivanja = datumPorucivanja;
 		this.datumIsporuke = datumIsporuke;
@@ -24,7 +23,6 @@ public class Porudzbina implements java.io.Serializable, Comparable<Porudzbina> 
 		this.dobavljacID = dobavljacID;
 		this.menadzerID = menadzerID;
 		this.prodavacID = prodavacID;
-		this.active = active;
 	}
 
 	public int getPorudzbinaID() {
@@ -89,14 +87,6 @@ public class Porudzbina implements java.io.Serializable, Comparable<Porudzbina> 
 
 	public void setProdavacID(int prodavacID) {
 		this.prodavacID = prodavacID;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

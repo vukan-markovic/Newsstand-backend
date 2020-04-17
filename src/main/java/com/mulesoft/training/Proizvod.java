@@ -13,11 +13,10 @@ public class Proizvod implements java.io.Serializable, Comparable<Proizvod> {
 	int raspolozivaKolicina;
 	int proizvodjacID;
 	int vrstaProizvodaID;
-	int active;
 
 	public Proizvod(int proizvodID, String nazivProizvoda, String opisProizvoda, double cena, String tipPakovanja,
 			String velicinaPakovanja, String barKod, double masa, int raspolozivaKolicina, int proizvodjacID,
-			int vrstaProizvodaID, int active) {
+			int vrstaProizvodaID) {
 		this.proizvodID = proizvodID;
 		this.nazivProizvoda = nazivProizvoda;
 		this.opisProizvoda = opisProizvoda;
@@ -29,7 +28,6 @@ public class Proizvod implements java.io.Serializable, Comparable<Proizvod> {
 		this.raspolozivaKolicina = raspolozivaKolicina;
 		this.proizvodjacID = proizvodjacID;
 		this.vrstaProizvodaID = vrstaProizvodaID;
-		this.active = active;
 	}
 
 	public int getProizvodID() {
@@ -118,14 +116,6 @@ public class Proizvod implements java.io.Serializable, Comparable<Proizvod> {
 
 	public void setVrstaProizvodaID(int vrstaProizvodaID) {
 		this.vrstaProizvodaID = vrstaProizvodaID;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

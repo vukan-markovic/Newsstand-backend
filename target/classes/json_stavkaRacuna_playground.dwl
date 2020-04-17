@@ -2,9 +2,8 @@
 %output application/json
 ---
 payload map ((payload , indexOfPayload) -> {
+	racunID: payload.racunID,
 	proizvodID: payload.proizvodID,
-	cena: payload.cena as :number,
-	sifra: payload.sifra as :string,
-	naziv: payload.naziv as :string,
-	active: payload.active as :number
+	kolicinaProizvoda: payload.kolicinaProizvoda as :integer,
+	prodajnaCena: payload.prodajnaCena as :number
 })

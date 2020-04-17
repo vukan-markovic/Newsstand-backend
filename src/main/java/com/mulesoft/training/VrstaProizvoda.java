@@ -5,13 +5,11 @@ public class VrstaProizvoda implements java.io.Serializable, Comparable<VrstaPro
 	int vrstaProizvodaID;
 	String nazivVrsteProizvoda;
 	String opisVrsteProizvoda;
-	int active;
-
-	public VrstaProizvoda(int vrstaProizvodaID, String nazivVrsteProizvoda, String opisVrsteProizvoda, int active) {
+	
+	public VrstaProizvoda(int vrstaProizvodaID, String nazivVrsteProizvoda, String opisVrsteProizvoda) {
 		this.vrstaProizvodaID = vrstaProizvodaID;
 		this.nazivVrsteProizvoda = nazivVrsteProizvoda;
 		this.opisVrsteProizvoda = opisVrsteProizvoda;
-		this.active = active;
 	}
 
 	public int getVrstaProizvodaID() {
@@ -36,14 +34,6 @@ public class VrstaProizvoda implements java.io.Serializable, Comparable<VrstaPro
 
 	public void setOpisVrsteProizvoda(String opisVrsteProizvoda) {
 		this.opisVrsteProizvoda = opisVrsteProizvoda;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

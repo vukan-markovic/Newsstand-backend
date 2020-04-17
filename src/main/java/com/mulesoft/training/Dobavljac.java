@@ -13,11 +13,10 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 	int PIB;
 	String kontaktOsoba;
 	String brojZiroRacuna;
-	int active;
 	
 	public Dobavljac(int dobavljacID, String skraceniNaziv, String punNaziv, String kontaktDobavljaca,
 			String adresaDobavljaca, String grad, String drzava, String postanskiBroj, int pIB, String kontaktOsoba,
-			String brojZiroRacuna, int active) {
+			String brojZiroRacuna) {
 		this.dobavljacID = dobavljacID;
 		this.skraceniNaziv = skraceniNaziv;
 		this.punNaziv = punNaziv;
@@ -29,7 +28,6 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 		PIB = pIB;
 		this.kontaktOsoba = kontaktOsoba;
 		this.brojZiroRacuna = brojZiroRacuna;
-		this.active = active;
 	}
 
 	public int getDobavljacID() {
@@ -118,14 +116,6 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 
 	public void setBrojZiroRacuna(String brojZiroRacuna) {
 		this.brojZiroRacuna = brojZiroRacuna;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

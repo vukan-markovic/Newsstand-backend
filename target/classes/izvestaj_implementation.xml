@@ -12,7 +12,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
     <flow name="izvestaj_implementationFlow">
-        <set-variable variableName="active" value="#[message.inboundProperties.active]" doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
+        <set-variable variableName="active" value="#[(message.inboundProperties.'http.query.params'.code == empty) ? 'SFO' : message.inboundProperties.'http.query.params'.code] " doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
         <choice doc:name="Choice">
             <when expression="#[flowVars.active == empty]">
                 <flow-ref name="getIzvestajiFlow" doc:name="getIzvestajiFlow"/>
@@ -126,8 +126,9 @@ active=values(active);]]></db:parameterized-query>
                 <flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow"/>
             </when>
             <otherwise>
-                <db:delete config-ref="" doc:name="Database">
-					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query></db:delete>
+                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+</db:delete>
                 <set-payload value="Obrisan izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>

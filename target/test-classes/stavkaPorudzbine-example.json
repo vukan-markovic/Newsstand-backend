@@ -1,7 +1,6 @@
 {
-  "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
+   "porudzbinaID": 1,
+   "proizvodID": 1,
+   "kolicina": 12,
+   "nabavnaCena": 134
 }

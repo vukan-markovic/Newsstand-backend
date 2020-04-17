@@ -1,7 +1,6 @@
 {
+  "racunID": 1,
   "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
+  "kolicinaProizvoda": 12,
+  "prodajnaCena": 123
 }

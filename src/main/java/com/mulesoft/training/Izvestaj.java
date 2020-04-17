@@ -10,17 +10,14 @@ public class Izvestaj implements java.io.Serializable, Comparable<Izvestaj> {
 	Date datumOd;
 	Date datumDo;
 	int menadzerID;
-	int active;
-	
-	public Izvestaj(int izvestajID, double promet, int brojKupovina, Date datumOd, Date datumDo, int menadzerID,
-			int active) {
+
+	public Izvestaj(int izvestajID, double promet, int brojKupovina, Date datumOd, Date datumDo, int menadzerID) {
 		this.izvestajID = izvestajID;
 		this.promet = promet;
 		this.brojKupovina = brojKupovina;
 		this.datumOd = datumOd;
 		this.datumDo = datumDo;
 		this.menadzerID = menadzerID;
-		this.active = active;
 	}
 
 	public int getIzvestajID() {
@@ -69,14 +66,6 @@ public class Izvestaj implements java.io.Serializable, Comparable<Izvestaj> {
 
 	public void setMenadzerID(int menadzerID) {
 		this.menadzerID = menadzerID;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

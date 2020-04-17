@@ -13,11 +13,9 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 	String brojRacuna;
 	String tipRacuna;
 	int prodavacID;
-	int active;
 	
 	public Racun(int racunID, Date vremeIzdavanja, String mestoIzdavanja, double ukupanIznosRacuna,
-			String nazivProdavnice, String nacinPlacanja, String brojRacuna, String tipRacuna, int prodavacID,
-			int active) {
+			String nazivProdavnice, String nacinPlacanja, String brojRacuna, String tipRacuna, int prodavacID) {
 		this.racunID = racunID;
 		this.vremeIzdavanja = vremeIzdavanja;
 		this.mestoIzdavanja = mestoIzdavanja;
@@ -27,7 +25,6 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 		this.brojRacuna = brojRacuna;
 		this.tipRacuna = tipRacuna;
 		this.prodavacID = prodavacID;
-		this.active = active;
 	}
 
 	public int getRacunID() {
@@ -100,14 +97,6 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 
 	public void setProdavacID(int prodavacID) {
 		this.prodavacID = prodavacID;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

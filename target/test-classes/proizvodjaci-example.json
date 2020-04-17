@@ -1,7 +1,12 @@
+[{
+  "proizvodjacID": 1,
+  "nazivProizvodjaca": "Imlek",
+  "kontaktProizvodjaca": "32324443", 
+  "adresaProizvodjaca": "Jugovića 2"
+},
 {
-  "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
-}
+  "proizvodjacID": 2,
+  "nazivProizvodjaca": "Imlek",
+  "kontaktProizvodjaca": "32324443", 
+  "adresaProizvodjaca": "Jugovića 2"
+}]

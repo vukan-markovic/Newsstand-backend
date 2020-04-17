@@ -47,7 +47,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
     </flow>
     <flow name="getStavkaRacunaByIDFlow">
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaRacuna where stavkaRacunaID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaRacuna where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
@@ -84,13 +84,13 @@ payload]]></dw:set-payload>
 payload]]></dw:set-payload>
         </dw:transform-message>
         <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.StavkaRacuna (stavkaRacunaID, cena, sifra, naziv, active) values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active]);]]></db:parameterized-query>
+			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.StavkaRacuna (racunID, proizvodID, kolicinaProizvoda, prodajnaCena) values (#[payload.racunID], #[payload.proizvodID], #[payload.kolicinaProizvoda], #[payload.prodajnaCena]);]]></db:parameterized-query>
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
 
         <catch-exception-strategy doc:name="Catch Exception Strategy" >
             <set-property propertyName="http.status" value="400" doc:name="Property"/>
-            <set-payload value="Vec postoji proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
+            <set-payload value="Ve&#263; postoji stavka ra&#269;una sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
 
             <logger level="ERROR" doc:name="Logger" message="#[exception]"/>
         </catch-exception-strategy>
@@ -103,8 +103,8 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
 values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
 on duplicate key update 
 cena=values(cena), 
@@ -112,25 +112,27 @@ sifra=values(sifra),
 naziv=values(naziv), 
 active=values(active);]]></db:parameterized-query>
 
+
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
 
     </flow>
     <flow name="deleteStavkaRacunaByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaRacuna where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
-        <choice doc:name="Choice">
-            <when expression="#[payload == empty]">
-                <flow-ref name="stavkaRacunaErrorFlow" doc:name="stavkaRacunaErrorFlow"/>
-            </when>
-            <otherwise>
-                <db:bulk-execute config-ref="MySQL_Configuration" doc:name="Database"><![CDATA[delete from racun where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];
-delete from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:bulk-execute>
-                <set-payload value="Obrisan proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
-                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-            </otherwise>
-        </choice>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="stavkaRacunaErrorFlow" doc:name="stavkaRacunaErrorFlow"/>
+			</when>
+			<otherwise>
+				<db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.StavkaRacuna where racunID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+				</db:delete>
+				<set-payload value="Obrisana stavka ra&#269;una sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
+				<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+			</otherwise>
+		</choice>
 
     </flow>
 </mule>

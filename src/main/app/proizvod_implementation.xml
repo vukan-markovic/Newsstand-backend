@@ -27,7 +27,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Proizvod;]]></db:parameterized-query>
         </db:select>
         <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c726-4c0a-b760-6c9cbc9fdacb">
-            <dw:input-payload doc:sample="sample_data\MyPojo.dwl" mimeType="application/java"/>
+            <dw:input-payload doc:sample="sample_data\list_Proizvod.dwl" mimeType="application/java"/>
             <dw:set-payload resource="classpath:json_proizvod_playground.dwl"/>
         </dw:transform-message>
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
@@ -39,7 +39,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         </db:select>
 
         <dw:transform-message doc:name="Transform Message" metadata:id="9e13650d-f9c2-4df5-b57f-e14aba196e7e">
-            <dw:input-payload doc:sample="sample_data\MyPojo_1.dwl" mimeType="application/java"/>
+<dw:input-payload doc:sample="sample_data\list_Proizvod.dwl" mimeType="application/java"/>
             <dw:set-payload resource="classpath:json_proizvod_playground.dwl"/>
         </dw:transform-message>
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>

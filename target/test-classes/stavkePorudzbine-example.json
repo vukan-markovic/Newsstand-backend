@@ -1,0 +1,12 @@
+[{
+   "porudzbinaID": 1,
+   "proizvodID": 1,
+   "kolicina": 12,
+   "nabavnaCena": 134
+}, 
+{
+   "porudzbinaID": 2,
+   "proizvodID": 1,
+   "kolicina": 12,
+   "nabavnaCena": 134
+}]

@@ -90,7 +90,7 @@ payload]]></dw:set-payload>
 
         <catch-exception-strategy doc:name="Catch Exception Strategy" >
             <set-property propertyName="http.status" value="400" doc:name="Property"/>
-			<set-payload value="Vec postoji proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
+			<set-payload value="Ve&#263; postoji proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
 
             <logger level="ERROR" doc:name="Logger" message="#[exception]"/>
         </catch-exception-strategy>
@@ -103,14 +103,15 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
+        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
 values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
 on duplicate key update 
 cena=values(cena), 
 sifra=values(sifra), 
 naziv=values(naziv), 
 active=values(active);]]></db:parameterized-query>
+
 
         </db:insert>
         <logger level="INFO" doc:name="Logger"/>
@@ -125,8 +126,9 @@ active=values(active);]]></db:parameterized-query>
                 <flow-ref name="proizvodjacErrorFlow" doc:name="proizvodjacErrorFlow"/>
             </when>
             <otherwise>
-                <db:delete config-ref="" doc:name="Database">
-					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Proizvodjac where proizvodjacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query></db:delete>
+                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Proizvodjac where proizvodjacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+</db:delete>
                 <set-payload value="Obrisan proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>

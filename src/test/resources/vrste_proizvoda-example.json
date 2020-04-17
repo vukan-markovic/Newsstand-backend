@@ -1,7 +1,10 @@
+[{
+   "vrstaProizvodaID": 1,
+   "nazivVrsteProizvoda": "stampa",
+   "opisVrsteProizvoda": "Dnevna stampa"
+},
 {
-  "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
-}
+   "vrstaProizvodaID": 2,
+   "nazivVrsteProizvoda": "stampa",
+   "opisVrsteProizvoda": "Dnevna stampa"
+}]

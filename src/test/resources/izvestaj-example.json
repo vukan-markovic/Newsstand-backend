@@ -1,7 +1,8 @@
 {
-  "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
+    "izvestajID": 1,
+    "promet": 35,
+    "brojKupovina": 234,
+    "datumOd": "2015-05-23",
+    "datumDo": "2017-05-23",
+    "menadzerID": 1
 }

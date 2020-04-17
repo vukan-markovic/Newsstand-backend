@@ -1,7 +1,7 @@
 {
-  "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
+   "menadzerID": 1,
+   "adresaKancelarije": "Banatska BB",
+   "brojKancelarije": "12a"
+  /*"departureDate": "2016/03/20",*/
+  //"departureDate": "June 1, 2016",
 }

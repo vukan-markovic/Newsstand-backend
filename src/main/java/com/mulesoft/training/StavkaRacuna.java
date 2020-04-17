@@ -6,15 +6,13 @@ public class StavkaRacuna implements java.io.Serializable, Comparable<StavkaRacu
 	int proizvodID;
 	int kolicinaProizvoda;
 	double prodajnaCena;
-	int active;
 
-	public StavkaRacuna(int racunID, int proizvodID, int kolicinaProizvoda, double prodajnaCena, int active) {
+	public StavkaRacuna(int racunID, int proizvodID, int kolicinaProizvoda, double prodajnaCena) {
 		super();
 		this.racunID = racunID;
 		this.proizvodID = proizvodID;
 		this.kolicinaProizvoda = kolicinaProizvoda;
 		this.prodajnaCena = prodajnaCena;
-		this.active = active;
 	}
 
 	public int getRacunID() {
@@ -47,14 +45,6 @@ public class StavkaRacuna implements java.io.Serializable, Comparable<StavkaRacu
 
 	public void setProdajnaCena(double prodajnaCena) {
 		this.prodajnaCena = prodajnaCena;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

@@ -2,9 +2,9 @@
 %output application/json
 ---
 payload map ((payload , indexOfPayload) -> {
-	proizvodID: payload.proizvodID,
-	cena: payload.cena as :number,
-	sifra: payload.sifra as :string,
-	naziv: payload.naziv as :string,
-	active: payload.active as :number
+    korisnikID: payload.korisnikID,
+  	email: payload.email as :string,
+  	lozinka: payload.email as :string,
+  	autentifikacioniToken: payload.email as :string,
+  	uloga: payload.uloga as :string
 })

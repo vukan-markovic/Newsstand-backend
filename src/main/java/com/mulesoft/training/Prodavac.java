@@ -14,10 +14,9 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 	String JMBG;
 	String datumZaposlenja;
 	String strucnaSprema;
-	int active;
-
+	
 	public Prodavac(int prodavacID, String ime, String prezime, String pol, Date datumRodjenja, String adresaStanovanja,
-			String telefon, String jMBG, String datumZaposlenja, String strucnaSprema, int active) {
+			String telefon, String jMBG, String datumZaposlenja, String strucnaSprema) {
 		this.prodavacID = prodavacID;
 		this.ime = ime;
 		this.prezime = prezime;
@@ -28,7 +27,6 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 		JMBG = jMBG;
 		this.datumZaposlenja = datumZaposlenja;
 		this.strucnaSprema = strucnaSprema;
-		this.active = active;
 	}
 
 	public int getProdavacID() {
@@ -109,14 +107,6 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 
 	public void setStrucnaSprema(String strucnaSprema) {
 		this.strucnaSprema = strucnaSprema;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

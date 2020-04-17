@@ -5,14 +5,11 @@ public class Menadzer implements java.io.Serializable, Comparable<Menadzer> {
 	int menadzerID;
 	String adresaKancelarije;
 	String brojKancelarije;
-	int active;
 
-	public Menadzer(int menadzerID, String adresaKancelarije, String brojKancelarije, int active) {
-		super();
+	public Menadzer(int menadzerID, String adresaKancelarije, String brojKancelarije) {
 		this.menadzerID = menadzerID;
 		this.adresaKancelarije = adresaKancelarije;
 		this.brojKancelarije = brojKancelarije;
-		this.active = active;
 	}
 
 	public int getMenadzerID() {
@@ -37,14 +34,6 @@ public class Menadzer implements java.io.Serializable, Comparable<Menadzer> {
 
 	public void setBrojKancelarije(String brojKancelarije) {
 		this.brojKancelarije = brojKancelarije;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public static long getSerialversionuid() {

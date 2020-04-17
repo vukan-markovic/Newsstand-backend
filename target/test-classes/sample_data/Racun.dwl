@@ -1,0 +1,13 @@
+%dw 1.0
+%output application/java
+---
+[{
+	racunID: 1,
+    vremeIzdavanja: '2016-02-28T16:41:41.090Z',
+    mestoIzdavanja: 'Beograd',
+    ukupanIznosRacuna: 123,
+    nazivProdavnice: 'Trafika BMB',
+    nacinPlacanja: 'gotovina',
+    brojRacuna: '3432342432',
+    prodavacID: 1
+}]

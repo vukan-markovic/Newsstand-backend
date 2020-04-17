@@ -2,17 +2,19 @@
   "racunID": 1, 
   "vremeIzdavanja": "12 May, 2016", 
   "mestoIzdavanja": "Mesto", 
-  "iznos": 120, 
-  "kolicina": 2, 
-  "proizvodID": 1, 
-  "active": 0 
+  "ukupanIznosRacuna": 120, 
+  "nazivProdavnice": "Trafika BMB",
+  "nacinPlacanja": "gotovina",
+  "brojRacuna": "3432342432",
+  "prodavacID": 1
 }, 
 {
   "racunID": 2, 
   "vremeIzdavanja": "14 June, 2016", 
   "mestoIzdavanja": "Mesto1", 
-  "iznos": 140, 
-  "kolicina": 1, 
-  "proizvodID": 2, 
-  "active": 1
+  "ukupanIznosRacuna": 120, 
+  "nazivProdavnice": "Trafika BMB",
+  "nacinPlacanja": "gotovina",
+  "brojRacuna": "3432342432",
+  "prodavacID": 1
 }]

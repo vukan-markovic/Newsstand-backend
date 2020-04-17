@@ -118,17 +118,17 @@ active=values(active);]]></db:parameterized-query>
 
     </flow>
     <flow name="deleteProdavacByIDFlow">
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
-            <db:parameterized-query><![CDATA[select * from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Prodavac where prodavacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
         </db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
                 <flow-ref name="prodavacErrorFlow" doc:name="prodavacErrorFlow"/>
             </when>
             <otherwise>
-                <db:bulk-execute config-ref="MySQL_Configuration" doc:name="Database"><![CDATA[delete from racun where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];
-delete from proizvod where proizvodID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:bulk-execute>
-                <set-payload value="Obrisan proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
+                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Prodavac where prodavacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query></db:delete>
+                <set-payload value="Obrisan prodavac sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>
         </choice>

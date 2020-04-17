@@ -12,7 +12,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
     <flow name="dobavljac_implementationFlow">
-        <set-variable variableName="active" value="#[message.inboundProperties.active]" doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
+        <set-variable variableName="active" value="#[message.inboundProperties.'http.query.params'.name]" doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
         <choice doc:name="Choice">
             <when expression="#[flowVars.active == empty]">
                 <flow-ref name="getDobavljaciFlow" doc:name="getDobavljaciFlow"/>
@@ -103,7 +103,21 @@ payload]]></dw:set-payload>
 ---
 payload]]></dw:set-payload>
         </dw:transform-message>
-        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+		<db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query/>
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="">
+				<flow-ref name="insertDobavljac_implementationFlow" doc:name="insertDobavljac_implementationFlow"/>
+			</when>
+			<otherwise>
+				<flow-ref name="updateDobavljac_implementationFlow" doc:name="updateDobavljac_implementationFlow"/>
+			</otherwise>
+		</choice>
+
+    </flow>
+	<flow name="insertDobavljac_implementationFlow">
+		<db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
 values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
 on duplicate key update 
@@ -111,12 +125,21 @@ cena=values(cena),
 sifra=values(sifra), 
 naziv=values(naziv), 
 active=values(active);]]></db:parameterized-query>
-
-
-        </db:insert>
-        <logger level="INFO" doc:name="Logger"/>
-
-    </flow>
+		</db:insert>
+		<logger level="INFO" doc:name="Logger"/>
+	</flow>
+	<flow name="updateDobavljac_implementationFlow">
+		<db:insert config-ref="Generic_Database_Configuration" doc:name="Copy_of_Copy_of_Database">
+			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
+values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
+on duplicate key update 
+cena=values(cena), 
+sifra=values(sifra), 
+naziv=values(naziv), 
+active=values(active);]]></db:parameterized-query>
+		</db:insert>
+		<logger level="INFO" doc:name="Copy_of_Copy_of_Logger"/>
+	</flow>
     <flow name="deleteDobavljacByIDFlow">
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Dobavljac where dobavljacID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>

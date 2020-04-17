@@ -1,7 +1,5 @@
 {
-  "proizvodID": 1,
-  "cena": 35, 
-  "sifra": "234235", 
-  "naziv": "Smoki", 
-  "active": 1
+   "vrstaProizvodaID": 1,
+   "nazivVrsteProizvoda": "stampa",
+   "opisVrsteProizvoda": "Dnevna stampa"
 }
