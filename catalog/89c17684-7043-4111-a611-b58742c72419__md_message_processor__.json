@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "porudzbina"
+        }
+    },
+    "id": "89c17684-7043-4111-a611-b58742c72419",
+    "version": "5.2.0.0"
+}

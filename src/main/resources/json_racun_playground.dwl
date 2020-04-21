@@ -10,5 +10,5 @@ payload map ((payload , indexOfPayload) -> {
 	nacinPlacanja: payload.nacinPlacanja as :string,
 	brojRacuna: payload.brojRacuna as :string,
 	tipRacuna: payload.tipRacuna as :string,
-	prodavacID: payload.prodavacID as :integer
+	prodavacID: payload.prodavacID as :number
 })

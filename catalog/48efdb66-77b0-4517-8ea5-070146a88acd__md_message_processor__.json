@@ -1,0 +1,16 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "prodavacID"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "prodavac"
+        }
+    },
+    "id": "48efdb66-77b0-4517-8ea5-070146a88acd",
+    "version": "5.2.0.0"
+}

@@ -1,0 +1,16 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "izvestaj"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "izvestajIDJson"
+        }
+    },
+    "id": "0fe42e9b-1747-4c96-b646-7e402c963723",
+    "version": "5.2.0.0"
+}

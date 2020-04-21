@@ -2,13 +2,13 @@
     "inputMessageMetadata": {
         "messagePayload": {
             "connectorName": "#_custom_mule_metadata_type_#",
-            "typeId": "proizvod"
+            "typeId": "dobavljacInput"
         }
     },
     "outputMessageMetadata": {
         "messagePayload": {
             "connectorName": "#_custom_mule_metadata_type_#",
-            "typeId": "proizvod"
+            "typeId": "dobavljac"
         }
     },
     "id": "03ca259c-c726-4c0a-b760-6c9cbc9fdacb",

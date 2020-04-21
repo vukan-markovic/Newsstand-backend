@@ -8,7 +8,7 @@
     "outputMessageMetadata": {
         "messagePayload": {
             "connectorName": "#_custom_mule_metadata_type_#",
-            "typeId": "proizvod"
+            "typeId": "dobavljac"
         }
     },
     "id": "9e13650d-f9c2-4df5-b57f-e14aba196e7e",

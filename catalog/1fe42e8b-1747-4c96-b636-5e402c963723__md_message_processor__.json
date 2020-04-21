@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "stavkaRacuna"
+        }
+    },
+    "outputMessageMetadata": {},
+    "id": "1fe42e8b-1747-4c96-b636-5e402c963723",
+    "version": "5.2.0.0"
+}

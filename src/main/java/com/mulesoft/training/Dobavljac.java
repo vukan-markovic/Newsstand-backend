@@ -15,7 +15,7 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 	String brojZiroRacuna;
 	
 	public Dobavljac(int dobavljacID, String skraceniNaziv, String punNaziv, String kontaktDobavljaca,
-			String adresaDobavljaca, String grad, String drzava, String postanskiBroj, int pIB, String kontaktOsoba,
+			String adresaDobavljaca, String grad, String drzava, String postanskiBroj, int PIB, String kontaktOsoba,
 			String brojZiroRacuna) {
 		this.dobavljacID = dobavljacID;
 		this.skraceniNaziv = skraceniNaziv;
@@ -25,7 +25,7 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 		this.grad = grad;
 		this.drzava = drzava;
 		this.postanskiBroj = postanskiBroj;
-		PIB = pIB;
+		this.PIB = PIB;
 		this.kontaktOsoba = kontaktOsoba;
 		this.brojZiroRacuna = brojZiroRacuna;
 	}

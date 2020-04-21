@@ -4,6 +4,6 @@
 payload map ((payload , indexOfPayload) -> {
 	racunID: payload.racunID,
 	proizvodID: payload.proizvodID,
-	kolicinaProizvoda: payload.kolicinaProizvoda as :integer,
+	kolicinaProizvoda: payload.kolicinaProizvoda as :number,
 	prodajnaCena: payload.prodajnaCena as :number
 })

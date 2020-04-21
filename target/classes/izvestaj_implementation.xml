@@ -26,29 +26,21 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Izvestaj;]]></db:parameterized-query>
         </db:select>
-        <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c726-4c0a-b760-6c9cbc9fdacb">
-            <dw:input-payload doc:sample="sample_data\MyPojo.dwl" mimeType="application/java"/>
-            <dw:set-payload resource="classpath:json_proizvod_playground.dwl"/>
+        <dw:transform-message doc:name="Transform Message" metadata:id="04ca259c-c726-4c0a-b760-6c9cbc9fdacb">
+            <dw:input-payload doc:sample="sample_data\Izvestaj.dwl" mimeType="application/java"/>
+            <dw:set-payload resource="classpath:json_izvestaj_playground.dwl"/>
         </dw:transform-message>
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
 
     </flow>
     <flow name="getIzvestajiFlow">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Izvestaj;]]></db:parameterized-query>
-        </db:select>
-
-        <dw:transform-message doc:name="Transform Message" metadata:id="9e13650d-f9c2-4df5-b57f-e14aba196e7e">
-            <dw:input-payload doc:sample="sample_data\MyPojo_1.dwl" mimeType="application/java"/>
-            <dw:set-payload resource="classpath:json_proizvod_playground.dwl"/>
-        </dw:transform-message>
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
 
     </flow>
     <flow name="getIzvestajByIDFlow">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+		<db:select config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
-        </db:select>
+		</db:select>
         <choice doc:name="Choice">
             <when expression="#[payload == empty]">
                 <flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow"/>
@@ -65,27 +57,21 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="izvestajSuccessFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="0fe42e8b-1747-4c96-b646-7e402c963723">
-            <dw:input-payload doc:sample="sample_data\MyPojo_2.dwl"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/json
----
-payload]]></dw:set-payload>
+        <dw:transform-message doc:name="Transform Message" metadata:id="0fe42e9b-1747-4c96-b646-7e402c963723">
+       		<dw:input-payload doc:sample="sample_data\Izvestaj.dwl" mimeType="application/java"/>
+            <dw:set-payload resource="classpath:json_izvestaj_playground.dwl"/>
         </dw:transform-message>
         <logger message="Dodat izve&#353;taj u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
 
     <flow name="postIzvestajFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="48efdb66-77b0-4517-8ea5-070276a88acd">
-            <dw:input-payload doc:sample="sample_data\json.json"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
----
-payload]]></dw:set-payload>
+        <dw:transform-message doc:name="Transform Message" metadata:id="48efdb66-77b1-4517-8ea5-070276a88acd">
+            <dw:input-payload doc:sample="izvestaj-example.json" mimeType="application/json"/>
+            <dw:set-payload resource="classpath:java_playground.dwl"/>
         </dw:transform-message>
-        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.Izvestaj (izvestajID, promet, brojKupovina, datumOd, datumDo, menadzerID) values (#[payload.izvestajID], #[payload.promet], #[payload.brojKupovina], #[payload.datumOd], #[payload.datumDo], #[payload.menadzerID]);]]></db:parameterized-query>
-        </db:insert>
+		<db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.Izvestaj (promet, brojKupovina, datumOd, datumDo, menadzerID) values (#[payload.promet], #[payload.brojKupovina], #[payload.datumOd], #[payload.datumDo], #[payload.menadzerID]);]]></db:parameterized-query>
+		</db:insert>
 		<logger level="INFO" doc:name="Logger"/>
 
         <catch-exception-strategy doc:name="Catch Exception Strategy" >
@@ -96,24 +82,21 @@ payload]]></dw:set-payload>
         </catch-exception-strategy>
     </flow>
     <flow name="putIzvestajByIDFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="89c17684-7043-4111-a611-a88742c72419">
-            <dw:input-payload doc:sample="sample_data\json_1.json"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
----
-payload]]></dw:set-payload>
+        <dw:transform-message doc:name="Transform Message" metadata:id="89c17684-7043-4111-a611-a88742c72417">
+         	<dw:input-payload doc:sample="izvestaj-example.json" mimeType="application/json"/>
+            <dw:set-payload resource="classpath:java_playground.dwl"/>
         </dw:transform-message>
-        <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 
-values (#[payload.proizvodID], #[payload.cena], #[payload.sifra], #[payload.naziv], #[payload.active])
-on duplicate key update 
-cena=values(cena), 
-sifra=values(sifra), 
-naziv=values(naziv), 
-active=values(active);]]></db:parameterized-query>
-
-
-        </db:insert>
+		<db:update config-ref="Generic_Database_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[update it20g2016.trafika.Izvestaj
+set promet=#[payload.promet],
+brojKupovina=#[payload.brojKupovina],
+datumOd=#[payload.datumOd],
+datumDo=#[payload.datumDo],
+menadzerID=#[payload.menadzerID]
+where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];
+if @@rowcount=0
+insert into it20g2016.trafika.Izvestaj (promet, brojKupovina, datumOd, datumDo, menadzerID) values (#[payload.promet], #[payload.brojKupovina], #[payload.datumOd], #[payload.datumDo], #[payload.menadzerID]);]]></db:parameterized-query>
+		</db:update>
         <logger level="INFO" doc:name="Logger"/>
 
     </flow>
@@ -126,9 +109,10 @@ active=values(active);]]></db:parameterized-query>
                 <flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow"/>
             </when>
             <otherwise>
-                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
+				<db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
 					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
-</db:delete>
+				</db:delete>
+
                 <set-payload value="Obrisan izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
                 <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>

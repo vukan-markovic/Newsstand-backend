@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "menadzer"
+        }
+    },
+    "id": "48efdb66-77b5-4517-8ea5-070476a88acd",
+    "version": "5.2.0.0"
+}

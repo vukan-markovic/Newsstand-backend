@@ -26,22 +26,14 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaPorudzbine;]]></db:parameterized-query>
         </db:select>
-        <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c726-4c0a-b760-6c9cbc9fdacb">
-            <dw:input-payload doc:sample="sample_data\MyPojo.dwl" mimeType="application/java"/>
-            <dw:set-payload resource="classpath:json_proizvod_playground.dwl"/>
+        <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c736-4c0a-b760-6c9cbc9fdacg">
+            <dw:input-payload doc:sample="sample_data\StavkaPorudzbine.dwl" mimeType="application/java"/>
+            <dw:set-payload resource="classpath:json_stavkaPorudzbine_playground.dwl"/>
         </dw:transform-message>
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
 
     </flow>
     <flow name="getStavkePorudzbineFlow">
-		<db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.StavkaPorudzbine;]]></db:parameterized-query>
-		</db:select>
-
-        <dw:transform-message doc:name="Transform Message" metadata:id="9e13650d-f9c2-4df5-b57f-e14aba196e7e">
-            <dw:input-payload doc:sample="sample_data\MyPojo_1.dwl" mimeType="application/java"/>
-            <dw:set-payload resource="classpath:json_proizvod_playground.dwl"/>
-        </dw:transform-message>
         <logger level="INFO" doc:name="Logger" message="#[payload]"/>
 
     </flow>
@@ -65,23 +57,17 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="stavkaPorudzbineSuccessFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="0fe42e8b-1747-4c96-b646-7e402c963723">
-            <dw:input-payload doc:sample="sample_data\MyPojo_2.dwl"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/json
----
-payload]]></dw:set-payload>
+        <dw:transform-message doc:name="Transform Message" metadata:id="0fe42e8b-1747-4c51-b646-7e402c963723">
+            <dw:input-payload doc:sample="sample_data\StavkaPorudzbine.dwl" mimeType="application/java"/>
+            <dw:set-payload resource="classpath:json_stavkaPorudzbine_playground.dwl"/>
         </dw:transform-message>
         <logger message="Dodat proizvod u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
     </flow>
 
     <flow name="postStavkaPorudzbineFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="48efdb66-77b0-4517-8ea5-070276a88acd">
-            <dw:input-payload doc:sample="sample_data\json.json"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
----
-payload]]></dw:set-payload>
+        <dw:transform-message doc:name="Transform Message" metadata:id="48efdb55-77b0-4517-8ea5-070276a88acd">
+            <dw:input-payload doc:sample="stavkaPorudzbine-example.json" mimeType="application/json"/>
+            <dw:set-payload resource="classpath:java_playground.dwl"/>
         </dw:transform-message>
         <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.StavkaPorudzbine (porudzbinaID, proizvodID, kolicina, nabavnaCena) values (#[payload.porudzbinaID], #[payload.proizvodID], #[payload.kolicina], #[payload.nabavnaCena]);]]></db:parameterized-query>
@@ -96,12 +82,9 @@ payload]]></dw:set-payload>
         </catch-exception-strategy>
     </flow>
     <flow name="putStavkaPorudzbineByIDFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="89c17684-7043-4111-a611-a88742c72419">
-            <dw:input-payload doc:sample="sample_data\json_1.json"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
----
-payload]]></dw:set-payload>
+        <dw:transform-message doc:name="Transform Message" metadata:id="95c17684-7043-4111-a611-a88742c72419">
+            <dw:input-payload doc:sample="stavkaPorudzbine-example.json" mimeType="application/json"/>
+            <dw:set-payload resource="classpath:java_playground.dwl"/>
         </dw:transform-message>
         <db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
 			<db:parameterized-query><![CDATA[insert into proizvod (proizvodID, cena, sifra, naziv, active) 

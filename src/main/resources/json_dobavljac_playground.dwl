@@ -2,8 +2,6 @@
 %output application/json
 ---
 payload map ((payload , indexOfPayload) -> {
-	proizvodID: payload.proizvodID,
-	cena: payload.cena as :number,
 	dobavljacID: payload.dobavljacID,
   	skraceniNaziv: payload.skraceniNaziv as :string,
   	punNaziv: payload.punNaziv as :string, 
@@ -12,7 +10,7 @@ payload map ((payload , indexOfPayload) -> {
   	grad: payload.grad as :string,
   	drzava: payload.drzava as :string,
   	postanskiBroj: payload.postanskiBroj as :string,
-  	PIB: payload.PIB as :integer,
+  	PIB: payload.PIB as :number,
   	kontaktOsoba: payload.kontaktOsoba as :string,
   	brojZiroRacuna: payload.brojZiroRacuna as :string
 })
