@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+<mule xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-    <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="${http.port}" doc:name="HTTP Listener Configuration"/>
-    <file:connector name="FileConnector" autoDelete="true" outputAppend="true" streaming="true" validateConnections="true" doc:name="File"/>
-    <context:property-placeholder location="trafika-DEV.properties"/>
-    <db:generic-config name="Generic_Database_Configuration" url="jdbc:sqlserver://${db.ip};user=${db.user};password=${db.password};" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" doc:name="Generic Database Configuration"/>
+	<http:listener-config name="HTTP_Listener_Configuration"
+		host="localhost" port="${http.port}" doc:name="HTTP Listener Configuration" />
+	<file:connector name="FileConnector" autoDelete="true"
+		outputAppend="true" streaming="true" validateConnections="true"
+		doc:name="File" />
+	<context:property-placeholder location="trafika-DEV.properties" />
+	<db:generic-config name="Generic_Database_Configuration"
+		url="jdbc:sqlserver://${db.ip};user=${db.user};password=${db.password};"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		doc:name="Generic Database Configuration" />
+	<configuration defaultExceptionStrategy-ref="proizvod-api-apiKitGlobalExceptionMapping"
+		doc:name="Configuration">
+		<http:config useTransportForUris="false" />
+	</configuration>
 </mule>

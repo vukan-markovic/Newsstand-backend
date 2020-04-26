@@ -7,14 +7,14 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 	int prodavacID;
 	String ime;
 	String prezime;
-	String pol; 
+	String pol;
 	Date datumRodjenja;
 	String adresaStanovanja;
 	String telefon;
 	String JMBG;
 	String datumZaposlenja;
 	String strucnaSprema;
-	
+
 	public Prodavac(int prodavacID, String ime, String prezime, String pol, Date datumRodjenja, String adresaStanovanja,
 			String telefon, String jMBG, String datumZaposlenja, String strucnaSprema) {
 		this.prodavacID = prodavacID;

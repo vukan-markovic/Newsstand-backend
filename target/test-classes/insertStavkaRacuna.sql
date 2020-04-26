@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.StavkaRacuna (racunID, proizvodID, kolicinaProizvoda) values (#[payload.racunID], #[payload.proizvodID], #[payload.kolicinaProizvoda]);

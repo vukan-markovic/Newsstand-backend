@@ -12,7 +12,7 @@ public class Porudzbina implements java.io.Serializable, Comparable<Porudzbina> 
 	int dobavljacID;
 	int menadzerID;
 	int prodavacID;
-	
+
 	public Porudzbina(int porudzbinaID, Date datumPorucivanja, Date datumIsporuke, double ukupanIznosPorudzbine,
 			String statusPorudzbine, int dobavljacID, int menadzerID, int prodavacID) {
 		this.porudzbinaID = porudzbinaID;

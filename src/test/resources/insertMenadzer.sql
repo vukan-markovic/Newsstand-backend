@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.Menadzer (menadzerID, adresaKancelarije, brojKancelarije) values (#[message.inboundProperties.'http.uri.params'.ID], #[payload.adresaKancelarije], #[payload.brojKancelarije]);

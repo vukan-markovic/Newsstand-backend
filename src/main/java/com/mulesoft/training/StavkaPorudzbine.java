@@ -37,7 +37,7 @@ public class StavkaPorudzbine implements java.io.Serializable, Comparable<Stavka
 	public void setKolicina(int kolicina) {
 		this.kolicina = kolicina;
 	}
-	
+
 	public double getNabavnaCena() {
 		return nabavnaCena;
 	}
@@ -52,6 +52,7 @@ public class StavkaPorudzbine implements java.io.Serializable, Comparable<Stavka
 
 	@Override
 	public int compareTo(StavkaPorudzbine otherStavkaPorudzbine) {
-		return Integer.compare(this.getProizvodID(), otherStavkaPorudzbine.getProizvodID()) & Integer.compare(this.getPorudzbinaID(), otherStavkaPorudzbine.getPorudzbinaID());
+		return Integer.compare(this.getProizvodID(), otherStavkaPorudzbine.getProizvodID())
+				& Integer.compare(this.getPorudzbinaID(), otherStavkaPorudzbine.getPorudzbinaID());
 	}
 }

@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.Porudzbina (datumPorucivanja, datumIsporuke, statusPorudzbine, dobavljacID, menadzerID, prodavacID) values (#[payload.datumPorucivanja], #[payload.datumIsporuke], #[payload.statusPorudzbine], #[payload.dobavljacID], #[payload.menadzerID], #[payload.prodavacID]);

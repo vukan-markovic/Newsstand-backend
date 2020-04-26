@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.StavkaPorudzbine (porudzbinaID, proizvodID, kolicina) values (#[payload.porudzbinaID], #[payload.proizvodID], #[payload.kolicina]);

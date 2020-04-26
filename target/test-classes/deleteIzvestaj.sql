@@ -1,0 +1,1 @@
+delete from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];

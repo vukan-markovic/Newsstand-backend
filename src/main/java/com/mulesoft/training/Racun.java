@@ -13,7 +13,7 @@ public class Racun implements java.io.Serializable, Comparable<Racun> {
 	String brojRacuna;
 	String tipRacuna;
 	int prodavacID;
-	
+
 	public Racun(int racunID, Date vremeIzdavanja, String mestoIzdavanja, double ukupanIznosRacuna,
 			String nazivProdavnice, String nacinPlacanja, String brojRacuna, String tipRacuna, int prodavacID) {
 		this.racunID = racunID;

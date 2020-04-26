@@ -5,7 +5,7 @@ public class VrstaProizvoda implements java.io.Serializable, Comparable<VrstaPro
 	int vrstaProizvodaID;
 	String nazivVrsteProizvoda;
 	String opisVrsteProizvoda;
-	
+
 	public VrstaProizvoda(int vrstaProizvodaID, String nazivVrsteProizvoda, String opisVrsteProizvoda) {
 		this.vrstaProizvodaID = vrstaProizvodaID;
 		this.nazivVrsteProizvoda = nazivVrsteProizvoda;

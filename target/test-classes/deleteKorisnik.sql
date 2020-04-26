@@ -1,0 +1,1 @@
+delete from it20g2016.trafika.Korisnik where korisnikID=#[message.inboundProperties.'http.uri.params'.ID];

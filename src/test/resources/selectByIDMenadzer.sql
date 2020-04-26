@@ -1,0 +1,1 @@
+select * from it20g2016.trafika.Menadzer where menadzerID=#[message.inboundProperties.'http.uri.params'.ID];

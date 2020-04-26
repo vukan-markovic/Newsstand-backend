@@ -1,286 +1,266 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
-    <http:listener-config name="proizvod-api-httpListenerConfig" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
-    <apikit:config name="proizvod-api-config" raml="trafika-api.raml" consoleEnabled="false" doc:name="Router" keepRamlBaseUri="false" />
-    <flow name="proizvod-api-main">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/api/*" doc:name="HTTP" />
-        <apikit:router config-ref="proizvod-api-config" doc:name="APIkit Router" />
-        <exception-strategy ref="proizvod-api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
-    </flow>
-    <flow name="proizvod-api-console">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/console/*" doc:name="HTTP" />
-        <apikit:console config-ref="proizvod-api-config" doc:name="APIkit Console" />
-    </flow>
-
-    <flow name="put:/vrstaProizvoda/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putVrstaProizvodaByIDFlow" doc:name="putVrstaProizvodaByIDFlow"/>
-
-    </flow>
-    <flow name="put:/izvestaj/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putIzvestajByIDFlow" doc:name="putIzvestajByIDFlow"/>
-
-    </flow>
-    <flow name="put:/korisnik/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putKorisnikByIDFlow" doc:name="putKorisnikByIDFlow"/>
-
-    </flow>
-    <flow name="put:/proizvodjac/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putProizvodjacByIDFlow" doc:name="putProizvodjacByIDFlow"/>
-
-    </flow>
-    <flow name="put:/dobavljac/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putDobavljacByIDFlow" doc:name="putDobavljacByIDFlow"/>
-
-    </flow>
-    <flow name="put:/porudzbina/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putPorudzbinaByIDFlow" doc:name="putPorudzbinaByIDFlow"/>
-
-    </flow>
-    <flow name="put:/stavkaPorudzbine/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putStavkaPorudzbineByIDFlow" doc:name="putStavkaPorudzbineByIDFlow"/>
-
-    </flow>
-    <flow name="put:/prodavac/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putProdavacByIDFlow" doc:name="putProdavacByIDFlow"/>
-
-    </flow>
-    <flow name="put:/menadzer/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putMenadzerByIDFlow" doc:name="putMenadzerByIDFlow"/>
-
-    </flow>
-    <flow name="put:/racun/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putRacunByIDFlow" doc:name="putRacunByIDFlow"/>
-
-    </flow>
-    <flow name="put:/proizvod/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putProizvodByIDFlow" doc:name="putProizvodByIDFlow"/>
-
-    </flow>
-    <flow name="put:/stavkaRacuna/{ID}:application/json:proizvod-api-config">
-		<flow-ref name="putStavkaRacunaByIDFlow" doc:name="putStavkaRacunaByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/menadzer/{ID}:proizvod-api-config">
-		<flow-ref name="deleteMendzerByIDFlow" doc:name="deleteMendzerByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/dobavljac/{ID}:proizvod-api-config">
-		<flow-ref name="deleteDobavljacByIDFlow" doc:name="deleteDobavljacByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/proizvod/{ID}:proizvod-api-config">
-		<flow-ref name="deleteProizvodByIDFlow" doc:name="deleteProizvodByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/stavkaRacuna/{ID}:proizvod-api-config">
-		<flow-ref name="deleteStavkaRacunaByIDFlow" doc:name="deleteStavkaRacunaByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/izvestaj/{ID}:proizvod-api-config">
-		<flow-ref name="deleteIzvestajByIDFlow" doc:name="deleteIzvestajByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/vrstaProizvoda/{ID}:proizvod-api-config">
-		<flow-ref name="deleteVrstaProizvodaByIDFlow" doc:name="deleteVrstaProizvodaByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/racun/{ID}:proizvod-api-config">
-		<flow-ref name="deleteRacunByIDFlow" doc:name="deleteRacunByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/proizvodjac/{ID}:proizvod-api-config">
-		<flow-ref name="deleteProizvodjacByIDFlow" doc:name="deleteProizvodjacByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/korisnik/{ID}:proizvod-api-config">
-		<flow-ref name="deleteKorisnikByIDFlow" doc:name="deleteKorisnikByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/stavkaPorudzbine/{ID}:proizvod-api-config">
-		<flow-ref name="deleteStavkaPorudzbineByIDFlow" doc:name="deleteStavkaPorudzbineByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/porudzbina/{ID}:proizvod-api-config">
-		<flow-ref name="deletePorudzbinaByIDFlow" doc:name="deletePorudzbinaByIDFlow"/>
-
-    </flow>
-    <flow name="delete:/prodavac/{ID}:proizvod-api-config">
-		<flow-ref name="deleteProdavacByIDFlow" doc:name="deleteProdavacByIDFlow"/>
-
-    </flow>
-    <flow name="get:/dobavljac:proizvod-api-config">
-		<flow-ref name="dobavljac_implementationFlow" doc:name="dobavljac_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/izvestaj:proizvod-api-config">
-		<flow-ref name="izvestaj_implementationFlow" doc:name="izvestaj_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/korisnik:proizvod-api-config">
-		<flow-ref name="korisnik_implementationFlow" doc:name="korisnik_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/menadzer:proizvod-api-config">
-		<flow-ref name="menadzer_implementationFlow" doc:name="menadzer_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/porudzbina:proizvod-api-config">
-		<flow-ref name="porudzbina_implementationFlow" doc:name="porudzbina_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/prodavac:proizvod-api-config">
-		<flow-ref name="prodavac_implementationFlow" doc:name="prodavac_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/proizvod:proizvod-api-config">
-		<flow-ref name="proizvod_implementationFlow" doc:name="proizvod_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/proizvodjac:proizvod-api-config">
-		<flow-ref name="proizvodjac_implementationFlow" doc:name="proizvodjac_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/racun:proizvod-api-config">
-		<flow-ref name="racun_implementationFlow" doc:name="racun_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/stavkaPorudzbine:proizvod-api-config">
-		<flow-ref name="stavkaPorudzbine_implementationFlow" doc:name="stavkaPorudzbine_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/stavkaRacuna:proizvod-api-config">
-		<flow-ref name="stavkaRacuna_implementationFlow" doc:name="stavkaRacuna_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/vrstaProizvoda:proizvod-api-config">
-		<flow-ref name="vrstaProizvoda_implementationFlow" doc:name="vrstaProizvoda_implementationFlow"/>
-
-    </flow>
-    <flow name="get:/menadzer/{ID}:proizvod-api-config">
-		<flow-ref name="getMenadzerByIDFlow" doc:name="getMenadzerByIDFlow"/>
-
-    </flow>
-    <flow name="get:/dobavljac/{ID}:proizvod-api-config">
-		<flow-ref name="getDobavljacByIDFlow" doc:name="getDobavljacByIDFlow"/>
-
-    </flow>
-    <flow name="get:/izvestaj/{ID}:proizvod-api-config">
-		<flow-ref name="getIzvestajByIDFlow" doc:name="getIzvestajByIDFlow"/>
-
-    </flow>
-    <flow name="get:/stavkaRacuna/{ID}:proizvod-api-config">
-		<flow-ref name="getStavkaRacunaByIDFlow" doc:name="getStavkaRacunaByIDFlow"/>
-
-    </flow>
-    <flow name="get:/porudzbina/{ID}:proizvod-api-config">
-		<flow-ref name="getPorudzbinaByIDFlow" doc:name="getPorudzbinaByIDFlow"/>
-
-    </flow>
-    <flow name="get:/proizvod/{ID}:proizvod-api-config">
-		<flow-ref name="getProizvodByIDFlow" doc:name="getProizvodByIDFlow"/>
-
-    </flow>
-    <flow name="get:/vrstaProizvoda/{ID}:proizvod-api-config">
-		<flow-ref name="getVrstaProizvodaByIDFlow" doc:name="getVrstaProizvodaByIDFlow"/>
-
-    </flow>
-    <flow name="get:/proizvodjac/{ID}:proizvod-api-config">
-		<flow-ref name="getProizvodjacByIDFlow" doc:name="getProizvodjacByIDFlow"/>
-
-    </flow>
-    <flow name="get:/prodavac/{ID}:proizvod-api-config">
-		<flow-ref name="getProdavacByIDFlow" doc:name="getProdavacByIDFlow"/>
-
-    </flow>
-    <flow name="get:/racun/{ID}:proizvod-api-config">
-		<flow-ref name="getRacunByIDFlow" doc:name="getRacunByIDFlow"/>
-
-    </flow>
-    <flow name="get:/korisnik/{ID}:proizvod-api-config">
-		<flow-ref name="getKorisnikByIDFlow" doc:name="getKorisnikByIDFlow"/>
-
-    </flow>
-    <flow name="get:/stavkaPorudzbine/{ID}:proizvod-api-config">
-		<flow-ref name="getStavkaPorudzbineByIDFlow" doc:name="getStavkaPorudzbineByIDFlow"/>
-
-    </flow>
-    <flow name="post:/dobavljac:application/json:proizvod-api-config">
-		<flow-ref name="postDobavljacFlow" doc:name="postDobavljacFlow"/>
-
-    </flow>
-    <flow name="post:/izvestaj:application/json:proizvod-api-config">
-		<flow-ref name="postIzvestajFlow" doc:name="postIzvestajFlow"/>
-
-    </flow>
-    <flow name="post:/korisnik:application/json:proizvod-api-config">
-		<flow-ref name="postKorisnikFlow" doc:name="postKorisnikFlow"/>
-
-    </flow>
-    <flow name="post:/menadzer:application/json:proizvod-api-config">
-		<flow-ref name="postMenadzerFlow" doc:name="postMenadzerFlow"/>
-
-    </flow>
-    <flow name="post:/porudzbina:application/json:proizvod-api-config">
-		<flow-ref name="postPorudzbinaFlow" doc:name="postPorudzbinaFlow"/>
-
-    </flow>
-    <flow name="post:/prodavac:application/json:proizvod-api-config">
-		<flow-ref name="postProdavacFlow" doc:name="postProdavacFlow"/>
-
-    </flow>
-    <flow name="post:/proizvod:application/json:proizvod-api-config">
-		<flow-ref name="postProizvodFlow" doc:name="postProizvodFlow"/>
-
-    </flow>
-    <flow name="post:/proizvodjac:application/json:proizvod-api-config">
-		<flow-ref name="postProizvodjacFlow" doc:name="postProizvodjacFlow"/>
-
-    </flow>
-    <flow name="post:/racun:application/json:proizvod-api-config">
-		<flow-ref name="postRacunFlow" doc:name="postRacunFlow"/>
-
-    </flow>
-    <flow name="post:/stavkaPorudzbine:application/json:proizvod-api-config">
-		<flow-ref name="postStavkaPorudzbineFlow" doc:name="postStavkaPorudzbineFlow"/>
-
-    </flow>
-    <flow name="post:/stavkaRacuna:application/json:proizvod-api-config">
-		<flow-ref name="postStavkaRacunaFlow" doc:name="postStavkaRacunaFlow"/>
-
-    </flow>
-    <flow name="post:/vrstaProizvoda:application/json:proizvod-api-config">
-		<flow-ref name="postVrstaProizvodaFlow" doc:name="postVrstaProizvodaFlow"/>
-
-    </flow>
-	<apikit:mapping-exception-strategy name="proizvod-api-apiKitGlobalExceptionMapping">
+	<http:listener-config name="proizvod-api-httpListenerConfig"
+		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
+	<apikit:config name="proizvod-api-config" raml="trafika-api.raml"
+		consoleEnabled="false" doc:name="Router" keepRamlBaseUri="false" />
+	<flow name="proizvod-api-main">
+		<http:listener config-ref="HTTP_Listener_Configuration"
+			path="/api/*" doc:name="HTTP" />
+		<apikit:router config-ref="proizvod-api-config"
+			doc:name="APIkit Router" />
+		<exception-strategy ref="proizvod-api-apiKitGlobalExceptionMapping"
+			doc:name="Reference Exception Strategy" />
+	</flow>
+	<flow name="proizvod-api-console">
+		<http:listener config-ref="HTTP_Listener_Configuration"
+			path="/console/*" doc:name="HTTP" />
+		<apikit:console config-ref="proizvod-api-config"
+			doc:name="APIkit Console" />
+	</flow>
+	<flow name="put:/vrstaProizvoda/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putVrstaProizvodaByIDFlow" doc:name="putVrstaProizvodaByIDFlow" />
+	</flow>
+	<flow name="put:/izvestaj/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putIzvestajByIDFlow" doc:name="putIzvestajByIDFlow" />
+	</flow>
+	<flow name="put:/korisnik/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putKorisnikByIDFlow" doc:name="putKorisnikByIDFlow" />
+	</flow>
+	<flow name="put:/proizvodjac/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putProizvodjacByIDFlow" doc:name="putProizvodjacByIDFlow" />
+	</flow>
+	<flow name="put:/dobavljac/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putDobavljacByIDFlow" doc:name="putDobavljacByIDFlow" />
+	</flow>
+	<flow name="put:/porudzbina/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putPorudzbinaByIDFlow" doc:name="putPorudzbinaByIDFlow" />
+	</flow>
+	<flow name="put:/prodavac/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putProdavacByIDFlow" doc:name="putProdavacByIDFlow" />
+	</flow>
+	<flow name="put:/menadzer/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putMenadzerByIDFlow" doc:name="putMenadzerByIDFlow" />
+	</flow>
+	<flow name="put:/racun/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putRacunByIDFlow" doc:name="putRacunByIDFlow" />
+	</flow>
+	<flow name="put:/proizvod/{ID}:application/json:proizvod-api-config">
+		<flow-ref name="putProizvodByIDFlow" doc:name="putProizvodByIDFlow" />
+	</flow>
+	<flow name="delete:/menadzer/{ID}:proizvod-api-config">
+		<flow-ref name="deleteMendzerByIDFlow" doc:name="deleteMendzerByIDFlow" />
+	</flow>
+	<flow name="delete:/dobavljac/{ID}:proizvod-api-config">
+		<flow-ref name="deleteDobavljacByIDFlow" doc:name="deleteDobavljacByIDFlow" />
+	</flow>
+	<flow name="delete:/proizvod/{ID}:proizvod-api-config">
+		<flow-ref name="deleteProizvodByIDFlow" doc:name="deleteProizvodByIDFlow" />
+	</flow>
+	<flow name="delete:/izvestaj/{ID}:proizvod-api-config">
+		<flow-ref name="deleteIzvestajByIDFlow" doc:name="deleteIzvestajByIDFlow" />
+	</flow>
+	<flow name="delete:/vrstaProizvoda/{ID}:proizvod-api-config">
+		<flow-ref name="deleteVrstaProizvodaByIDFlow" doc:name="deleteVrstaProizvodaByIDFlow" />
+	</flow>
+	<flow name="delete:/racun/{ID}:proizvod-api-config">
+		<flow-ref name="deleteRacunByIDFlow" doc:name="deleteRacunByIDFlow" />
+	</flow>
+	<flow name="delete:/proizvodjac/{ID}:proizvod-api-config">
+		<flow-ref name="deleteProizvodjacByIDFlow" doc:name="deleteProizvodjacByIDFlow" />
+	</flow>
+	<flow name="delete:/korisnik/{ID}:proizvod-api-config">
+		<flow-ref name="deleteKorisnikByIDFlow" doc:name="deleteKorisnikByIDFlow" />
+	</flow>
+	<flow name="delete:/porudzbina/{ID}:proizvod-api-config">
+		<flow-ref name="deletePorudzbinaByIDFlow" doc:name="deletePorudzbinaByIDFlow" />
+	</flow>
+	<flow name="delete:/prodavac/{ID}:proizvod-api-config">
+		<flow-ref name="deleteProdavacByIDFlow" doc:name="deleteProdavacByIDFlow" />
+	</flow>
+	<flow name="get:/dobavljac:proizvod-api-config">
+		<flow-ref name="dobavljac_implementationFlow" doc:name="dobavljac_implementationFlow" />
+	</flow>
+	<flow name="get:/izvestaj:proizvod-api-config">
+		<flow-ref name="izvestaj_implementationFlow" doc:name="izvestaj_implementationFlow" />
+	</flow>
+	<flow name="get:/korisnik:proizvod-api-config">
+		<flow-ref name="korisnik_implementationFlow" doc:name="korisnik_implementationFlow" />
+	</flow>
+	<flow name="get:/menadzer:proizvod-api-config">
+		<flow-ref name="menadzer_implementationFlow" doc:name="menadzer_implementationFlow" />
+	</flow>
+	<flow name="get:/porudzbina:proizvod-api-config">
+		<flow-ref name="porudzbina_implementationFlow" doc:name="porudzbina_implementationFlow" />
+	</flow>
+	<flow name="get:/prodavac:proizvod-api-config">
+		<flow-ref name="prodavac_implementationFlow" doc:name="prodavac_implementationFlow" />
+	</flow>
+	<flow name="get:/proizvod:proizvod-api-config">
+		<flow-ref name="proizvod_implementationFlow" doc:name="proizvod_implementationFlow" />
+	</flow>
+	<flow name="get:/proizvodjac:proizvod-api-config">
+		<flow-ref name="proizvodjac_implementationFlow" doc:name="proizvodjac_implementationFlow" />
+	</flow>
+	<flow name="get:/racun:proizvod-api-config">
+		<flow-ref name="racun_implementationFlow" doc:name="racun_implementationFlow" />
+	</flow>
+	<flow name="get:/stavkaPorudzbine:proizvod-api-config">
+		<flow-ref name="stavkaPorudzbine_implementationFlow"
+			doc:name="stavkaPorudzbine_implementationFlow" />
+	</flow>
+	<flow name="get:/stavkaRacuna:proizvod-api-config">
+		<flow-ref name="stavkaRacuna_implementationFlow" doc:name="stavkaRacuna_implementationFlow" />
+	</flow>
+	<flow name="get:/vrstaProizvoda:proizvod-api-config">
+		<flow-ref name="vrstaProizvoda_implementationFlow" doc:name="vrstaProizvoda_implementationFlow" />
+	</flow>
+	<flow name="get:/menadzer/{ID}:proizvod-api-config">
+		<flow-ref name="getMenadzerByIDFlow" doc:name="getMenadzerByIDFlow" />
+	</flow>
+	<flow name="get:/dobavljac/{ID}:proizvod-api-config">
+		<flow-ref name="getDobavljacByIDFlow" doc:name="getDobavljacByIDFlow" />
+	</flow>
+	<flow name="get:/izvestaj/{ID}:proizvod-api-config">
+		<flow-ref name="getIzvestajByIDFlow" doc:name="getIzvestajByIDFlow" />
+	</flow>
+	<flow name="get:/porudzbina/{ID}:proizvod-api-config">
+		<flow-ref name="getPorudzbinaByIDFlow" doc:name="getPorudzbinaByIDFlow" />
+	</flow>
+	<flow name="get:/proizvod/{ID}:proizvod-api-config">
+		<flow-ref name="getProizvodByIDFlow" doc:name="getProizvodByIDFlow" />
+	</flow>
+	<flow name="get:/vrstaProizvoda/{ID}:proizvod-api-config">
+		<flow-ref name="getVrstaProizvodaByIDFlow" doc:name="getVrstaProizvodaByIDFlow" />
+	</flow>
+	<flow name="get:/proizvodjac/{ID}:proizvod-api-config">
+		<flow-ref name="getProizvodjacByIDFlow" doc:name="getProizvodjacByIDFlow" />
+	</flow>
+	<flow name="get:/prodavac/{ID}:proizvod-api-config">
+		<flow-ref name="getProdavacByIDFlow" doc:name="getProdavacByIDFlow" />
+	</flow>
+	<flow name="get:/racun/{ID}:proizvod-api-config">
+		<flow-ref name="getRacunByIDFlow" doc:name="getRacunByIDFlow" />
+	</flow>
+	<flow name="get:/korisnik/{ID}:proizvod-api-config">
+		<flow-ref name="getKorisnikByIDFlow" doc:name="getKorisnikByIDFlow" />
+	</flow>
+	<flow name="post:/dobavljac:application/json:proizvod-api-config">
+		<flow-ref name="postDobavljacFlow" doc:name="postDobavljacFlow" />
+	</flow>
+	<flow name="post:/izvestaj:application/json:proizvod-api-config">
+		<flow-ref name="postIzvestajFlow" doc:name="postIzvestajFlow" />
+	</flow>
+	<flow name="post:/korisnik:application/json:proizvod-api-config">
+		<flow-ref name="postKorisnikFlow" doc:name="postKorisnikFlow" />
+	</flow>
+	<flow name="post:/menadzer:application/json:proizvod-api-config">
+		<flow-ref name="postMenadzerFlow" doc:name="postMenadzerFlow" />
+	</flow>
+	<flow name="post:/porudzbina:application/json:proizvod-api-config">
+		<flow-ref name="postPorudzbinaFlow" doc:name="postPorudzbinaFlow" />
+	</flow>
+	<flow name="post:/prodavac:application/json:proizvod-api-config">
+		<flow-ref name="postProdavacFlow" doc:name="postProdavacFlow" />
+	</flow>
+	<flow name="post:/proizvod:application/json:proizvod-api-config">
+		<flow-ref name="postProizvodFlow" doc:name="postProizvodFlow" />
+	</flow>
+	<flow name="post:/proizvodjac:application/json:proizvod-api-config">
+		<flow-ref name="postProizvodjacFlow" doc:name="postProizvodjacFlow" />
+	</flow>
+	<flow name="post:/racun:application/json:proizvod-api-config">
+		<flow-ref name="postRacunFlow" doc:name="postRacunFlow" />
+	</flow>
+	<flow name="post:/stavkaPorudzbine:application/json:proizvod-api-config">
+		<flow-ref name="postStavkaPorudzbineFlow" doc:name="postStavkaPorudzbineFlow" />
+	</flow>
+	<flow name="post:/stavkaRacuna:application/json:proizvod-api-config">
+		<flow-ref name="postStavkaRacunaFlow" doc:name="postStavkaRacunaFlow" />
+	</flow>
+	<flow name="post:/vrstaProizvoda:application/json:proizvod-api-config">
+		<flow-ref name="postVrstaProizvodaFlow" doc:name="postVrstaProizvodaFlow" />
+	</flow>
+	<flow
+		name="put:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:application/json:proizvod-api-config">
+		<flow-ref name="putStavkaPorudzbineByIDFlow" doc:name="putStavkaPorudzbineByIDFlow" />
+	</flow>
+	<flow
+		name="put:/stavkaRacuna/{racunID}/{proizvodID}:application/json:proizvod-api-config">
+		<flow-ref name="putStavkaRacunaByIDFlow" doc:name="putStavkaRacunaByIDFlow" />
+	</flow>
+	<flow
+		name="delete:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:proizvod-api-config">
+		<flow-ref name="deleteStavkaPorudzbineByIDFlow" doc:name="deleteStavkaPorudzbineByIDFlow" />
+	</flow>
+	<flow name="delete:/stavkaRacuna/{racunID}/{proizvodID}:proizvod-api-config">
+		<flow-ref name="deleteStavkaRacunaByIDFlow" doc:name="deleteStavkaRacunaByIDFlow" />
+	</flow>
+	<flow
+		name="get:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:proizvod-api-config">
+		<flow-ref name="getStavkaPorudzbineByIDFlow" doc:name="getStavkaPorudzbineByIDFlow" />
+	</flow>
+	<flow name="get:/stavkaRacuna/{racunID}/{proizvodID}:proizvod-api-config">
+		<flow-ref name="getStavkaRacunaByIDFlow" doc:name="getStavkaRacunaByIDFlow" />
+	</flow>
+	<apikit:mapping-exception-strategy
+		name="proizvod-api-apiKitGlobalExceptionMapping">
 		<apikit:mapping statusCode="404">
-			<apikit:exception value="org.mule.module.apikit.exception.NotFoundException"/>
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-			<set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+			<apikit:exception
+				value="org.mule.module.apikit.exception.NotFoundException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Resource not found&quot; }"
+				doc:name="Set Payload" />
 		</apikit:mapping>
 		<apikit:mapping statusCode="405">
-			<apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException"/>
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-			<set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+			<apikit:exception
+				value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Method not allowed&quot; }"
+				doc:name="Set Payload" />
 		</apikit:mapping>
 		<apikit:mapping statusCode="415">
-			<apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException"/>
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-			<set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+			<apikit:exception
+				value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }"
+				doc:name="Set Payload" />
 		</apikit:mapping>
 		<apikit:mapping statusCode="406">
-			<apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException"/>
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-			<set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+			<apikit:exception
+				value="org.mule.module.apikit.exception.NotAcceptableException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }"
+				doc:name="Set Payload" />
 		</apikit:mapping>
 		<apikit:mapping statusCode="400">
-			<apikit:exception value="org.mule.module.apikit.exception.BadRequestException"/>
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-			<set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+			<apikit:exception
+				value="org.mule.module.apikit.exception.BadRequestException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="500">
+			<apikit:exception value="com.microsoft.sqlserver.jdbc.SQLServerException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Server error&quot; }"
+				doc:name="Set Payload" />
 		</apikit:mapping>
 	</apikit:mapping-exception-strategy>
-
 </mule>

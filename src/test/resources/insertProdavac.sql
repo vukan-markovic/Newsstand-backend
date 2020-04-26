@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.Prodavac (prodavacID, ime, prezime, pol, datumRodjenja, adresaStanovanja, telefon, JMBG, datumZaposlenja, strucnaSprema) values (#[payload.prodavacID], #[payload.ime], #[payload.prezime], #[payload.pol], #[payload.datumRodjenja], #[payload.adresaStanovanja], #[payload.telefon], #[payload.JMBG], #[payload.datumZaposlenja], #[payload.strucnaSprema]);

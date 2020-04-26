@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.Izvestaj (datumOd, datumDo, menadzerID) values (#[payload.datumOd], #[payload.datumDo], #[payload.menadzerID]);

@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.VrstaProizvoda (nazivVrsteProizvoda, opisVrsteProizvoda) values (#[payload.nazivVrsteProizvoda], #[payload.opisVrsteProizvoda]);

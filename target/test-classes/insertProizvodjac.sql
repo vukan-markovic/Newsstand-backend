@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.Proizvodjac (nazivProizvodjaca, kontaktProizvodjaca, adresaProizvodjaca) values (#[payload.nazivProizvodjaca], #[payload.kontaktProizvodjaca], #[payload.adresaProizvodjaca]);

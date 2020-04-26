@@ -1,0 +1,1 @@
+delete from it20g2016.trafika.Dobavljac where dobavljacID=#[message.inboundProperties.'http.uri.params'.ID];

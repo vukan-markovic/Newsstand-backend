@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
@@ -11,112 +15,139 @@ http://www.mulesoft.org/schema/mule/schedulers http://www.mulesoft.org/schema/mu
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
-    <flow name="izvestaj_implementationFlow">
-        <set-variable variableName="active" value="#[(message.inboundProperties.'http.query.params'.code == empty) ? 'SFO' : message.inboundProperties.'http.query.params'.code] " doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
-        <choice doc:name="Choice">
-            <when expression="#[flowVars.active == empty]">
-                <flow-ref name="getIzvestajiFlow" doc:name="getIzvestajiFlow"/>
-            </when>
-            <otherwise>
-                <flow-ref name="getIzvestajiFlow2" doc:name="getIzvestajiFlow2"/>
-            </otherwise>
-        </choice>
-    </flow>
-    <flow name="getIzvestajiFlow2">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Izvestaj;]]></db:parameterized-query>
-        </db:select>
-        <dw:transform-message doc:name="Transform Message" metadata:id="04ca259c-c726-4c0a-b760-6c9cbc9fdacb">
-            <dw:input-payload doc:sample="sample_data\Izvestaj.dwl" mimeType="application/java"/>
-            <dw:set-payload resource="classpath:json_izvestaj_playground.dwl"/>
-        </dw:transform-message>
-        <logger level="INFO" doc:name="Logger" message="#[payload]"/>
-
-    </flow>
-    <flow name="getIzvestajiFlow">
-        <logger level="INFO" doc:name="Logger" message="#[payload]"/>
-
-    </flow>
-    <flow name="getIzvestajByIDFlow">
-		<db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+	<db:template-query name="selectAllIzvestaj" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectAllIzvestaj.sql" />
+	</db:template-query>
+	<db:template-query name="selectByIDIzvestaj"
+		doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectByIDIzvestaj.sql" />
+	</db:template-query>
+	<db:template-query name="insertIzvestaj" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\insertIzvestaj.sql" />
+	</db:template-query>
+	<db:template-query name="updateIzvestaj" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\updateIzvestaj.sql" />
+	</db:template-query>
+	<db:template-query name="deleteIzvestaj" doc:name="Template Query">
+		<db:parameterized-query
+			file="C:\Users\Win7\Google Drive\4. godina\8. semestar\ERP eksploatacija, odr&#382;avanje i nadogradnja\trafika_vukan_markovic_it20-16\src\test\resources\deleteIzvestaj.sql" />
+	</db:template-query>
+	<flow name="izvestaj_implementationFlow">
+		<set-variable variableName="active"
+			value="#[(message.inboundProperties.'http.query.params'.code == empty) ? 'SFO' : message.inboundProperties.'http.query.params'.code] "
+			doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7" />
+		<choice doc:name="Choice">
+			<when expression="#[flowVars.active == empty]">
+				<flow-ref name="getIzvestajiFlow" doc:name="getIzvestajiFlow" />
+			</when>
+			<otherwise>
+				<flow-ref name="getIzvestajiFlow2" doc:name="getIzvestajiFlow2" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="getIzvestajiFlow2">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectAllIzvestaj" />
 		</db:select>
-        <choice doc:name="Choice">
-            <when expression="#[payload == empty]">
-                <flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow"/>
-            </when>
-            <otherwise>
-                <flow-ref name="izvestajSuccessFlow" doc:name="izvestajSuccessFlow"/>
-            </otherwise>
-        </choice>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-property propertyName="Content-Type" value="application/json"
+					doc:name="Property" />
+				<set-payload doc:name="Set Payload"
+					value="{  &quot;message&quot;: &quot;Trenutno nema izve&#353;taja u bazi podataka&quot; }" />
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="04ca259c-c726-4c0a-b760-6c9cbc9fdacb">
+					<dw:input-payload doc:sample="sample_data\Izvestaj.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_izvestaj_playground.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="getIzvestajiFlow">
+		<logger level="INFO" doc:name="Logger" message="#[payload]" />
 
-    </flow>
-    <flow name="izvestajErrorFlow">
-        <set-property propertyName="http.status" value="404" doc:name="Property"/>
-        <set-payload value="Ne postoji izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
-        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-    </flow>
-    <flow name="izvestajSuccessFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="0fe42e9b-1747-4c96-b646-7e402c963723">
-       		<dw:input-payload doc:sample="sample_data\Izvestaj.dwl" mimeType="application/java"/>
-            <dw:set-payload resource="classpath:json_izvestaj_playground.dwl"/>
-        </dw:transform-message>
-        <logger message="Dodat izve&#353;taj u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
-    </flow>
-
-    <flow name="postIzvestajFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="48efdb66-77b1-4517-8ea5-070276a88acd">
-            <dw:input-payload doc:sample="izvestaj-example.json" mimeType="application/json"/>
-            <dw:set-payload resource="classpath:java_playground.dwl"/>
-        </dw:transform-message>
-		<db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[insert into it20g2016.trafika.Izvestaj (promet, brojKupovina, datumOd, datumDo, menadzerID) values (#[payload.promet], #[payload.brojKupovina], #[payload.datumOd], #[payload.datumDo], #[payload.menadzerID]);]]></db:parameterized-query>
+	</flow>
+	<flow name="getIzvestajByIDFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByIDIzvestaj" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow" />
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="0fe42e9b-1747-4c96-b646-7e402c963723">
+					<dw:input-payload doc:sample="sample_data\Izvestaj.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_izvestaj_playground.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="izvestajErrorFlow">
+		<set-property propertyName="http.status" value="404"
+			doc:name="Property" />
+		<set-payload
+			value="Ne postoji izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			doc:name="Set Payload" />
+	</flow>
+	<flow name="postIzvestajFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="48efdb66-77b1-4517-8ea5-070276a88acd">
+			<dw:input-payload doc:sample="izvestaj-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_playground.dwl" />
+		</dw:transform-message>
+		<db:insert config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="insertIzvestaj" />
 		</db:insert>
-		<logger level="INFO" doc:name="Logger"/>
-
-        <catch-exception-strategy doc:name="Catch Exception Strategy" >
-            <set-property propertyName="http.status" value="400" doc:name="Property"/>
-            <set-payload value="Vec postoji izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
-
-            <logger level="ERROR" doc:name="Logger" message="#[exception]"/>
-        </catch-exception-strategy>
-    </flow>
-    <flow name="putIzvestajByIDFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="89c17684-7043-4111-a611-a88742c72417">
-         	<dw:input-payload doc:sample="izvestaj-example.json" mimeType="application/json"/>
-            <dw:set-payload resource="classpath:java_playground.dwl"/>
-        </dw:transform-message>
-		<db:update config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[update it20g2016.trafika.Izvestaj
-set promet=#[payload.promet],
-brojKupovina=#[payload.brojKupovina],
-datumOd=#[payload.datumOd],
-datumDo=#[payload.datumDo],
-menadzerID=#[payload.menadzerID]
-where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];
-if @@rowcount=0
-insert into it20g2016.trafika.Izvestaj (promet, brojKupovina, datumOd, datumDo, menadzerID) values (#[payload.promet], #[payload.brojKupovina], #[payload.datumOd], #[payload.datumDo], #[payload.menadzerID]);]]></db:parameterized-query>
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
+		<set-payload doc:name="Set Payload" value="{ message: &quot;Dodat novi izve&#353;taj&quot; }"/>
+	</flow>
+	<flow name="putIzvestajByIDFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="89c17684-7043-4111-a611-a88742c72417">
+			<dw:input-payload doc:sample="izvestaj-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_playground.dwl" />
+		</dw:transform-message>
+		<db:update config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="updateIzvestaj" />
 		</db:update>
-        <logger level="INFO" doc:name="Logger"/>
-
-    </flow>
-    <flow name="deleteIzvestajByIDFlow">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
-        </db:select>
-        <choice doc:name="Choice">
-            <when expression="#[payload == empty]">
-                <flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow"/>
-            </when>
-            <otherwise>
-				<db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
-					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Izvestaj where izvestajID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
+		<set-payload doc:name="Set Payload" value="{ message: &quot;A&#382;uriran/dodat izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"/>
+	</flow>
+	<flow name="deleteIzvestajByIDFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByIDIzvestaj" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow" />
+			</when>
+			<otherwise>
+				<db:delete config-ref="Generic_Database_Configuration"
+					doc:name="Database">
+					<db:template-query-ref name="deleteIzvestaj" />
 				</db:delete>
+				<set-property propertyName="Content-Type" value="application/json"
+					doc:name="Property" />
+				<set-payload
+					value="{ message: &quot;Obrisan izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
 
-                <set-payload value="Obrisan izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
-                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-            </otherwise>
-        </choice>
-
-    </flow>
+	</flow>
 </mule>

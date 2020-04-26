@@ -1,0 +1,1 @@
+insert into it20g2016.trafika.Racun (vremeIzdavanja, mestoIzdavanja, nazivProdavnice, nacinPlacanja, brojRacuna, tipRacuna, prodavacID) values (#[payload.vremeIzdavanja], #[payload.mestoIzdavanja], #[payload.nazivProdavnice], #[payload.nacinPlacanja], #[payload.brojRacuna], #[payload.tipRacuna], #[payload.prodavacID]);

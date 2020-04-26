@@ -6,7 +6,7 @@ public class Proizvodjac implements java.io.Serializable, Comparable<Proizvodjac
 	String nazivProizvodjaca;
 	String kontaktProizvodjaca;
 	String adresaProizvodjaca;
-	
+
 	public Proizvodjac(int proizvodjacID, String nazivProizvodjaca, String kontaktProizvodjaca,
 			String adresaProizvodjaca) {
 		this.proizvodjacID = proizvodjacID;
@@ -46,7 +46,7 @@ public class Proizvodjac implements java.io.Serializable, Comparable<Proizvodjac
 	public void setAdresaProizvodjaca(String adresaProizvodjaca) {
 		this.adresaProizvodjaca = adresaProizvodjaca;
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

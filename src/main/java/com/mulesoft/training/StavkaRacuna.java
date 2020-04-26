@@ -53,6 +53,7 @@ public class StavkaRacuna implements java.io.Serializable, Comparable<StavkaRacu
 
 	@Override
 	public int compareTo(StavkaRacuna otherStavkaRacuna) {
-		return Integer.compare(this.racunID, otherStavkaRacuna.racunID) & Integer.compare(this.getProizvodID(), otherStavkaRacuna.getProizvodID());
+		return Integer.compare(this.racunID, otherStavkaRacuna.racunID)
+				& Integer.compare(this.getProizvodID(), otherStavkaRacuna.getProizvodID());
 	}
 }

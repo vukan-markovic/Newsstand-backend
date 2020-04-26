@@ -13,7 +13,7 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 	int PIB;
 	String kontaktOsoba;
 	String brojZiroRacuna;
-	
+
 	public Dobavljac(int dobavljacID, String skraceniNaziv, String punNaziv, String kontaktDobavljaca,
 			String adresaDobavljaca, String grad, String drzava, String postanskiBroj, int PIB, String kontaktOsoba,
 			String brojZiroRacuna) {

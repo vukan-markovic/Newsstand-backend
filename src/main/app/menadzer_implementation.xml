@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
@@ -11,107 +15,133 @@ http://www.mulesoft.org/schema/mule/schedulers http://www.mulesoft.org/schema/mu
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
-    <flow name="menadzer_implementationFlow">
-        <set-variable variableName="active" value="#[message.inboundProperties.active]" doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7"/>
-        <choice doc:name="Choice">
-            <when expression="#[flowVars.active == empty]">
-                <flow-ref name="getMenadzeriFlow" doc:name="getMenadzeriFlow"/>
-            </when>
-            <otherwise>
-                <flow-ref name="getMenadzeriFlow2" doc:name="getMenadzeriFlow2"/>
-            </otherwise>
-        </choice>
-    </flow>
-    <flow name="getMenadzeriFlow2">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Menadzer;]]></db:parameterized-query>
-        </db:select>
-        <dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c731-4c0a-b760-6c9cbc9fdacb">
-             <dw:input-payload doc:sample="sample_data\Menadzer.dwl" mimeType="application/java"/>
-             <dw:set-payload resource="classpath:json_menadzer_playground.dwl"/>
-        </dw:transform-message>
-        <logger level="INFO" doc:name="Logger" message="#[payload]"/>
+	<db:template-query name="selectAllMenadzer" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectAllMenadzer.sql" />
+	</db:template-query>
+	<db:template-query name="selectByIDMenadzer"
+		doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectByIDMenadzer.sql" />
+	</db:template-query>
+	<db:template-query name="insertMenadzer" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\insertMenadzer.sql" />
+	</db:template-query>
+	<db:template-query name="updateMenadzer" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\updateMenadzer.sql" />
+	</db:template-query>
+	<db:template-query name="deleteMenadzer" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\deleteMenadzer.sql" />
+	</db:template-query>
+	<flow name="menadzer_implementationFlow">
+		<set-variable variableName="active"
+			value="#[message.inboundProperties.active]" doc:name="Variable"
+			metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7" />
+		<choice doc:name="Choice">
+			<when expression="#[flowVars.active == empty]">
+				<flow-ref name="getMenadzeriFlow" doc:name="getMenadzeriFlow" />
+			</when>
+			<otherwise>
+				<flow-ref name="getMenadzeriFlow2" doc:name="getMenadzeriFlow2" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="getMenadzeriFlow2">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectAllMenadzer" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-property doc:name="Property" propertyName="Content-Type"
+					value="application/json"/>
+				<set-payload doc:name="Set Payload" value="{  &quot;message&quot;: &quot;Trenutno nema menad&#382;era u bazi podataka&quot; }"/>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message" metadata:id="03ca259c-c731-4c0a-b760-6c9cbc9fdacb">
+					<dw:input-payload doc:sample="sample_data\Menadzer.dwl" mimeType="application/java"/>
+					<dw:set-payload resource="classpath:json_menadzer_playground.dwl"/>
+				</dw:transform-message>
+			</otherwise>
+		</choice>
 
-    </flow>
-    <flow name="getMenadzeriFlow">
-        <logger level="INFO" doc:name="Logger" message="#[payload]"/>
+	</flow>
+	<flow name="getMenadzeriFlow">
+		<logger level="INFO" doc:name="Logger" message="#[payload]" />
 
-    </flow>
-    <flow name="getMenadzerByIDFlow">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Menadzer where menadzerID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
-        </db:select>
-        <choice doc:name="Choice">
-            <when expression="#[payload == empty]">
-                <flow-ref name="menadzerErrorFlow" doc:name="menadzerErrorFlow"/>
-            </when>
-            <otherwise>
-                <flow-ref name="menadzerSuccessFlow" doc:name="menadzerSuccessFlow"/>
-            </otherwise>
-        </choice>
-
-    </flow>
-    <flow name="menadzerErrorFlow">
-        <set-property propertyName="http.status" value="404" doc:name="Property"/>
-        <set-payload value="Ne postoji menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
-        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-    </flow>
-    <flow name="menadzerSuccessFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="0fe42e8b-1711-4c96-b646-7e402c963723">
-         	<dw:input-payload doc:sample="sample_data\Menadzer.dwl" mimeType="application/java"/>
-			<dw:set-payload resource="classpath:json_menadzer_playground.dwl"/>
-        </dw:transform-message>
-        <logger message="Dodat proizvod u fajl sa id: #[message.inboundProperties.'http.uri.params'.ID]." level="INFO" doc:name="Logger"/>
-    </flow>
-
-    <flow name="postMenadzerFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="48efdb66-77b5-4517-8ea5-070476a88acd">
-            <dw:input-payload doc:sample="menadzer-example.json" mimeType="application/json"/>
-            <dw:set-payload resource="classpath:java_playground.dwl"/>
-        </dw:transform-message>
-		<db:insert config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[v]]></db:parameterized-query>
+	</flow>
+	<flow name="getMenadzerByIDFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByIDMenadzer" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="menadzerErrorFlow" doc:name="menadzerErrorFlow" />
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="0fe42e8b-1711-4c96-b646-7e402c963723">
+					<dw:input-payload doc:sample="sample_data\Menadzer.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_menadzer_playground.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="menadzerErrorFlow">
+		<set-property propertyName="http.status" value="404"
+			doc:name="Property" />
+		<set-payload
+			value="Ne postoji menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			doc:name="Set Payload" />
+	</flow>
+	<flow name="postMenadzerFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="48efdb66-77b5-4517-8ea5-070476a88acd">
+			<dw:input-payload doc:sample="menadzer-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_playground.dwl" />
+		</dw:transform-message>
+		<db:insert config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="insertMenadzer" />
 		</db:insert>
-        <logger level="INFO" doc:name="Logger"/>
-
-        <catch-exception-strategy doc:name="Catch Exception Strategy" >
-            <set-property propertyName="http.status" value="400" doc:name="Property"/>
-            <set-payload value="Ve&#263; postoji menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID + '\n' + exception]" doc:name="Set Payload"/>
-
-            <logger level="ERROR" doc:name="Logger" message="#[exception]"/>
-        </catch-exception-strategy>
-    </flow>
-    <flow name="putMenadzerByIDFlow">
-        <dw:transform-message doc:name="Transform Message" metadata:id="19c17684-7243-4111-a611-a88742c72419">
-        	<dw:input-payload doc:sample="menadzer-example.json" mimeType="application/json"/>
-            <dw:set-payload resource="classpath:java_playground.dwl"/>
-        </dw:transform-message>
-		<db:update config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[update it20g2016.trafika.Menadzer
-set adresaKancelarije=#[payload.adresaKancelarije],
-brojKancelarije=#[payload.brojKancelarije]
-where menadzerID=#[message.inboundProperties.'http.uri.params'.ID];
-if @@rowcount=0
-insert into it20g2016.trafika.Menadzer (menadzerID, adresaKancelarije, brojKancelarije) values (#[message.inboundProperties.'http.uri.params'.ID], #[payload.adresaKancelarije], #[payload.brojKancelarije]);]]></db:parameterized-query>
+		<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+		<set-payload doc:name="Set Payload" value="{ message: &quot;Dodat novi menad&#382;er&quot; }"/>
+	</flow>
+	<flow name="putMenadzerByIDFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="19c17684-7243-4111-a611-a88742c72419">
+			<dw:input-payload doc:sample="menadzer-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_playground.dwl" />
+		</dw:transform-message>
+		<db:update config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="updateMenadzer" />
 		</db:update>
-        <logger level="INFO" doc:name="Logger"/>
+		<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+		<set-payload doc:name="Set Payload" value="{ message: &quot;A&#382;uriran/dodat menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"/>
+	</flow>
+	<flow name="deleteMendzerByIDFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByIDMenadzer" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="menadzerErrorFlow" doc:name="menadzerErrorFlow" />
+			</when>
+			<otherwise>
+				<db:delete config-ref="Generic_Database_Configuration"
+					doc:name="Database">
+					<db:template-query-ref name="deleteMenadzer" />
+				</db:delete>
+				<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+				<set-payload
+					value="{ message: &quot;Obrisan menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
 
-    </flow>
-    <flow name="deleteMendzerByIDFlow">
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
-			<db:parameterized-query><![CDATA[select * from it20g2016.trafika.Menadzer where menadzerID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query>
-        </db:select>
-        <choice doc:name="Choice">
-            <when expression="#[payload == empty]">
-                <flow-ref name="menadzerErrorFlow" doc:name="menadzerErrorFlow"/>
-            </when>
-            <otherwise>
-                <db:delete config-ref="Generic_Database_Configuration" doc:name="Database">
-					<db:parameterized-query><![CDATA[delete from it20g2016.trafika.Menadzer where menadzerID=#[message.inboundProperties.'http.uri.params'.ID];]]></db:parameterized-query></db:delete>
-				<set-payload value="Obrisan menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID]." doc:name="Set Payload"/>
-                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-            </otherwise>
-        </choice>
-
-    </flow>
+	</flow>
 </mule>
