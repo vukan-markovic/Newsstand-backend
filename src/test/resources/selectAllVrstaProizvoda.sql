@@ -1,1 +1,2 @@
-select * from it20g2016.trafika.VrstaProizvoda;
+select * from it20g2016.trafika.VrstaProizvoda where (#[message.inboundProperties.'http.query.params'.nazivVrsteProizvoda] is null or 
+nazivVrsteProizvoda=#[message.inboundProperties.'http.query.params'.nazivVrsteProizvoda]);

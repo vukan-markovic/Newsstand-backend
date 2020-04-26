@@ -18,24 +18,56 @@ types:
 
 /proizvod:
   get:
-#    displayName: Get flights
-#    queryParameters:
-#      code:
-#        displayName: Destination airport code
-#        required: false
-#        enum: 
-#          - SFO
-#          - LAX
-#          - PDX
-#          - CLE
-#          - PDF
-#      airline:
-#        displayName: Airline
-#        required: false
-#        enum: 
-#          - united
-#          - delta
-#          - american
+    displayName: Get proizvodi
+    queryParameters:
+      nazivProizvoda:
+        displayName: Naziv
+        type: string
+        description: Naziv proizvoda
+        example: Plazma
+        required: false
+      cena:
+        displayName: Cena
+        type: integer
+        description: Cena proizvoda
+        example: 100
+        required: false
+      tipPakovanja:
+        displayName: Tip pakovanja
+        type: string
+        description: Tip pakovanja proizvoda
+        example: kutija
+        required: false
+      velicinaPakovanja:
+        displayName: Veličina pakovanja
+        type: string
+        description: Veličina pakovanja proizvoda
+        example: redovno
+        required: false
+      barKod:
+        displayName: Bar kod
+        type: string
+        description: Bar kod proizvoda
+        example: '00143234'
+        required: false
+      masa:
+        displayName: Masa
+        type: number
+        description: Masa proizvoda
+        example: 100
+        required: false
+      proizvodjacID:
+        displayName: Proizvođač
+        type: integer
+        description: Proizvođač proizvoda
+        example: 1
+        required: false
+      vrstaProizvodaID:
+        displayName: Vrsta proizvoda
+        type: integer
+        description: Vrsta proizvoda
+        example: 1
+        required: false
     responses: 
       200:
         body: 
@@ -84,6 +116,57 @@ types:
                 
 /racun:
   get:
+    queryParameters:
+      vremeIzdavanja:
+        displayName: Vreme izdavanja
+        type: datetime-only
+        description: Vreme izdavanja računa
+        example: 2015-07-04T21:00:00
+        required: false
+      mestoIzdavanja:
+        displayName: Mesto izdavanja
+        type: string
+        description: Mesto izdavanja računa
+        example: Beograd
+        required: false
+      ukupanIznosRacuna:
+        displayName: Ukupan iznos
+        type: number
+        description: Ukupan iznos računa
+        example: 123
+        required: false
+      nazivProdavnice:
+        displayName: Naziv prodavnice
+        type: string
+        description: Naziv prodavnice koja je izdala račun
+        example: Trafika BMB
+        required: false
+      nacinPlacanja:
+        displayName: Način plaćanja
+        type: string
+        description: Način plaćanja računa
+        enum: 
+          - gotovina
+          - kartica
+        required: false
+      brojRacuna:
+        displayName: Broj
+        type: string
+        description: Broj računa
+        example: aw3432342432
+        required: false
+      tipRacuna:
+        displayName: Tip
+        type: string
+        description: Tip računa
+        example: Dopuna
+        required: false
+      prodavacID:
+        displayName: Prodavac
+        type: integer
+        description: Prodavac koji je izdao račun
+        example: 1
+        required: false
     responses: 
       200:
         body: 
@@ -132,6 +215,63 @@ types:
                 
 /prodavac:
   get:
+    queryParameters:
+      ime:
+        displayName: Ime
+        type: string
+        description: Ime prodavca
+        example: Petar
+        required: false
+      prezime:
+        displayName: Ime
+        type: string
+        description: Ime prodavca
+        example: Petar
+        required: false
+      pol:
+        displayName: Pol
+        type: string
+        description: Pol prodavca
+        enum: 
+          - musko
+          - zensko
+        required: false
+      datumRodjenja:
+        displayName: Datum rođenja
+        type: date-only
+        description: Datum rođenja prodavca
+        example: 1999-05-23
+        required: false
+      adresaStanovanja:
+        displayName: Adresa stanovanja
+        type: string
+        description: Adresa stanovanja prodavca
+        example: Ohridska 12
+        required: false
+      telefon:
+        displayName: Telefon
+        type: string
+        description: Telefon prodavca
+        example: '0631113452'
+        required: false
+      JMBG:
+        displayName: JMBG
+        type: string
+        description: JMBG prodavca
+        example: '0811998910053'
+        required: false
+      datumZaposlenja:
+        displayName: Datum zaposlenja
+        type: date-only
+        description: Datum zaposlenja prodavca
+        example: 2019-05-23
+        required: false
+      strucnaSprema:
+        displayName: Stručna sprema
+        type: string
+        description: Stručna sprema prodavca
+        example: srednja škola
+        required: false
     responses: 
       200:
         body: 
@@ -180,6 +320,19 @@ types:
                 
 /menadzer:
   get:
+    queryParameters:
+      adresaKancelarije:
+        displayName: Adresa kancelarije
+        type: string
+        description: Adresa kancelarije menadžera
+        example: Banatska BB
+        required: false
+      brojKancelarije:
+        displayName: Broj kancelarije
+        type: string
+        description: Broj kancelarije menadžera
+        example: c12a
+        required: false
     responses: 
       200:
         body: 
@@ -228,6 +381,67 @@ types:
                 
 /dobavljac:
   get:
+    queryParameters:
+      skraceniNaziv:
+        displayName: Skraćeni naziv
+        type: string
+        description: Skraceni naziv dobavljača
+        example: RAS
+        required: false
+      punNaziv:
+        displayName: Pun naziv
+        type: string
+        description: Pun naziv dobavljača
+        example: Ringier Axel Springier
+        required: false
+      kontaktDobavljaca:
+        displayName: Kontakt
+        type: string
+        description: Kontakt dobavljača
+        example: '024234444'
+        required: false
+      adresaDobavljaca:
+        displayName: Adresa
+        type: string
+        description: Adresa dobavljača
+        example: Banatska BB
+        required: false
+      grad:
+        displayName: Grad
+        type: string
+        description: Grad dobavljača
+        example: Sombor
+        required: false
+      drzava:
+        displayName: Država
+        type: string
+        description: Država dobavljača
+        example: Srbija
+        required: false
+      postanskiBroj:
+        displayName: Poštanski broj
+        type: string
+        description: Poštanski broj dobavljača
+        example: '2434332'
+        required: false
+      PIB:
+        displayName: PIB
+        type: integer
+        description: PIB dobavljača
+        example: 111111111
+        required: false
+      kontaktOsoba:
+        displayName: Kontakt osoba
+        type: string
+        description: Kontakt osoba dobavljača
+        example: Pera Peric
+        required: false
+      brojZiroRacuna:
+        displayName: Broj žiro računa
+        type: string
+        description: Broj žiro računa dobavljača
+        example: 3ea032324324
+        required: false
     responses: 
       200:
         body: 
@@ -276,6 +490,52 @@ types:
                 
 /porudzbina:
   get:
+    queryParameters:
+      datumPorucivanja:
+        displayName: Datum poručivanja
+        type: date-only
+        description: Datum poručivanja porudžbine
+        example: 2015-05-25
+        required: false
+      datumIsporuke:
+        displayName: Datum isporuke
+        type: date-only
+        description: Datum isporuke porudžbine
+        example: 2015-05-30
+        required: false
+      ukupanIznosPorudzbine:
+        displayName: Ukupan iznos
+        type: number
+        description: Ukupan iznos porudžbine
+        example: 12323
+        required: false
+      statusPorudzbine:
+        displayName: Status
+        type: string
+        description: Status porudžbine
+        enum: 
+          - poruceno
+          - kompletirano
+          - reklamacija
+        required: false
+      dobavljacID:
+        displayName: Dobavljač
+        type: integer
+        description: Dobavljač porudžbine
+        example: 1
+        required: false
+      menadzerID:
+        displayName: Menadžer
+        type: integer
+        description: Menadžer porudžbine
+        example: 1
+        required: false
+      prodavacID:
+        displayName: Prodavac
+        type: integer
+        description: Prodavac porudžbine
+        example: 1
+        required: false
     responses: 
       200:
         body: 
@@ -324,6 +584,37 @@ types:
                 
 /izvestaj:
   get:
+    queryParameters:
+      promet:
+        displayName: Promet
+        type: number
+        description: Promet
+        example: 123
+        required: false
+      brojKupovina:
+        displayName: Broj kupovina
+        type: integer
+        description: Broj kupovina
+        example: 12
+        required: false
+      datumOd:
+        displayName: Datum od
+        type: date-only
+        description: Datum od
+        example: 2015-05-23
+        required: false
+      datumDo:
+        displayName: Datum do
+        type: date-only
+        description: Datum do
+        example: 2017-05-23
+        required: false
+      menadzerID:
+        displayName: Menadžer
+        type: integer
+        description: Menadžer
+        example: 1
+        required: false
     responses: 
       200:
         body: 
@@ -372,6 +663,19 @@ types:
                 
 /stavkaRacuna:
   get:
+    queryParameters:
+      kolicinaProizvoda:
+        displayName: Količina proizvoda
+        type: integer
+        description: Količina proizvoda
+        example: 12
+        required: false
+      prodajnaCena:
+        displayName: Prodajna cena
+        type: number
+        description: Prodajna cena
+        example: 123
+        required: false
     responses: 
       200:
         body: 
@@ -420,6 +724,19 @@ types:
                 
 /stavkaPorudzbine:
   get:
+    queryParameters:
+      kolicina:
+        displayName: Količina proizvoda
+        type: integer
+        description: Količina proizvoda
+        example: 12
+        required: false
+      nabavnaCena:
+        displayName: Nabavna cena
+        type: number
+        description: Nabavna cena
+        example: 123
+        required: false
     responses: 
       200:
         body: 
@@ -468,6 +785,22 @@ types:
                 
 /korisnik:
   get:
+    queryParameters:
+      email:
+        displayName: Email
+        type: string
+        description: Email korisnika
+        example: vukan.markovic97@gmail.com
+        required: false
+      uloga:
+        displayName: Uloga
+        type: string
+        description: Uloga korisnika
+        enum: 
+          - prodavac
+          - dobavljac
+          - menadzer
+        required: false
     responses: 
       200:
         body: 
@@ -516,6 +849,25 @@ types:
                 
 /proizvodjac:
   get:
+    queryParameters:
+      nazivProizvodjaca:
+        displayName: Naziv
+        type: string
+        description: Naziv proizvođača
+        example: Imlek
+        required: false
+      kontaktProizvodjaca:
+        displayName: Kontakt
+        type: string
+        description: Kontakt proizvođača
+        example: '32324443'
+        required: false
+      adresaProizvodjaca:
+        displayName: Adresa
+        type: string
+        description: Adresa proizvođača
+        example: Jugovića 2
+        required: false
     responses: 
       200:
         body: 
@@ -564,6 +916,13 @@ types:
                 
 /vrstaProizvoda:
   get:
+    queryParameters:
+      nazivVrsteProizvoda:
+        displayName: Naziv
+        type: string
+        description: Naziv vrste proizvoda
+        example: štampa
+        required: false
     responses: 
       200:
         body: 

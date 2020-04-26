@@ -86,7 +86,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<flow-ref name="deleteProdavacByIDFlow" doc:name="deleteProdavacByIDFlow" />
 	</flow>
 	<flow name="get:/dobavljac:proizvod-api-config">
-		<flow-ref name="dobavljac_implementationFlow" doc:name="dobavljac_implementationFlow" />
+		<flow-ref name="getDobavljaciFlow2" doc:name="dobavljac_implementationFlow" />
 	</flow>
 	<flow name="get:/izvestaj:proizvod-api-config">
 		<flow-ref name="izvestaj_implementationFlow" doc:name="izvestaj_implementationFlow" />
