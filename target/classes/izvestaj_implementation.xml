@@ -32,20 +32,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<db:parameterized-query
 			file="C:\Users\Win7\Google Drive\4. godina\8. semestar\ERP eksploatacija, odr&#382;avanje i nadogradnja\trafika_vukan_markovic_it20-16\src\test\resources\deleteIzvestaj.sql" />
 	</db:template-query>
-	<flow name="izvestaj_implementationFlow">
-		<set-variable variableName="active"
-			value="#[(message.inboundProperties.'http.query.params'.code == empty) ? 'SFO' : message.inboundProperties.'http.query.params'.code] "
-			doc:name="Variable" metadata:id="ed9a7ab7-c43f-45c4-bf92-2a29feb099a7" />
-		<choice doc:name="Choice">
-			<when expression="#[flowVars.active == empty]">
-				<flow-ref name="getIzvestajiFlow" doc:name="getIzvestajiFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="getIzvestajiFlow2" doc:name="getIzvestajiFlow2" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="getIzvestajiFlow2">
+	<flow name="getIzvestajiFlow">
 		<db:select config-ref="Generic_Database_Configuration"
 			doc:name="Database">
 			<db:template-query-ref name="selectAllIzvestaj" />
@@ -67,10 +54,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			</otherwise>
 		</choice>
 	</flow>
-	<flow name="getIzvestajiFlow">
-		<logger level="INFO" doc:name="Logger" message="#[payload]" />
-
-	</flow>
 	<flow name="getIzvestajByIDFlow">
 		<db:select config-ref="Generic_Database_Configuration"
 			doc:name="Database">
@@ -90,13 +73,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			</otherwise>
 		</choice>
 	</flow>
-	<flow name="izvestajErrorFlow">
-		<set-property propertyName="http.status" value="404"
-			doc:name="Property" />
-		<set-payload
-			value="Ne postoji izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]."
-			doc:name="Set Payload" />
-	</flow>
 	<flow name="postIzvestajFlow">
 		<dw:transform-message doc:name="Transform Message"
 			metadata:id="48efdb66-77b1-4517-8ea5-070276a88acd">
@@ -110,7 +86,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:insert>
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
-		<set-payload doc:name="Set Payload" value="{ message: &quot;Dodat novi izve&#353;taj&quot; }"/>
+		<set-payload doc:name="Set Payload"
+			value="{ message: &quot;Dodat novi izve&#353;taj&quot; }" />
 	</flow>
 	<flow name="putIzvestajByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -125,7 +102,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:update>
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
-		<set-payload doc:name="Set Payload" value="{ message: &quot;A&#382;uriran/dodat izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"/>
+		<set-payload doc:name="Set Payload"
+			value="{ message: &quot;A&#382;uriran/dodat izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
 	</flow>
 	<flow name="deleteIzvestajByIDFlow">
 		<db:select config-ref="Generic_Database_Configuration"
@@ -149,5 +127,12 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			</otherwise>
 		</choice>
 
+	</flow>
+	<flow name="izvestajErrorFlow">
+		<set-property propertyName="http.status" value="404"
+			doc:name="Property" />
+		<set-payload
+			value="Ne postoji izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			doc:name="Set Payload" />
 	</flow>
 </mule>

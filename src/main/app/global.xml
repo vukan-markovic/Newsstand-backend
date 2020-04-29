@@ -22,8 +22,18 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 		url="jdbc:sqlserver://${db.ip};user=${db.user};password=${db.password};"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		doc:name="Generic Database Configuration" />
-	<configuration defaultExceptionStrategy-ref="proizvod-api-apiKitGlobalExceptionMapping"
+	<configuration defaultExceptionStrategy-ref="trafika-api-apiKitGlobalExceptionMapping"
 		doc:name="Configuration">
 		<http:config useTransportForUris="false" />
+	</configuration>
+	<configuration doc:name="Configuration">
+		<expression-language>
+			<import class="com.mulesoft.training.Authentication" />
+			<global-functions>
+				def encrypt(password) {
+				return com.mulesoft.training.Authentication.encrypt(password);
+				}
+			</global-functions>
+		</expression-language>
 	</configuration>
 </mule>

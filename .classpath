@@ -11,5 +11,6 @@
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="lib" path="C:/Users/Win7/Google Drive/4. godina/8. semestar/ERP eksploatacija, održavanje i nadogradnja/trafika_vukan_markovic_it20-16/src/main/app/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Win7/Google Drive/4. godina/8. semestar/ERP eksploatacija, održavanje i nadogradnja/trafika_vukan_markovic_it20-16/src/main/app/lib/jjwt-0.9.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

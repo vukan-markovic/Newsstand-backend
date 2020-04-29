@@ -30,19 +30,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<db:template-query name="deleteRacun" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\deleteRacun.sql" />
 	</db:template-query>
-	<flow name="racun_implementationFlow">
-		<set-variable variableName="active"
-			value="#[message.inboundProperties.active]" doc:name="Variable" />
-		<choice doc:name="Choice">
-			<when expression="#[flowVars.active == empty]">
-				<flow-ref name="getRacuniFlow" doc:name="getRacuniFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="getRacuniFlow2" doc:name="getRacuniFlow2" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="getRacuniFlow2">
+	<flow name="getRacuniFlow">
 		<db:select config-ref="Generic_Database_Configuration"
 			doc:name="Database">
 			<db:template-query-ref name="selectAllRacun" />
@@ -50,19 +38,19 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<set-property doc:name="Property" propertyName="Content-Type"
-					value="application/json"/>
-				<set-payload doc:name="Set Payload" value="{  &quot;message&quot;: &quot;Trenutno nema ra&#269;una u bazi podataka&quot; }"/>
+					value="application/json" />
+				<set-payload doc:name="Set Payload"
+					value="{  &quot;message&quot;: &quot;Trenutno nema ra&#269;una u bazi podataka&quot; }" />
 			</when>
 			<otherwise>
-				<dw:transform-message doc:name="Transform Message" metadata:id="222432db-7d9b-4d5f-9573-0f9a340d0970">
-					<dw:input-payload doc:sample="sample_data\Racun.dwl" mimeType="application/java"/>
-					<dw:set-payload resource="classpath:json_racun_playground.dwl"/>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="222432db-7d9b-4d5f-9573-0f9a340d0970">
+					<dw:input-payload doc:sample="sample_data\Racun.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_racun_playground.dwl" />
 				</dw:transform-message>
 			</otherwise>
 		</choice>
-	</flow>
-	<flow name="getRacuniFlow">
-		<logger level="INFO" doc:name="Logger" message="#[payload]" />
 	</flow>
 	<flow name="getRacunByIDFlow">
 		<db:select config-ref="Generic_Database_Configuration"
@@ -83,13 +71,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			</otherwise>
 		</choice>
 	</flow>
-	<flow name="racunErrorFlow">
-		<set-property propertyName="http.status" value="404"
-			doc:name="Property" />
-		<set-payload
-			value="Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]."
-			doc:name="Set Payload" />
-	</flow>
 	<flow name="postRacunFlow">
 		<dw:transform-message doc:name="Transform Message"
 			metadata:id="72c76926-c11e-42e8-8d25-739caccbe003">
@@ -99,8 +80,10 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			doc:name="Database">
 			<db:template-query-ref name="insertRacun" />
 		</db:insert>
-		<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-		<set-payload doc:name="Set Payload" value="{ message: &quot;Dodat nov ra&#269;un&quot; }"/>
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
+		<set-payload doc:name="Set Payload"
+			value="{ message: &quot;Dodat nov ra&#269;un&quot; }" />
 	</flow>
 	<flow name="putRacunByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -113,8 +96,10 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			doc:name="Database">
 			<db:template-query-ref name="updateRacun" />
 		</db:update>
-		<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-		<set-payload doc:name="Set Payload" value="{ message: &quot;A&#382;uriran/dodat ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"/>
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
+		<set-payload doc:name="Set Payload"
+			value="{ message: &quot;A&#382;uriran/dodat ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
 	</flow>
 	<flow name="deleteRacunByIDFlow">
 		<db:select config-ref="Generic_Database_Configuration"
@@ -130,11 +115,19 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 					doc:name="Database">
 					<db:template-query-ref name="deleteRacun" />
 				</db:delete>
-				<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+				<set-property propertyName="Content-Type" value="application/json"
+					doc:name="Property" />
 				<set-payload
 					value="{ message: &quot;Obrisan ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
 			</otherwise>
 		</choice>
+	</flow>
+	<flow name="racunErrorFlow">
+		<set-property propertyName="http.status" value="404"
+			doc:name="Property" />
+		<set-payload
+			value="Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			doc:name="Set Payload" />
 	</flow>
 </mule>

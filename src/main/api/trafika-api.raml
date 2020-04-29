@@ -13,12 +13,31 @@ types:
   StavkaPorudzbine: !include data_types/StavkaPorudzbineDataType.raml
   StavkaRacuna: !include data_types/StavkaRacunaDataType.raml
   Korisnik: !include data_types/KorisnikDataType.raml
+  Login: !include data_types/LoginDataType.raml
   Proizvodjac: !include data_types/ProizvodjacDataType.raml
   VrstaProizvoda: !include data_types/VrstaProizvodaDataType.raml
+  
+/login:
+  post:
+    body: 
+      application/json:
+        type: Login
+        example: !include examples/LoginExample.raml
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM
 
 /proizvod:
   get:
     displayName: Get proizvodi
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     queryParameters:
       nazivProizvoda:
         displayName: Naziv
@@ -76,6 +95,11 @@ types:
             example: !include examples/ProizvodiExample.raml
 
   post:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     body: 
       application/json:
         type: Proizvod
@@ -89,6 +113,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -96,6 +125,11 @@ types:
               type: Proizvod
               example: !include examples/ProizvodExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -103,6 +137,11 @@ types:
               example:
                 message: Proizvod obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Proizvod
@@ -116,6 +155,11 @@ types:
                 
 /racun:
   get:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     queryParameters:
       vremeIzdavanja:
         displayName: Vreme izdavanja
@@ -175,6 +219,11 @@ types:
             example: !include examples/RacuniExample.raml
 
   post:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     body: 
       application/json:
         type: Racun
@@ -188,6 +237,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -195,6 +249,11 @@ types:
               type: Racun
               example: !include examples/RacunExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -202,6 +261,11 @@ types:
               example:
                 message: Racun obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Racun
@@ -215,6 +279,11 @@ types:
                 
 /prodavac:
   get:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     queryParameters:
       ime:
         displayName: Ime
@@ -280,6 +349,11 @@ types:
             example: !include examples/ProdavciExample.raml
 
   post:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     body: 
       application/json:
         type: Prodavac
@@ -293,6 +367,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -300,6 +379,11 @@ types:
               type: Prodavac
               example: !include examples/ProdavacExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -307,6 +391,11 @@ types:
               example:
                 message: Prodavac obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Prodavac
@@ -320,6 +409,11 @@ types:
                 
 /menadzer:
   get:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     queryParameters:
       adresaKancelarije:
         displayName: Adresa kancelarije
@@ -341,6 +435,11 @@ types:
             example: !include examples/MenadzeriExample.raml
 
   post:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     body: 
       application/json:
         type: Menadzer
@@ -354,6 +453,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -361,6 +465,11 @@ types:
               type: Menadzer
               example: !include examples/MenadzerExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -368,6 +477,11 @@ types:
               example:
                 message: Menadzer obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Menadzer
@@ -381,6 +495,11 @@ types:
                 
 /dobavljac:
   get:
+    headers:
+      Authorization:
+        type: string
+        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+        required: false
     queryParameters:
       skraceniNaziv:
         displayName: Skraćeni naziv
@@ -450,6 +569,11 @@ types:
             example: !include examples/DobavljaciExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: Dobavljac
@@ -463,6 +587,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -470,6 +599,11 @@ types:
               type: Dobavljac
               example: !include examples/DobavljacExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -477,6 +611,11 @@ types:
               example:
                 message: Dobavljac obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Dobavljac
@@ -490,6 +629,11 @@ types:
                 
 /porudzbina:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       datumPorucivanja:
         displayName: Datum poručivanja
@@ -544,6 +688,11 @@ types:
             example: !include examples/PorudzbineExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: Porudzbina
@@ -557,6 +706,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -564,6 +718,11 @@ types:
               type: Porudzbina
               example: !include examples/PorudzbinaExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -571,6 +730,11 @@ types:
               example:
                 message: Porudzbina obrisana
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Porudzbina
@@ -584,6 +748,11 @@ types:
                 
 /izvestaj:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       promet:
         displayName: Promet
@@ -623,6 +792,11 @@ types:
             example: !include examples/IzvestajiExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: Izvestaj
@@ -636,6 +810,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -643,6 +822,11 @@ types:
               type: Izvestaj
               example: !include examples/IzvestajExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -650,6 +834,11 @@ types:
               example:
                 message: Izvestaj obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Izvestaj
@@ -663,6 +852,11 @@ types:
                 
 /stavkaRacuna:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       kolicinaProizvoda:
         displayName: Količina proizvoda
@@ -684,6 +878,11 @@ types:
             example: !include examples/StavkeRacunaExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: StavkaRacuna
@@ -697,6 +896,11 @@ types:
 
   /{racunID}/{proizvodID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -704,6 +908,11 @@ types:
               type: StavkaRacuna
               example: !include examples/StavkaRacunaExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -711,6 +920,11 @@ types:
               example:
                 message: Stavka racuna obrisana
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: StavkaRacuna
@@ -724,6 +938,11 @@ types:
                 
 /stavkaPorudzbine:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       kolicina:
         displayName: Količina proizvoda
@@ -745,6 +964,11 @@ types:
             example: !include examples/StavkePorudzbineExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: StavkaPorudzbine
@@ -758,6 +982,11 @@ types:
 
   /{porudzbinaID}/{proizvodID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -765,6 +994,11 @@ types:
               type: StavkaPorudzbine
               example: !include examples/StavkaPorudzbineExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -772,6 +1006,11 @@ types:
               example:
                 message: Stavka porudzbine obrisana
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: StavkaPorudzbine
@@ -785,6 +1024,11 @@ types:
                 
 /korisnik:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       email:
         displayName: Email
@@ -822,6 +1066,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -829,6 +1078,11 @@ types:
               type: Korisnik
               example: !include examples/KorisnikExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -836,6 +1090,11 @@ types:
               example:
                 message: Korisnik obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Korisnik
@@ -849,6 +1108,11 @@ types:
                 
 /proizvodjac:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       nazivProizvodjaca:
         displayName: Naziv
@@ -876,6 +1140,11 @@ types:
             example: !include examples/ProizvodjaciExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: Proizvodjac
@@ -889,6 +1158,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -896,6 +1170,11 @@ types:
               type: Proizvodjac
               example: !include examples/ProizvodjacExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -903,6 +1182,11 @@ types:
               example:
                 message: Proizvodjac obrisan
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: Proizvodjac
@@ -916,6 +1200,11 @@ types:
                 
 /vrstaProizvoda:
   get:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     queryParameters:
       nazivVrsteProizvoda:
         displayName: Naziv
@@ -931,6 +1220,11 @@ types:
             example: !include examples/VrsteProizvodaExample.raml
 
   post:
+    headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
     body: 
       application/json:
         type: VrstaProizvoda
@@ -944,6 +1238,11 @@ types:
 
   /{ID}:
     get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses: 
         200:
           body: 
@@ -951,6 +1250,11 @@ types:
               type: VrstaProizvoda
               example: !include examples/VrstaProizvodaExample.raml
     delete:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       responses:
         200:
           body:
@@ -958,6 +1262,11 @@ types:
               example:
                 message: Vrsta proizvoda obrisana
     put:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
       body:
         application/json:
           type: VrstaProizvoda
