@@ -86,7 +86,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
 		<set-payload doc:name="Set Payload"
-			value="{ message: &quot;Dodat nov proizvod&quot; }" />
+			value="{ &quot;message&quot;: &quot;Dodat nov proizvod&quot; }" />
 	</flow>
 	<flow name="putProizvodjacByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -103,7 +103,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
 		<set-payload doc:name="Set Payload"
-			value="{ message: &quot;A&#382;uriran/dodat proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
+			value="{ &quot;message&quot;: &quot;A&#382;uriran/dodat proizvod sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
 	</flow>
 	<flow name="deleteProizvodjacByIDFlow">
 		<db:select config-ref="Generic_Database_Configuration"
@@ -122,7 +122,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<set-property propertyName="Content-Type" value="application/json"
 					doc:name="Property" />
 				<set-payload
-					value="{ message: &quot;Obrisan proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					value="{ &quot;message&quot;: &quot;Obrisan proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
 			</otherwise>
 		</choice>
@@ -131,8 +131,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<flow name="proizvodjacErrorFlow">
 		<set-property propertyName="http.status" value="404"
 			doc:name="Property" />
+			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
 		<set-payload
-			value="Ne postoji proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			value="{ &quot;message&quot;: &quot;Ne postoji proizvo&#273;a&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />
 	</flow>
 </mule>

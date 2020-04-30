@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:file="http://www.mulesoft.org/schema/mule/file"
-	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db"
-	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers"
 	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
@@ -15,6 +16,7 @@ http://www.mulesoft.org/schema/mule/schedulers http://www.mulesoft.org/schema/mu
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+
 	<db:template-query name="selectAllDobavljac"
 		doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\selectAllDobavljac.sql" />
@@ -91,7 +93,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:insert>
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
-		<set-payload value="{ message: &quot;Dodat novi dobavlja&#269;&quot; }"
+		<set-payload value="{ &quot;message&quot;: &quot;Dodat novi dobavlja&#269;&quot; }"
 			doc:name="Set Payload" />
 	</flow>
 	<flow name="putDobavljacByIDFlow">
@@ -108,7 +110,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
 		<set-payload
-			value="{ message: &quot;A&#382;uriran/dodat dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+			value="{ &quot;message&quot;: &quot;A&#382;uriran/dodat dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />
 
 
@@ -132,7 +134,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<set-property propertyName="Content-Type" value="application/json"
 					doc:name="Property" />
 				<set-payload
-					value="{ message: &quot;Obrisan dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					value="{ &quot;message&quot;: &quot;Obrisan dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
 			</otherwise>
 		</choice>
@@ -141,8 +143,10 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<flow name="dobavljacErrorFlow">
 		<set-property propertyName="http.status" value="404"
 			doc:name="Property" />
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
 		<set-payload
-			value="Ne postoji dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			value="{ &quot;message&quot;: &quot;Ne postoji dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />
 	</flow>
 </mule>

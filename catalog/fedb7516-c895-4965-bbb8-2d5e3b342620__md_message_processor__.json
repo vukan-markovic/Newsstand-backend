@@ -1,0 +1,15 @@
+{
+    "inputMessageMetadata": {
+        "flowVariables": {
+            "verifyEmail": {
+                "dataType": "UNKNOWN",
+                "metaDataModelPropertiesManager": {
+                    "properties": []
+                }
+            }
+        }
+    },
+    "outputMessageMetadata": {},
+    "id": "fedb7516-c895-4965-bbb8-2d5e3b342620",
+    "version": "5.2.0.0"
+}

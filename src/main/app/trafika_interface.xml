@@ -1,816 +1,717 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <spring:beans>
+        <spring:bean name="validateJWT" class="com.mulesoft.training.Authentication" />
+    </spring:beans>
+    <http:listener-config name="trafika-api-httpListenerConfig" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
+    <apikit:config name="trafika-api-config" raml="trafika-api.raml" consoleEnabled="false" doc:name="Router" keepRamlBaseUri="false" />
+    <flow name="trafika-api-main">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/api/*" doc:name="HTTP" />
+        <apikit:router config-ref="trafika-api-config" doc:name="APIkit Router" />
+        <exception-strategy ref="trafika-api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
+    </flow>
+    <flow name="trafika-api-console">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/console/*" doc:name="HTTP" />
+        <apikit:console config-ref="trafika-api-config" doc:name="APIkit Console" />
+    </flow>
+    <flow name="put:/vrstaProizvoda/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putVrstaProizvodaByIDFlow" doc:name="putVrstaProizvodaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/izvestaj/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putIzvestajByIDFlow" doc:name="putIzvestajByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/korisnik/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putKorisnikByIDFlow" doc:name="putKorisnikByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/proizvodjac/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putProizvodjacByIDFlow" doc:name="putProizvodjacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/dobavljac/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putDobavljacByIDFlow" doc:name="putDobavljacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/porudzbina/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putPorudzbinaByIDFlow" doc:name="putPorudzbinaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/prodavac/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putProdavacByIDFlow" doc:name="putProdavacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/menadzer/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putMenadzerByIDFlow" doc:name="putMenadzerByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/racun/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putRacunByIDFlow" doc:name="putRacunByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/proizvod/{ID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putProizvodByIDFlow" doc:name="putProizvodByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/menadzer/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteMendzerByIDFlow" doc:name="deleteMendzerByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/dobavljac/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteDobavljacByIDFlow" doc:name="deleteDobavljacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/proizvod/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteProizvodByIDFlow" doc:name="deleteProizvodByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/izvestaj/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteIzvestajByIDFlow" doc:name="deleteIzvestajByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/vrstaProizvoda/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteVrstaProizvodaByIDFlow" doc:name="deleteVrstaProizvodaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/racun/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteRacunByIDFlow" doc:name="deleteRacunByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/proizvodjac/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteProizvodjacByIDFlow" doc:name="deleteProizvodjacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/korisnik/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteKorisnikByIDFlow" doc:name="deleteKorisnikByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/porudzbina/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deletePorudzbinaByIDFlow" doc:name="deletePorudzbinaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/prodavac/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteProdavacByIDFlow" doc:name="deleteProdavacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/dobavljac:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getDobavljaciFlow" doc:name="getDobavljaciFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/izvestaj:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getIzvestajiFlow" doc:name="getIzvestajiFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/korisnik:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getKorisniciFlow" doc:name="getKorisniciFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/menadzer:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getMenadzeriFlow" doc:name="getMenadzeriFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/porudzbina:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getPorudzbineFlow" doc:name="getPorudzbineFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/prodavac:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getProdavciFlow" doc:name="getProdavciFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/proizvod:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getProizvodiFlow" doc:name="getProizvodiFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/proizvodjac:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getProizvodjaciFlow" doc:name="getProizvodjaciFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/racun:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getRacuniFlow" doc:name="getRacuniFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/stavkaPorudzbine:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getStavkePorudzbineFlow" doc:name="getStavkePorudzbineFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/stavkaRacuna:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getStavkeRacunaFlow" doc:name="getStavkeRacunaFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/vrstaProizvoda:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getVrsteProizvodaFlow" doc:name="getVrsteProizvodaFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/menadzer/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getMenadzerByIDFlow" doc:name="getMenadzerByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/dobavljac/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getDobavljacByIDFlow" doc:name="getDobavljacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/izvestaj/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getIzvestajByIDFlow" doc:name="getIzvestajByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/porudzbina/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getPorudzbinaByIDFlow" doc:name="getPorudzbinaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/proizvod/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getProizvodByIDFlow" doc:name="getProizvodByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/vrstaProizvoda/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getVrstaProizvodaByIDFlow" doc:name="getVrstaProizvodaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/proizvodjac/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getProizvodjacByIDFlow" doc:name="getProizvodjacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/prodavac/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getProdavacByIDFlow" doc:name="getProdavacByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/racun/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getRacunByIDFlow" doc:name="getRacunByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/korisnik/{ID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getKorisnikByIDFlow" doc:name="getKorisnikByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/dobavljac:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postDobavljacFlow" doc:name="postDobavljacFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/izvestaj:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postIzvestajFlow" doc:name="postIzvestajFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/korisnik:application/json:trafika-api-config">
+        <flow-ref name="postKorisnikFlow" doc:name="postKorisnikFlow" />
+    </flow>
+    <flow name="post:/menadzer:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postMenadzerFlow" doc:name="postMenadzerFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/porudzbina:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postPorudzbinaFlow" doc:name="postPorudzbinaFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/prodavac:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postProdavacFlow" doc:name="postProdavacFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/proizvod:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postProizvodFlow" doc:name="postProizvodFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/proizvodjac:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postProizvodjacFlow" doc:name="postProizvodjacFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/racun:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postRacunFlow" doc:name="postRacunFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/stavkaPorudzbine:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postStavkaPorudzbineFlow" doc:name="postStavkaPorudzbineFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/stavkaRacuna:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postStavkaRacunaFlow" doc:name="postStavkaRacunaFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/vrstaProizvoda:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="postVrstaProizvodaFlow" doc:name="postVrstaProizvodaFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putStavkaPorudzbineByIDFlow" doc:name="putStavkaPorudzbineByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="put:/stavkaRacuna/{racunID}/{proizvodID}:application/json:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="putStavkaRacunaByIDFlow" doc:name="putStavkaRacunaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteStavkaPorudzbineByIDFlow" doc:name="deleteStavkaPorudzbineByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="delete:/stavkaRacuna/{racunID}/{proizvodID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="deleteStavkaRacunaByIDFlow" doc:name="deleteStavkaRacunaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getStavkaPorudzbineByIDFlow" doc:name="getStavkaPorudzbineByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="get:/stavkaRacuna/{racunID}/{proizvodID}:trafika-api-config">
+        <invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke" methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;valid&quot;]">
+                <flow-ref name="getStavkaRacunaByIDFlow" doc:name="getStavkaRacunaByIDFlow" />
+            </when>
+            <otherwise>
+                <flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="post:/login:application/json:trafika-api-config">
+        <flow-ref name="loginFlow" doc:name="loginFlow" />
+    </flow>
+    <flow name="notAuthenticatedFlow">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+        <set-property propertyName="http.status" value="401" doc:name="Property" />
+        <set-payload value="{  &quot;message&quot;: &quot;Not Authenticated&quot; }" doc:name="Set Payload" />
+    </flow>
+    <flow name="get:/emailVerification/{email}:trafika-api-config">
+		<flow-ref name="emailVerificationFlow" doc:name="emailVerificationFlow"/>
 
-	<spring:beans>
-		<spring:bean name="validateJWT" class="com.mulesoft.training.Authentication"></spring:bean>
-	</spring:beans>
-
-	<http:listener-config name="trafika-api-httpListenerConfig"
-		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
-	<apikit:config name="trafika-api-config" raml="trafika-api.raml"
-		consoleEnabled="false" doc:name="Router" keepRamlBaseUri="false" />
-	<flow name="trafika-api-main">
-		<http:listener config-ref="HTTP_Listener_Configuration"
-			path="/api/*" doc:name="HTTP" />
-		<apikit:router config-ref="trafika-api-config"
-			doc:name="APIkit Router" />
-		<exception-strategy ref="trafika-api-apiKitGlobalExceptionMapping"
-			doc:name="Reference Exception Strategy" />
-	</flow>
-	<flow name="trafika-api-console">
-		<http:listener config-ref="HTTP_Listener_Configuration"
-			path="/console/*" doc:name="HTTP" />
-		<apikit:console config-ref="trafika-api-config"
-			doc:name="APIkit Console" />
-	</flow>
-	<flow name="put:/vrstaProizvoda/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putVrstaProizvodaByIDFlow" doc:name="putVrstaProizvodaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/izvestaj/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putIzvestajByIDFlow" doc:name="putIzvestajByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/korisnik/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putKorisnikByIDFlow" doc:name="putKorisnikByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/proizvodjac/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putProizvodjacByIDFlow" doc:name="putProizvodjacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/dobavljac/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putDobavljacByIDFlow" doc:name="putDobavljacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/porudzbina/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putPorudzbinaByIDFlow" doc:name="putPorudzbinaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/prodavac/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putProdavacByIDFlow" doc:name="putProdavacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/menadzer/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putMenadzerByIDFlow" doc:name="putMenadzerByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/racun/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putRacunByIDFlow" doc:name="putRacunByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="put:/proizvod/{ID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putProizvodByIDFlow" doc:name="putProizvodByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/menadzer/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteMendzerByIDFlow" doc:name="deleteMendzerByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/dobavljac/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteDobavljacByIDFlow" doc:name="deleteDobavljacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/proizvod/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteProizvodByIDFlow" doc:name="deleteProizvodByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/izvestaj/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteIzvestajByIDFlow" doc:name="deleteIzvestajByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/vrstaProizvoda/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteVrstaProizvodaByIDFlow" doc:name="deleteVrstaProizvodaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/racun/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteRacunByIDFlow" doc:name="deleteRacunByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/proizvodjac/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteProizvodjacByIDFlow" doc:name="deleteProizvodjacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/korisnik/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteKorisnikByIDFlow" doc:name="deleteKorisnikByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/porudzbina/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deletePorudzbinaByIDFlow" doc:name="deletePorudzbinaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/prodavac/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteProdavacByIDFlow" doc:name="deleteProdavacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/dobavljac:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getDobavljaciFlow" doc:name="getDobavljaciFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/izvestaj:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getIzvestajiFlow" doc:name="getIzvestajiFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/korisnik:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getKorisniciFlow" doc:name="getKorisniciFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/menadzer:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getMenadzeriFlow" doc:name="getMenadzeriFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/porudzbina:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getPorudzbineFlow" doc:name="getPorudzbineFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/prodavac:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getProdavciFlow" doc:name="getProdavciFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/proizvod:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getProizvodiFlow" doc:name="getProizvodiFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/proizvodjac:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getProizvodjaciFlow" doc:name="getProizvodjaciFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/racun:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getRacuniFlow" doc:name="getRacuniFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/stavkaPorudzbine:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getStavkePorudzbineFlow"
-					doc:name="getStavkePorudzbineFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/stavkaRacuna:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getStavkeRacunaFlow" doc:name="getStavkeRacunaFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/vrstaProizvoda:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getVrsteProizvodaFlow"
-					doc:name="getVrsteProizvodaFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/menadzer/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getMenadzerByIDFlow" doc:name="getMenadzerByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/dobavljac/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getDobavljacByIDFlow" doc:name="getDobavljacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/izvestaj/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getIzvestajByIDFlow" doc:name="getIzvestajByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/porudzbina/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getPorudzbinaByIDFlow" doc:name="getPorudzbinaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/proizvod/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getProizvodByIDFlow" doc:name="getProizvodByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/vrstaProizvoda/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getVrstaProizvodaByIDFlow" doc:name="getVrstaProizvodaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/proizvodjac/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getProizvodjacByIDFlow" doc:name="getProizvodjacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/prodavac/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getProdavacByIDFlow" doc:name="getProdavacByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/racun/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getRacunByIDFlow" doc:name="getRacunByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/korisnik/{ID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getKorisnikByIDFlow" doc:name="getKorisnikByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/dobavljac:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postDobavljacFlow" doc:name="postDobavljacFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/izvestaj:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postIzvestajFlow" doc:name="postIzvestajFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/korisnik:application/json:trafika-api-config">
-		<flow-ref name="postKorisnikFlow" doc:name="postKorisnikFlow" />
-	</flow>
-	<flow name="post:/menadzer:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postMenadzerFlow" doc:name="postMenadzerFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/porudzbina:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postPorudzbinaFlow" doc:name="postPorudzbinaFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/prodavac:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postProdavacFlow" doc:name="postProdavacFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/proizvod:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postProizvodFlow" doc:name="postProizvodFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/proizvodjac:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postProizvodjacFlow" doc:name="postProizvodjacFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/racun:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postRacunFlow" doc:name="postRacunFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/stavkaPorudzbine:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postStavkaPorudzbineFlow" doc:name="postStavkaPorudzbineFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/stavkaRacuna:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postStavkaRacunaFlow" doc:name="postStavkaRacunaFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/vrstaProizvoda:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="postVrstaProizvodaFlow" doc:name="postVrstaProizvodaFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow
-		name="put:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putStavkaPorudzbineByIDFlow" doc:name="putStavkaPorudzbineByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow
-		name="put:/stavkaRacuna/{racunID}/{proizvodID}:application/json:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="putStavkaRacunaByIDFlow" doc:name="putStavkaRacunaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow
-		name="delete:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteStavkaPorudzbineByIDFlow" doc:name="deleteStavkaPorudzbineByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="delete:/stavkaRacuna/{racunID}/{proizvodID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="deleteStavkaRacunaByIDFlow" doc:name="deleteStavkaRacunaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow
-		name="get:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getStavkaPorudzbineByIDFlow" doc:name="getStavkaPorudzbineByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="get:/stavkaRacuna/{racunID}/{proizvodID}:trafika-api-config">
-		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		<choice doc:name="Choice">
-			<when expression="#[payload == &quot;valid&quot;]">
-				<flow-ref name="getStavkaRacunaByIDFlow" doc:name="getStavkaRacunaByIDFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
-	</flow>
-	<flow name="post:/login:application/json:trafika-api-config">
-		<flow-ref name="loginFlow" doc:name="loginFlow" />
-	</flow>
-	<flow name="notAuthenticatedFlow">
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
-		<set-property propertyName="http.status" value="401"
-			doc:name="Property" />
-		<set-payload value="{  &quot;message&quot;: &quot;Not Authenticated&quot; }"
-			doc:name="Set Payload" />
-	</flow>
-	<apikit:mapping-exception-strategy
-		name="trafika-api-apiKitGlobalExceptionMapping">
-		<apikit:mapping statusCode="404">
-			<apikit:exception
-				value="org.mule.module.apikit.exception.NotFoundException" />
-			<set-property propertyName="Content-Type" value="application/json"
-				doc:name="Property" />
-			<set-payload
-				value="{ &quot;message&quot;: &quot;Resource not found&quot; }"
-				doc:name="Set Payload" />
-		</apikit:mapping>
-		<apikit:mapping statusCode="405">
-			<apikit:exception
-				value="org.mule.module.apikit.exception.MethodNotAllowedException" />
-			<set-property propertyName="Content-Type" value="application/json"
-				doc:name="Property" />
-			<set-payload
-				value="{ &quot;message&quot;: &quot;Method not allowed&quot; }"
-				doc:name="Set Payload" />
-		</apikit:mapping>
-		<apikit:mapping statusCode="415">
-			<apikit:exception
-				value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
-			<set-property propertyName="Content-Type" value="application/json"
-				doc:name="Property" />
-			<set-payload
-				value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }"
-				doc:name="Set Payload" />
-		</apikit:mapping>
-		<apikit:mapping statusCode="406">
-			<apikit:exception
-				value="org.mule.module.apikit.exception.NotAcceptableException" />
-			<set-property propertyName="Content-Type" value="application/json"
-				doc:name="Property" />
-			<set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }"
-				doc:name="Set Payload" />
-		</apikit:mapping>
-		<apikit:mapping statusCode="400">
-			<apikit:exception
-				value="org.mule.module.apikit.exception.BadRequestException" />
-			<set-property propertyName="Content-Type" value="application/json"
-				doc:name="Property" />
-			<set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }"
-				doc:name="Set Payload" />
-		</apikit:mapping>
-		<apikit:mapping statusCode="500">
-			<apikit:exception value="com.microsoft.sqlserver.jdbc.SQLServerException" />
-			<set-property propertyName="Content-Type" value="application/json"
-				doc:name="Property" />
-			<set-payload value="{ &quot;message&quot;: &quot;Server error&quot; }"
-				doc:name="Set Payload" />
-		</apikit:mapping>
-	</apikit:mapping-exception-strategy>
+    </flow>
+    <apikit:mapping-exception-strategy name="trafika-api-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="500">
+            <apikit:exception value="com.microsoft.sqlserver.jdbc.SQLServerException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;message&quot;: &quot;Server error&quot; }" doc:name="Set Payload" />
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
 </mule>

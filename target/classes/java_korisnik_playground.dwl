@@ -5,6 +5,6 @@
     korisnikID: payload.korisnikID,
   	email: payload.email,
   	lozinka: encrypt(payload.lozinka),
-  	autentifikacioniToken: payload.autentifikacioniToken,
-  	uloga: payload.uloga
+  	uloga: payload.uloga, 
+  	verifikovan: payload.verifikovan
 } 

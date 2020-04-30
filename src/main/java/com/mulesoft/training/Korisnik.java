@@ -5,15 +5,15 @@ public class Korisnik implements java.io.Serializable, Comparable<Korisnik> {
 	int korisnikID;
 	String email;
 	String lozinka;
-	String autentifikacioniToken;
 	String uloga;
+	boolean verifikovan;
 
-	public Korisnik(int korisnikID, String email, String lozinka, String autentifikacioniToken, String uloga) {
+	public Korisnik(int korisnikID, String email, String lozinka, String uloga, boolean verifikovan) {
 		this.korisnikID = korisnikID;
 		this.email = email;
 		this.lozinka = lozinka;
-		this.autentifikacioniToken = autentifikacioniToken;
 		this.uloga = uloga;
+		this.verifikovan = verifikovan;
 	}
 
 	public int getKorisnikID() {
@@ -40,14 +40,6 @@ public class Korisnik implements java.io.Serializable, Comparable<Korisnik> {
 		this.lozinka = lozinka;
 	}
 
-	public String getAutentifikacioniToken() {
-		return autentifikacioniToken;
-	}
-
-	public void setAutentifikacioniToken(String autentifikacioniToken) {
-		this.autentifikacioniToken = autentifikacioniToken;
-	}
-
 	public String getUloga() {
 		return uloga;
 	}
@@ -58,6 +50,14 @@ public class Korisnik implements java.io.Serializable, Comparable<Korisnik> {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean getVerifikovan() {
+		return verifikovan;
+	}
+
+	public void setVerifikovan(boolean verifikovan) {
+		this.verifikovan = verifikovan;
 	}
 
 	@Override

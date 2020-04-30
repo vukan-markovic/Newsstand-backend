@@ -5,6 +5,6 @@ payload map ((payload , indexOfPayload) -> {
     korisnikID: payload.korisnikID,
   	email: payload.email as :string,
   	lozinka: payload.lozinka as :string,
-  	autentifikacioniToken: payload.autentifikacioniToken as :string,
-  	uloga: payload.uloga as :string
+  	uloga: payload.uloga as :string, 
+  	verifikovan: payload.verifikovan as :boolean
 })

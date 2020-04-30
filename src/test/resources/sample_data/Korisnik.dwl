@@ -5,6 +5,6 @@
     korisnikID: 1,
     email: 'vukan.markovic97@gmail.com',
     lozinka: '234235',
-    autentifikacioniToken: '213r52532523',
-    uloga: 'prodavac'
+    uloga: 'prodavac', 
+    verifikovan: false
 }]

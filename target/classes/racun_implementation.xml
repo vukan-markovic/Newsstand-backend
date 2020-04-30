@@ -83,7 +83,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
 		<set-payload doc:name="Set Payload"
-			value="{ message: &quot;Dodat nov ra&#269;un&quot; }" />
+			value="{ &quot;message&quot;: &quot;Dodat nov ra&#269;un&quot; }" />
 	</flow>
 	<flow name="putRacunByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -99,7 +99,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
 		<set-payload doc:name="Set Payload"
-			value="{ message: &quot;A&#382;uriran/dodat ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
+			value="{ &quot;message&quot;: &quot;A&#382;uriran/dodat ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
 	</flow>
 	<flow name="deleteRacunByIDFlow">
 		<db:select config-ref="Generic_Database_Configuration"
@@ -118,7 +118,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<set-property propertyName="Content-Type" value="application/json"
 					doc:name="Property" />
 				<set-payload
-					value="{ message: &quot;Obrisan ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					value="{ &quot;message&quot;: &quot;Obrisan ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
 			</otherwise>
 		</choice>
@@ -126,8 +126,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<flow name="racunErrorFlow">
 		<set-property propertyName="http.status" value="404"
 			doc:name="Property" />
+			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
 		<set-payload
-			value="Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]."
+			value="{ &quot;message&quot;: &quot;Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />
 	</flow>
 </mule>
