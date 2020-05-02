@@ -1,0 +1,16 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "resetPasswordJson"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "resetPassword"
+        }
+    },
+    "id": "cf3b92e4-e5a4-40a2-a096-4d2428f36815",
+    "version": "5.2.0.0"
+}

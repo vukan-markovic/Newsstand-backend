@@ -14,6 +14,8 @@ types:
   StavkaRacuna: !include data_types/StavkaRacunaDataType.raml
   Korisnik: !include data_types/KorisnikDataType.raml
   Login: !include data_types/LoginDataType.raml
+  Password: !include data_types/PasswordDataType.raml
+  ResetPassword: !include data_types/ResetPasswordDataType.raml
   Proizvodjac: !include data_types/ProizvodjacDataType.raml
   VrstaProizvoda: !include data_types/VrstaProizvodaDataType.raml
   
@@ -28,11 +30,43 @@ types:
         body: 
           application/json:
             example: 
-              token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM
+              token: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+              
+/resetPassword: 
+  post:
+      body: 
+        application/json:
+          type: ResetPassword
+          example: !include examples/ResetPasswordExample.raml
+      responses: 
+        201:
+          body: 
+            application/json:
+              example: 
+                message: Potrebno je da potvrdite svoju mejl adresu. Poslat vam je verifikacioni mejl.
 
-/emailVerification/{email}:
-   get:
-     responses: 
+/updatePassword:
+  put:
+      queryParameters:
+        code:
+          required: true
+      body:
+        application/json:
+          type: Password
+          example: !include examples/PasswordExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Lozinka je promenjena. Sada se možete ulogovati sa novom lozinkom.
+
+/emailVerification:
+  get:
+    queryParameters:
+      code:
+        required: true
+    responses: 
        200:
          body: 
            text/plain:
@@ -40,7 +74,6 @@ types:
 
 /proizvod:
   get:
-    displayName: Get proizvodi
     headers:
       Authorization:
         type: string
@@ -117,7 +150,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Proizvod dodat
+              message: Dodat novi proizvod
 
   /{ID}:
     get:
@@ -143,7 +176,7 @@ types:
           body:
             application/json:
               example:
-                message: Proizvod obrisan
+                message: 'Obrisan proizvod sa id: 1'
     put:
       headers:
         Authorization:
@@ -159,7 +192,7 @@ types:
           body:
             application/json:
               example:
-                message: Proizvod azuriran
+                message: 'Ažuriran proizvod sa id: 1'
                 
 /racun:
   get:
@@ -241,7 +274,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Racun dodat
+              message: Dodat nov račun
 
   /{ID}:
     get:
@@ -267,7 +300,7 @@ types:
           body:
             application/json:
               example:
-                message: Racun obrisan
+                message: 'Obrisan račun sa id: 1'
     put:
       headers:
         Authorization:
@@ -283,7 +316,7 @@ types:
           body:
             application/json:
               example:
-                message: Racun azuriran
+                message: 'Ažuriran račun sa id: 1'
                 
 /prodavac:
   get:
@@ -300,10 +333,10 @@ types:
         example: Petar
         required: false
       prezime:
-        displayName: Ime
+        displayName: Prezime
         type: string
-        description: Ime prodavca
-        example: Petar
+        description: Prezime prodavca
+        example: Petrović
         required: false
       pol:
         displayName: Pol
@@ -371,7 +404,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Prodavac dodat
+              message: Dodat novi prodavac
 
   /{ID}:
     get:
@@ -397,7 +430,7 @@ types:
           body:
             application/json:
               example:
-                message: Prodavac obrisan
+                message: 'Obrisan prodavac sa id: 1'
     put:
       headers:
         Authorization:
@@ -413,7 +446,7 @@ types:
           body:
             application/json:
               example:
-                message: Prodavac azuriran
+                message: 'Ažuriran prodavac sa id: 1'
                 
 /menadzer:
   get:
@@ -457,7 +490,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Menadzer dodat
+              message: Dodat novi menadžer
 
   /{ID}:
     get:
@@ -483,7 +516,7 @@ types:
           body:
             application/json:
               example:
-                message: Menadzer obrisan
+                message: 'Obrisan menadžer sa id: 1'
     put:
       headers:
         Authorization:
@@ -499,7 +532,7 @@ types:
           body:
             application/json:
               example:
-                message: Menadzer azuriran
+                message: 'Ažuriran menadžer sa id: 1'
                 
 /dobavljac:
   get:
@@ -591,7 +624,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Dobavljac dodat
+              message: Dodat novi dobavljač
 
   /{ID}:
     get:
@@ -617,7 +650,7 @@ types:
           body:
             application/json:
               example:
-                message: Dobavljac obrisan
+                message: 'Obrisan dobavljač sa id: 1'
     put:
       headers:
         Authorization:
@@ -633,7 +666,7 @@ types:
           body:
             application/json:
               example:
-                message: Dobavljac azuriran
+                message: 'Ažuriran dobavljač sa id: 1'
                 
 /porudzbina:
   get:
@@ -710,7 +743,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Porudzbina dodata
+              message: Dodata nova porudžbina
 
   /{ID}:
     get:
@@ -736,7 +769,7 @@ types:
           body:
             application/json:
               example:
-                message: Porudzbina obrisana
+                message: 'Obrisana porudžbina sa id: 1'
     put:
       headers:
         Authorization:
@@ -752,7 +785,7 @@ types:
           body:
             application/json:
               example:
-                message: Porudzbina azurirana
+                message: 'Ažurirana porudžbina sa id: 1'
                 
 /izvestaj:
   get:
@@ -814,7 +847,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Izvestaj dodat
+              message: Dodat novi izveštaj
 
   /{ID}:
     get:
@@ -840,7 +873,7 @@ types:
           body:
             application/json:
               example:
-                message: Izvestaj obrisan
+                message: 'Obrisan izveštaj sa id: 1'
     put:
       headers:
         Authorization:
@@ -856,7 +889,7 @@ types:
           body:
             application/json:
               example:
-                message: Izvestaj azuriran
+                message: 'Ažuriran izveštaj sa id: 1'
                 
 /stavkaRacuna:
   get:
@@ -900,7 +933,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Stavka racuna dodata
+              message: Dodata nova stavka računa
 
   /{racunID}/{proizvodID}:
     get:
@@ -926,7 +959,7 @@ types:
           body:
             application/json:
               example:
-                message: Stavka racuna obrisana
+                message: 'Obrisana stavka računa sa račun id: 1 i proizvod id: 1'
     put:
       headers:
         Authorization:
@@ -942,7 +975,7 @@ types:
           body:
             application/json:
               example:
-                message: Stavka racuna azurirana
+                message: 'Ažurirana stavka računa sa račun id: 1 i proizvod id: 1'
                 
 /stavkaPorudzbine:
   get:
@@ -986,7 +1019,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Stavka porudzbine dodata
+              message: Dodata nova stavka porudžbine
 
   /{porudzbinaID}/{proizvodID}:
     get:
@@ -1012,7 +1045,7 @@ types:
           body:
             application/json:
               example:
-                message: Stavka porudzbine obrisana
+                message: 'Obrisana stavka porudžbine sa porudžbina id: 1 i proizvod id: 1'
     put:
       headers:
         Authorization:
@@ -1028,7 +1061,7 @@ types:
           body:
             application/json:
               example:
-                message: Stavka porudzbine azurirana
+                message: 'Ažurirana stavka porudžbine sa porudžbina id: 1 i proizvod id: 1'
                 
 /korisnik:
   get:
@@ -1070,7 +1103,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Korisnik dodat
+              message: Kako bi uspešno završili proces registracije naloga potrebno je da potvrdite svoju mejl adresu. Poslat vam je verifikacioni mejl.
 
   /{ID}:
     get:
@@ -1096,7 +1129,7 @@ types:
           body:
             application/json:
               example:
-                message: Korisnik obrisan
+                message: 'Obrisan korisnik sa id: 1'
     put:
       headers:
         Authorization:
@@ -1112,7 +1145,7 @@ types:
           body:
             application/json:
               example:
-                message: Korisnik azuriran
+                message: 'Ažuriran korisnik sa id: 1'
                 
 /proizvodjac:
   get:
@@ -1162,7 +1195,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Proizvodjac dodat
+              message: Dodat novi proizvođač
 
   /{ID}:
     get:
@@ -1188,7 +1221,7 @@ types:
           body:
             application/json:
               example:
-                message: Proizvodjac obrisan
+                message: 'Obrisan proizvođač sa id: 1'
     put:
       headers:
         Authorization:
@@ -1204,7 +1237,7 @@ types:
           body:
             application/json:
               example:
-                message: Proizvodjac azuriran
+                message: 'Ažuriran proizvođač sa id: 1'
                 
 /vrstaProizvoda:
   get:
@@ -1242,7 +1275,7 @@ types:
         body: 
           application/json:
             example: 
-              message: Vrsta proizvoda dodata
+              message: Dodata nova vrsta proizvoda
 
   /{ID}:
     get:
@@ -1268,7 +1301,7 @@ types:
           body:
             application/json:
               example:
-                message: Vrsta proizvoda obrisana
+                message: 'Obrisana vrsta proizvoda sa id: 1'
     put:
       headers:
         Authorization:
@@ -1284,4 +1317,4 @@ types:
           body:
             application/json:
               example:
-                message: Vrsta proizvoda azurirana
+                message: 'Ažurirana vrsta proizvoda sa id: 1'

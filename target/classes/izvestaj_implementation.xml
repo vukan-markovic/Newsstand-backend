@@ -29,8 +29,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<db:parameterized-query file="src\test\resources\updateIzvestaj.sql" />
 	</db:template-query>
 	<db:template-query name="deleteIzvestaj" doc:name="Template Query">
-		<db:parameterized-query
-			file="C:\Users\Win7\Google Drive\4. godina\8. semestar\ERP eksploatacija, odr&#382;avanje i nadogradnja\trafika_vukan_markovic_it20-16\src\test\resources\deleteIzvestaj.sql" />
+		<db:parameterized-query file="src\test\resources\deleteIzvestaj.sql" />
 	</db:template-query>
 	<flow name="getIzvestajiFlow">
 		<db:select config-ref="Generic_Database_Configuration"
@@ -39,8 +38,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:select>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
-				<set-property propertyName="Content-Type" value="application/json"
-					doc:name="Property" />
 				<set-payload doc:name="Set Payload"
 					value="{  &quot;message&quot;: &quot;Trenutno nema izve&#353;taja u bazi podataka&quot; }" />
 			</when>
@@ -80,14 +77,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				mimeType="application/json" />
 			<dw:set-payload resource="classpath:java_playground.dwl" />
 		</dw:transform-message>
-		<db:insert config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="insertIzvestaj" />
-		</db:insert>
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
-		<set-payload doc:name="Set Payload"
-			value="{ &quot;message&quot;: &quot;Dodat novi izve&#353;taj&quot; }" />
+		<flow-ref name="insertIzvestajFlow" doc:name="insertIzvestajFlow" />
 	</flow>
 	<flow name="putIzvestajByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -96,31 +86,36 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				mimeType="application/json" />
 			<dw:set-payload resource="classpath:java_playground.dwl" />
 		</dw:transform-message>
-		<db:update config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="updateIzvestaj" />
-		</db:update>
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
-		<set-payload doc:name="Set Payload"
-			value="{ &quot;message&quot;: &quot;A&#382;uriran/dodat izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
+		<enricher target="#[flowVars.result]" doc:name="Message Enricher">
+			<db:update config-ref="Generic_Database_Configuration"
+				doc:name="Database">
+				<db:template-query-ref name="updateIzvestaj" />
+			</db:update>
+		</enricher>
+		<choice doc:name="Choice">
+			<when expression="#[flowVars.result == empty]">
+				<flow-ref name="insertIzvestajFlow" doc:name="insertIzvestajFlow" />
+				<set-property propertyName="http.status" value="201"
+					doc:name="Property" />
+			</when>
+			<otherwise>
+				<set-payload
+					value="{ &quot;message&quot;: &quot;A&#382;uriran izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
 	</flow>
 	<flow name="deleteIzvestajByIDFlow">
-		<db:select config-ref="Generic_Database_Configuration"
+		<db:delete config-ref="Generic_Database_Configuration"
 			doc:name="Database">
-			<db:template-query-ref name="selectByIDIzvestaj" />
-		</db:select>
+			<db:template-query-ref name="deleteIzvestaj" />
+		</db:delete>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow" />
 			</when>
 			<otherwise>
-				<db:delete config-ref="Generic_Database_Configuration"
-					doc:name="Database">
-					<db:template-query-ref name="deleteIzvestaj" />
-				</db:delete>
-				<set-property propertyName="Content-Type" value="application/json"
-					doc:name="Property" />
+
 				<set-payload
 					value="{ &quot;message&quot;: &quot;Obrisan izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
@@ -128,10 +123,20 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</choice>
 
 	</flow>
+
+	<flow name="insertIzvestajFlow">
+		<db:insert config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="insertIzvestaj" />
+		</db:insert>
+		<set-payload
+			value="{ &quot;message&quot;: &quot;Dodat novi izve&#353;taj&quot; }"
+			doc:name="Set Payload" />
+	</flow>
+
 	<flow name="izvestajErrorFlow">
 		<set-property propertyName="http.status" value="404"
 			doc:name="Property" />
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
 		<set-payload
 			value="{ &quot;message&quot;: &quot;Ne postoji izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />

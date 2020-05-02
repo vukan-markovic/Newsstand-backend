@@ -1,0 +1,16 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "vrstaProizvodaID"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "vrstaProizvoda"
+        }
+    },
+    "id": "89c17684-7043-4112-a611-a88742c55555",
+    "version": "5.2.0.0"
+}

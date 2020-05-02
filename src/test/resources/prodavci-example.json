@@ -1,24 +1,26 @@
-[{
-    "prodavacID": 1,
-    "ime": "Petar",
-    "prezime": "Petrovic",
-    "pol": "musko",
-    "datumRodjenja": "1999-05-23",
-    "adresaStanovanja": "Ohridska 12",
-    "telefon": "0631113452",
-    "JMBG": "0811998910053",
-    "datumZaposlenja": "2019-05-23",
-    "strucnaSprema": "srednja skola"
-},
-{
-    "prodavacID": 2,
-    "ime": "Petar",
-    "prezime": "Petrovic",
-    "pol": "musko",
-    "datumRodjenja": "1999-05-23",
-    "adresaStanovanja": "Ohridska 12",
-    "telefon": "0631113452",
-    "JMBG": "0811998910053",
-    "datumZaposlenja": "2019-05-23",
-    "strucnaSprema": "srednja skola"
-}]
+[
+	{
+		"prodavacID": 1,
+		"ime": "Petar",
+		"prezime": "Petrovic",
+		"pol": "musko",
+		"datumRodjenja": "1999-05-23",
+		"adresaStanovanja": "Ohridska 12",
+		"telefon": "0631113452",
+		"JMBG": "0811998910053",
+		"datumZaposlenja": "2019-05-23",
+		"strucnaSprema": "srednja skola"
+	},
+	{
+		"prodavacID": 2,
+		"ime": "Milan",
+		"prezime": "Petrovic",
+		"pol": "musko",
+		"datumRodjenja": "1989-01-23",
+		"adresaStanovanja": "Staparski put",
+		"telefon": "0631113999",
+		"JMBG": "0811998910999",
+		"datumZaposlenja": "2010-01-23",
+		"strucnaSprema": "srednja skola"
+	}
+]

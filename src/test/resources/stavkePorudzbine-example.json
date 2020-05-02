@@ -1,12 +1,14 @@
-[{
-   "porudzbinaID": 1,
-   "proizvodID": 1,
-   "kolicina": 12,
-   "nabavnaCena": 134
-}, 
-{
-   "porudzbinaID": 2,
-   "proizvodID": 1,
-   "kolicina": 12,
-   "nabavnaCena": 134
-}]
+[
+	{
+		"porudzbinaID": 1,
+		"proizvodID": 1,
+		"kolicina": 12,
+		"nabavnaCena": 134
+	},
+	{
+		"porudzbinaID": 2,
+		"proizvodID": 2,
+		"kolicina": 33,
+		"nabavnaCena": 2000
+	}
+]

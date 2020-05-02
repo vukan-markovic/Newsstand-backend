@@ -2,9 +2,9 @@
 %output application/java
 ---
 {
-    korisnikID: payload.korisnikID,
-  	email: payload.email,
-  	lozinka: encrypt(payload.lozinka),
-  	uloga: payload.uloga, 
-  	verifikovan: payload.verifikovan
+	korisnikID: payload.korisnikID,
+	email: payload.email,
+	lozinka: encrypt(payload.lozinka),
+	uloga: payload.uloga,
+	verifikovan: payload.verifikovan
 } 

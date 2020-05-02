@@ -1,5 +1,10 @@
 {
-    "inputMessageMetadata": {},
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "menadzerID"
+        }
+    },
     "outputMessageMetadata": {
         "messagePayload": {
             "connectorName": "#_custom_mule_metadata_type_#",

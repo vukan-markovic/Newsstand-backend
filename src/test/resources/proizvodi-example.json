@@ -1,26 +1,28 @@
-[{
-  "proizvodID": 1,
-  "nazivProizvoda": "Plazma",
-  "opisProizvoda": "Plazma keks",
-  "cena": 100,
-  "tipPakovanja": "kutija",
-  "velicinaPakovanja": "redovno",
-  "barKod": "2143234",
-  "masa": 100,
-  "raspolozivaKolicina": 12,
-  "proizvodjacID": 1,
-  "vrstaProizvodaID": 1
-}, 
-{
-  "proizvodID": 2,
-  "nazivProizvoda": "Plazma",
-  "opisProizvoda": "Plazma keks",
-  "cena": 100,
-  "tipPakovanja": "kutija",
-  "velicinaPakovanja": "redovno",
-  "barKod": "2143234",
-  "masa": 100,
-  "raspolozivaKolicina": 12,
-  "proizvodjacID": 1,
-  "vrstaProizvodaID": 1
-}]
+[
+	{
+		"proizvodID": 1,
+		"nazivProizvoda": "Plazma",
+		"opisProizvoda": "Plazma keks",
+		"cena": 100,
+		"tipPakovanja": "kutija",
+		"velicinaPakovanja": "redovno",
+		"barKod": "2143234",
+		"masa": 100,
+		"raspolozivaKolicina": 12,
+		"proizvodjacID": 1,
+		"vrstaProizvodaID": 1
+	},
+	{
+		"proizvodID": 2,
+		"nazivProizvoda": "Smoki",
+		"opisProizvoda": "Smoki flips sa kikirikijem",
+		"cena": 60,
+		"tipPakovanja": "kesa",
+		"velicinaPakovanja": "redovno",
+		"barKod": "2143234",
+		"masa": 100,
+		"raspolozivaKolicina": 5,
+		"proizvodjacID": 2,
+		"vrstaProizvodaID": 2
+	}
+]

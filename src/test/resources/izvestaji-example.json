@@ -1,16 +1,18 @@
-[{
-    "izvestajID": 1,
-    "promet": 35,
-    "brojKupovina": 234,
-    "datumOd": "2015-05-23",
-    "datumDo": "2017-05-23",
-    "menadzerID": 1
-}, 
-{
-    "izvestajID": 2,
-    "promet": 35,
-    "brojKupovina": 234,
-    "datumOd": "2015-05-23",
-    "datumDo": "2017-05-23",
-    "menadzerID": 1
-}]
+[
+	{
+		"izvestajID": 1,
+		"promet": 3500,
+		"brojKupovina": 234,
+		"datumOd": "2015-05-23",
+		"datumDo": "2017-05-23",
+		"menadzerID": 1
+	},
+	{
+		"izvestajID": 2,
+		"promet": 1200,
+		"brojKupovina": 23,
+		"datumOd": "2016-01-23",
+		"datumDo": "2019-03-23",
+		"menadzerID": 1
+	}
+]

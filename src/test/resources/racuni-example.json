@@ -1,20 +1,22 @@
-[{
-  "racunID": 1, 
-  "vremeIzdavanja": "12 May, 2016", 
-  "mestoIzdavanja": "Mesto", 
-  "ukupanIznosRacuna": 120, 
-  "nazivProdavnice": "Trafika BMB",
-  "nacinPlacanja": "gotovina",
-  "brojRacuna": "3432342432",
-  "prodavacID": 1
-}, 
-{
-  "racunID": 2, 
-  "vremeIzdavanja": "14 June, 2016", 
-  "mestoIzdavanja": "Mesto1", 
-  "ukupanIznosRacuna": 120, 
-  "nazivProdavnice": "Trafika BMB",
-  "nacinPlacanja": "gotovina",
-  "brojRacuna": "3432342432",
-  "prodavacID": 1
-}]
+[
+	{
+		"racunID": 1,
+		"vremeIzdavanja": "2016-02-28T16:41:41",
+		"mestoIzdavanja": "Sombor",
+		"ukupanIznosRacuna": 120,
+		"nazivProdavnice": "Trafika BMB",
+		"nacinPlacanja": "gotovina",
+		"brojRacuna": "3432342432",
+		"prodavacID": 1
+	},
+	{
+		"racunID": 2,
+		"vremeIzdavanja": "2015-07-28T16:47:41",
+		"mestoIzdavanja": "Beograd",
+		"ukupanIznosRacuna": 200,
+		"nazivProdavnice": "Trafika",
+		"nacinPlacanja": "gotovina",
+		"brojRacuna": "3432342888",
+		"prodavacID": 2
+	}
+]

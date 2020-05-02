@@ -16,7 +16,7 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 	String strucnaSprema;
 
 	public Prodavac(int prodavacID, String ime, String prezime, String pol, Date datumRodjenja, String adresaStanovanja,
-			String telefon, String jMBG, String datumZaposlenja, String strucnaSprema) {
+			String telefon, String JMBG, String datumZaposlenja, String strucnaSprema) {
 		this.prodavacID = prodavacID;
 		this.ime = ime;
 		this.prezime = prezime;
@@ -24,7 +24,7 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 		this.datumRodjenja = datumRodjenja;
 		this.adresaStanovanja = adresaStanovanja;
 		this.telefon = telefon;
-		JMBG = jMBG;
+		this.JMBG = JMBG;
 		this.datumZaposlenja = datumZaposlenja;
 		this.strucnaSprema = strucnaSprema;
 	}
@@ -89,8 +89,8 @@ public class Prodavac implements java.io.Serializable, Comparable<Prodavac> {
 		return JMBG;
 	}
 
-	public void setJMBG(String jMBG) {
-		JMBG = jMBG;
+	public void setJMBG(String JMBG) {
+		this.JMBG = JMBG;
 	}
 
 	public String getDatumZaposlenja() {

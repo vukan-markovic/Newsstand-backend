@@ -1,26 +1,28 @@
-[{
-   "dobavljacID": 1,
-   "skraceniNaziv": "BDOO",
-   "punNaziv": "Bambi d.o.o.",
-   "kontaktDobavljaca": "324234444",
-   "adresaDobavljaca": "Banatska BB",
-   "grad": "Sombor",
-   "drzava": "Srbija",
-   "postanskiBroj": "2434332",
-   "PIB": 111111111,
-   "kontaktOsoba": "Pera Peric",
-   "brojZiroRacuna": "3e032324324"
-},
-{
-   "dobavljacID": 2,
-   "skraceniNaziv": "BDOO",
-   "punNaziv": "Bambi d.o.o.",
-   "kontaktDobavljaca": "324234444",
-   "adresaDobavljaca": "Banatska BB",
-   "grad": "Sombor",
-   "drzava": "Srbija",
-   "postanskiBroj": "2434332",
-   "PIB": 111111111,
-   "kontaktOsoba": "Pera Peric",
-   "brojZiroRacuna": "3e032324324"
-}]
+[
+	{
+		"dobavljacID": 1,
+		"skraceniNaziv": "BDOO",
+		"punNaziv": "Bambi d.o.o.",
+		"kontaktDobavljaca": "324234444",
+		"adresaDobavljaca": "Banatska BB",
+		"grad": "Sombor",
+		"drzava": "Srbija",
+		"postanskiBroj": "25000",
+		"PIB": 111111111,
+		"kontaktOsoba": "Pera Peric",
+		"brojZiroRacuna": "3e032324324"
+	},
+	{
+		"dobavljacID": 2,
+		"skraceniNaziv": "IMK",
+		"punNaziv": "Imlek d.o.o.",
+		"kontaktDobavljaca": "555666",
+		"adresaDobavljaca": "Prvomajska 2",
+		"grad": "Beograd",
+		"drzava": "Srbija",
+		"postanskiBroj": "24000",
+		"PIB": 111221111,
+		"kontaktOsoba": "Nenad Peric",
+		"brojZiroRacuna": "56732324324"
+	}
+]

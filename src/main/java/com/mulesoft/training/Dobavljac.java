@@ -98,8 +98,8 @@ public class Dobavljac implements java.io.Serializable, Comparable<Dobavljac> {
 		return PIB;
 	}
 
-	public void setPIB(int pIB) {
-		PIB = pIB;
+	public void setPIB(int PIB) {
+		this.PIB = PIB;
 	}
 
 	public String getKontaktOsoba() {

@@ -8,7 +8,6 @@ public class StavkaRacuna implements java.io.Serializable, Comparable<StavkaRacu
 	double prodajnaCena;
 
 	public StavkaRacuna(int racunID, int proizvodID, int kolicinaProizvoda, double prodajnaCena) {
-		super();
 		this.racunID = racunID;
 		this.proizvodID = proizvodID;
 		this.kolicinaProizvoda = kolicinaProizvoda;
@@ -53,7 +52,7 @@ public class StavkaRacuna implements java.io.Serializable, Comparable<StavkaRacu
 
 	@Override
 	public int compareTo(StavkaRacuna otherStavkaRacuna) {
-		return Integer.compare(this.racunID, otherStavkaRacuna.racunID)
+		return Integer.compare(this.getRacunID(), otherStavkaRacuna.getRacunID())
 				& Integer.compare(this.getProizvodID(), otherStavkaRacuna.getProizvodID());
 	}
 }

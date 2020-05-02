@@ -1,12 +1,14 @@
-[{
-  "racunID": 1,
-  "proizvodID": 1,
-  "kolicinaProizvoda": 12,
-  "prodajnaCena": 123
-}, 
-{
-  "racunID": 2,
-  "proizvodID": 1,
-  "kolicinaProizvoda": 12,
-  "prodajnaCena": 123
-}]
+[
+	{
+		"racunID": 1,
+		"proizvodID": 1,
+		"kolicinaProizvoda": 12,
+		"prodajnaCena": 123
+	},
+	{
+		"racunID": 2,
+		"proizvodID": 3,
+		"kolicinaProizvoda": 50,
+		"prodajnaCena": 4000
+	}
+]

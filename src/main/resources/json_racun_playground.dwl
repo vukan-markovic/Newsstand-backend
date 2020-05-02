@@ -1,14 +1,14 @@
 %dw 1.0
 %output application/json
 ---
-payload map ((payload , indexOfPayload) -> {
+payload map ((payload) -> {
 	racunID: payload.racunID,
-	vremeIzdavanja: payload.vremeIzdavanja as :string,
-	mestoIzdavanja: payload.mestoIzdavanja as :string,
-	ukupanIznosRacuna: payload.ukupanIznosRacuna as :number,
-	nazivProdavnice: payload.nazivProdavnice as :string,
-	nacinPlacanja: payload.nacinPlacanja as :string,
-	brojRacuna: payload.brojRacuna as :string,
-	tipRacuna: payload.tipRacuna as :string,
-	prodavacID: payload.prodavacID as :number
+	vremeIzdavanja: payload.vremeIzdavanja,
+	(mestoIzdavanja: payload.mestoIzdavanja) when payload.mestoIzdavanja != null,
+	(ukupanIznosRacuna: payload.ukupanIznosRacuna) when payload.ukupanIznosRacuna != null,
+	nazivProdavnice: payload.nazivProdavnice,
+	nacinPlacanja: payload.nacinPlacanja,
+	brojRacuna: payload.brojRacuna,
+	(tipRacuna: payload.tipRacuna) when payload.tipRacuna != null,
+	prodavacID: payload.prodavacID
 })

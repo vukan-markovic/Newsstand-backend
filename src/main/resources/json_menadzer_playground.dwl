@@ -1,8 +1,8 @@
 %dw 1.0
 %output application/json
 ---
-payload map ((payload , indexOfPayload) -> {
+payload map ((payload) -> {
 	menadzerID: payload.menadzerID,
-  	adresaKancelarije: payload.adresaKancelarije as :string,
-  	brojKancelarije: payload.brojKancelarije as :string
+	adresaKancelarije: payload.adresaKancelarije,
+	(brojKancelarije: payload.brojKancelarije) when payload.brojKancelarije != null
 })

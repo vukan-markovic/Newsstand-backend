@@ -1,10 +1,12 @@
-[{
-   "vrstaProizvodaID": 1,
-   "nazivVrsteProizvoda": "stampa",
-   "opisVrsteProizvoda": "Dnevna stampa"
-},
-{
-   "vrstaProizvodaID": 2,
-   "nazivVrsteProizvoda": "stampa",
-   "opisVrsteProizvoda": "Dnevna stampa"
-}]
+[
+	{
+		"vrstaProizvodaID": 1,
+		"nazivVrsteProizvoda": "štampa",
+		"opisVrsteProizvoda": "Dnevna štampa"
+	},
+	{
+		"vrstaProizvodaID": 2,
+		"nazivVrsteProizvoda": "sokovi",
+		"opisVrsteProizvoda": "gazirana i negazirana pića"
+	}
+]

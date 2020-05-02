@@ -1,0 +1,13 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "flowVariables": {
+            "output": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "output"
+            }
+        }
+    },
+    "id": "efb54277-8a53-4617-9f4e-5df615156cc9",
+    "version": "5.2.0.0"
+}

@@ -1,9 +1,9 @@
 %dw 1.0
 %output application/json
 ---
-payload map ((payload , indexOfPayload) -> {
+payload map ((payload) -> {
 	racunID: payload.racunID,
 	proizvodID: payload.proizvodID,
-	kolicinaProizvoda: payload.kolicinaProizvoda as :number,
-	prodajnaCena: payload.prodajnaCena as :number
+	kolicinaProizvoda: payload.kolicinaProizvoda,
+	(prodajnaCena: payload.prodajnaCena) when payload.prodajnaCena != null
 })

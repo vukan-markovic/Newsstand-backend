@@ -74,16 +74,10 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<flow name="postRacunFlow">
 		<dw:transform-message doc:name="Transform Message"
 			metadata:id="72c76926-c11e-42e8-8d25-739caccbe003">
+			<dw:input-payload mimeType="application/json" />
 			<dw:set-payload resource="classpath:java_playground.dwl" />
 		</dw:transform-message>
-		<db:insert config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="insertRacun" />
-		</db:insert>
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
-		<set-payload doc:name="Set Payload"
-			value="{ &quot;message&quot;: &quot;Dodat nov ra&#269;un&quot; }" />
+		<flow-ref name="insertRacunFlow" doc:name="insertRacunFlow" />
 	</flow>
 	<flow name="putRacunByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -92,29 +86,37 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				mimeType="application/json" />
 			<dw:set-payload resource="classpath:java_playground.dwl" />
 		</dw:transform-message>
-		<db:update config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="updateRacun" />
-		</db:update>
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
-		<set-payload doc:name="Set Payload"
-			value="{ &quot;message&quot;: &quot;A&#382;uriran/dodat ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" />
+		<enricher target="#[flowVars.result]" doc:name="Message Enricher">
+			<db:update config-ref="Generic_Database_Configuration"
+				doc:name="Database">
+				<db:template-query-ref name="updateRacun" />
+			</db:update>
+		</enricher>
+		<choice doc:name="Choice">
+			<when expression="#[flowVars.result == empty]">
+				<flow-ref name="insertRacunFlow" doc:name="insertRacunFlow" />
+				<set-property propertyName="http.status" value="201"
+					doc:name="Property" />
+			</when>
+			<otherwise>
+				<set-property propertyName="Content-Type" value="application/json"
+					doc:name="Property" />
+				<set-payload
+					value="{ &quot;message&quot;: &quot;A&#382;uriran ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
 	</flow>
 	<flow name="deleteRacunByIDFlow">
-		<db:select config-ref="Generic_Database_Configuration"
+		<db:delete config-ref="Generic_Database_Configuration"
 			doc:name="Database">
-			<db:template-query-ref name="selectByIDRacun" />
-		</db:select>
+			<db:template-query-ref name="deleteRacun" />
+		</db:delete>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<flow-ref name="racunErrorFlow" doc:name="racunErrorFlow" />
 			</when>
 			<otherwise>
-				<db:delete config-ref="Generic_Database_Configuration"
-					doc:name="Database">
-					<db:template-query-ref name="deleteRacun" />
-				</db:delete>
 				<set-property propertyName="Content-Type" value="application/json"
 					doc:name="Property" />
 				<set-payload
@@ -123,10 +125,22 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			</otherwise>
 		</choice>
 	</flow>
+	<flow name="insertRacunFlow">
+		<db:insert config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="insertRacun" />
+		</db:insert>
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
+		<set-payload
+			value="{ &quot;message&quot;: &quot;Dodat novi ra&#269;un&quot; }"
+			doc:name="Set Payload" />
+	</flow>
 	<flow name="racunErrorFlow">
 		<set-property propertyName="http.status" value="404"
 			doc:name="Property" />
-			<set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+		<set-property propertyName="Content-Type" value="application/json"
+			doc:name="Property" />
 		<set-payload
 			value="{ &quot;message&quot;: &quot;Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />

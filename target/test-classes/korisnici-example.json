@@ -1,14 +1,16 @@
-[{
-    "korisnikID": 1,
-    "email": "vukan.markovic97@gmail.com",
-    "lozinka": "234235",
-    "uloga": "prodavac",
-    "verifikovan": false
-}, 
-{
-    "korisnikID": 2,
-    "email": "vukan.markovic97@gmail.com",
-    "lozinka": "234235",
-    "uloga": "prodavac",
-    "verifikovan": false
-}]
+[
+	{
+		"korisnikID": 1,
+		"email": "vukan.markovic97@gmail.com",
+		"lozinka": "234235",
+		"uloga": "prodavac",
+		"verifikovan": false
+	},
+	{
+		"korisnikID": 2,
+		"email": "pera.peric@gmail.com",
+		"lozinka": "asddgre",
+		"uloga": "prodavac",
+		"verifikovan": false
+	}
+]
