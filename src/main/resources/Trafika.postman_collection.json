@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/api/proizvodi/",
+			"name": "http://localhost:8080/api/proizvod",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -15,10 +15,15 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/proizvod/",
+					"raw": "http://localhost:8080/api/proizvod",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -26,18 +31,28 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvod",
-						""
+						"proizvod"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodi/1",
+			"name": "http://localhost:8080/api/proizvod/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/proizvod/1",
 					"protocol": "http",
@@ -55,12 +70,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni",
+			"name": "http://localhost:8080/api/racun",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/racun/",
+					"raw": "http://localhost:8080/api/racun",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -68,20 +94,30 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"racun",
-						""
+						"racun"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodi/2",
+			"name": "http://localhost:8080/api/proizvod/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/proizvod/2",
+					"raw": "http://localhost:8080/api/proizvod/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -90,14 +126,14 @@
 					"path": [
 						"api",
 						"proizvod",
-						"2"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodi",
+			"name": "http://localhost:8080/api/proizvod",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -106,11 +142,16 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"proizvodID\": 6,\r\n  \"nazivProizvoda\": \"novine\",\r\n  \"cena\": 35, \r\n  \"barKod\": \"21424214\",\r\n  \"raspolozivaKolicina\": 12,\r\n  \"proizvodjacID\": 1, \r\n  \"vrstaProizvodaID\": 1, \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"nazivProizvoda\": \"novine\",\r\n  \"cena\": 35, \r\n  \"barKod\": \"21424214\",\r\n  \"raspolozivaKolicina\": 12,\r\n  \"proizvodjacID\": 1, \r\n  \"vrstaProizvodaID\": 1\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/proizvod",
@@ -128,7 +169,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodi/8",
+			"name": "http://localhost:8080/api/proizvod/1",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -137,14 +178,19 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"proizvodID\": 6,\r\n  \"nazivProizvoda\": \"Dnevne novine\",\r\n  \"cena\": 35, \r\n  \"barKod\": \"21424214\",\r\n  \"raspolozivaKolicina\": 12,\r\n  \"proizvodjacID\": 1, \r\n  \"vrstaProizvodaID\": 1, \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"nazivProizvoda\": \"Dnevne novine\",\r\n  \"cena\": 35, \r\n  \"barKod\": \"21424214\",\r\n  \"raspolozivaKolicina\": 12,\r\n  \"proizvodjacID\": 1, \r\n  \"vrstaProizvodaID\": 1\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/proizvod/6",
+					"raw": "http://localhost:8080/api/proizvod/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,17 +199,28 @@
 					"path": [
 						"api",
 						"proizvod",
-						"6"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni/1",
+			"name": "http://localhost:8080/api/racun/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/racun/1",
 					"protocol": "http",
@@ -181,12 +238,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni/2",
+			"name": "http://localhost:8080/api/racun/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/racun/2",
+					"raw": "http://localhost:8080/api/racun/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -195,14 +263,14 @@
 					"path": [
 						"api",
 						"racun",
-						"2"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni",
+			"name": "http://localhost:8080/api/racun",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -211,11 +279,16 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"racunID\": 7, \r\n  \"vremeIzdavanja\": \"16 November, 2019\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"ukupanIznosRacuna\": 501, \r\n  \"nazivProdavnice\": \"Trafika BBL\",\r\n  \"nacinPlacanja\": \"gotovina\",\r\n  \"brojRacuna\": \"23142142\", \r\n  \"prodavacID\": 1, \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"vremeIzdavanja\": \"2015-07-04T21:00:00\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"ukupanIznosRacuna\": 501, \r\n  \"nazivProdavnice\": \"Trafika BBL\",\r\n  \"nacinPlacanja\": \"gotovina\",\r\n  \"brojRacuna\": \"23142142\", \r\n  \"prodavacID\": 1\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/racun",
@@ -233,7 +306,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/racuni/8",
+			"name": "http://localhost:8080/api/racun/1",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -242,14 +315,19 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"racunID\": 7, \r\n  \"vremeIzdavanja\": \"18 November, 2019\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"ukupanIznosRacuna\": 501, \r\n  \"nazivProdavnice\": \"Trafika BBL\",\r\n  \"nacinPlacanja\": \"gotovina\",\r\n  \"brojRacuna\": \"23142142\", \r\n  \"prodavacID\": 1, \r\n  \"active\": 1\r\n}"
+					"raw": "{\r\n  \"vremeIzdavanja\": \"2015-07-04T21:00:00\", \r\n  \"mestoIzdavanja\": \"Beograd\", \r\n  \"ukupanIznosRacuna\": 510, \r\n  \"nazivProdavnice\": \"Trafika BBL\",\r\n  \"nacinPlacanja\": \"gotovina\",\r\n  \"brojRacuna\": \"23142142\", \r\n  \"prodavacID\": 1\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/racun/8",
+					"raw": "http://localhost:8080/api/racun/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -258,19 +336,30 @@
 					"path": [
 						"api",
 						"racun",
-						"8"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "stavkaRacuna",
+			"name": "http://localhost:8080/api/stavkaRacuna",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaRacuna/",
+					"raw": "http://localhost:8080/api/stavkaRacuna",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -278,20 +367,30 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"stavkaRacuna",
-						""
+						"stavkaRacuna"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaRacuna/",
+			"name": "http://localhost:8080/api/stavkaRacuna/1/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaRacuna/1",
+					"raw": "http://localhost:8080/api/stavkaRacuna/1/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -300,6 +399,7 @@
 					"path": [
 						"api",
 						"stavkaRacuna",
+						"1",
 						"1"
 					]
 				}
@@ -307,12 +407,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaRacuna/1",
+			"name": "http://localhost:8080/api/stavkaRacuna/1/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaRacuna/1",
+					"raw": "http://localhost:8080/api/stavkaRacuna/1/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -321,6 +432,7 @@
 					"path": [
 						"api",
 						"stavkaRacuna",
+						"1",
 						"1"
 					]
 				}
@@ -328,7 +440,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaRacuna/1",
+			"name": "http://localhost:8080/api/stavkaRacuna/1/1",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -336,14 +448,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"racunID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicinaProizvoda\": 8\n}"
+					"raw": "{\n\t\"kolicinaProizvoda\": 8\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaRacuna/1",
+					"raw": "http://localhost:8080/api/stavkaRacuna/1/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -352,6 +469,7 @@
 					"path": [
 						"api",
 						"stavkaRacuna",
+						"1",
 						"1"
 					]
 				}
@@ -359,13 +477,18 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaRacuna/",
+			"name": "http://localhost:8080/api/stavkaRacuna",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
 						"type": "text"
 					}
 				],
@@ -374,7 +497,7 @@
 					"raw": "{\n\t\"racunID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicinaProizvoda\": 7\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaRacuna/",
+					"raw": "http://localhost:8080/api/stavkaRacuna",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -382,20 +505,30 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"stavkaRacuna",
-						""
+						"stavkaRacuna"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodjac/",
+			"name": "http://localhost:8080/api/proizvodjac",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodjac/",
+					"raw": "http://localhost:8080/api/proizvodjac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -403,8 +536,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodjac",
-						""
+						"proizvodjac"
 					]
 				}
 			},
@@ -414,7 +546,18 @@
 			"name": "http://localhost:8080/api/proizvodjac/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/proizvodjac/1",
 					"protocol": "http",
@@ -435,7 +578,18 @@
 			"name": "http://localhost:8080/api/proizvodjac/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/proizvodjac/1",
 					"protocol": "http",
@@ -453,7 +607,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/proizvodjac/",
+			"name": "http://localhost:8080/api/proizvodjac",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -461,14 +615,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"proizvodjacID\": 1, \n\t\"nazivProizvodjaca\": \"Bambi\", \n\t\"kontaktProizvodjaca\": \"2142434355\",\n\t\"adresaProizvodjaca\": \"Banatska BB\"\n}"
+					"raw": "{\n\t\"nazivProizvodjaca\": \"Bambi\", \n\t\"kontaktProizvodjaca\": \"2142434355\",\n\t\"adresaProizvodjaca\": \"Banatska BB\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/proizvodjac/",
+					"raw": "http://localhost:8080/api/proizvodjac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -476,8 +635,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"proizvodjac",
-						""
+						"proizvodjac"
 					]
 				}
 			},
@@ -492,11 +650,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"proizvodjacID\": 1, \n\t\"nazivProizvodjaca\": \"Bambi\", \n\t\"kontaktProizvodjaca\": \"27355\",\n\t\"adresaProizvodjaca\": \"Banatska BB\"\n}"
+					"raw": "{\n\t\"nazivProizvodjaca\": \"Bambi\", \n\t\"kontaktProizvodjaca\": \"27355\",\n\t\"adresaProizvodjaca\": \"Banatska BB\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/proizvodjac/1",
@@ -515,12 +678,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/vrstaProizvoda/",
+			"name": "http://localhost:8080/api/vrstaProizvoda",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/vrstaProizvoda/",
+					"raw": "http://localhost:8080/api/vrstaProizvoda",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -528,8 +702,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"vrstaProizvoda",
-						""
+						"vrstaProizvoda"
 					]
 				}
 			},
@@ -539,7 +712,18 @@
 			"name": "http://localhost:8080/api/vrstaProizvoda/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/vrstaProizvoda/1",
 					"protocol": "http",
@@ -560,7 +744,18 @@
 			"name": "http://localhost:8080/api/vrstaProizvoda/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/vrstaProizvoda/1",
 					"protocol": "http",
@@ -578,7 +773,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/vrstaProizvoda/",
+			"name": "http://localhost:8080/api/vrstaProizvoda",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -586,14 +781,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"vrstaProizvodaID\": 1, \n\t\"nazivVrsteProizvoda\": \"Stampa\"\n}"
+					"raw": "{\n\t\"nazivVrsteProizvoda\": \"Štampa\", \n\t\"opisVrsteProizvoda\": \"Dnevna štampa\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/vrstaProizvoda/",
+					"raw": "http://localhost:8080/api/vrstaProizvoda",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -601,8 +801,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"vrstaProizvoda",
-						""
+						"vrstaProizvoda"
 					]
 				}
 			},
@@ -617,11 +816,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"vrstaProizvodaID\": 1, \n\t\"nazivVrsteProizvoda\": \"Dnevna stampa\"\n}"
+					"raw": "{\n\t\"nazivVrsteProizvoda\": \"Štampa\", \n\t\"opisVrsteProizvoda\": \"Dnevna štampa, časopisi i knjige\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/vrstaProizvoda/1",
@@ -640,12 +844,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/korisnik/",
+			"name": "http://localhost:8080/api/korisnik",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/korisnik/",
+					"raw": "http://localhost:8080/api/korisnik",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -653,8 +868,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"korisnik",
-						""
+						"korisnik"
 					]
 				}
 			},
@@ -664,7 +878,18 @@
 			"name": "http://localhost:8080/api/korisnik/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/korisnik/1",
 					"protocol": "http",
@@ -685,7 +910,18 @@
 			"name": "http://localhost:8080/api/korisnik/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/korisnik/1",
 					"protocol": "http",
@@ -703,7 +939,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/korisnik/",
+			"name": "http://localhost:8080/api/korisnik",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -715,10 +951,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"korisnikID\": 1, \n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"123456\", \n\t\"autentifikacioniToken\": \"5493834539805498059\", \n\t\"uloga\": \"prodavac\"\n}"
+					"raw": "{\n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"123456\", \n\t\"uloga\": \"prodavac\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/korisnik/",
+					"raw": "http://localhost:8080/api/korisnik",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -726,8 +962,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"korisnik",
-						""
+						"korisnik"
 					]
 				}
 			},
@@ -742,11 +977,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"korisnikID\": 1, \n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"1234568\", \n\t\"autentifikacioniToken\": \"5493834539805498059\", \n\t\"uloga\": \"prodavac\"\n}"
+					"raw": "{\n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"1234568\", \n\t\"uloga\": \"prodavac\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/korisnik/1",
@@ -765,12 +1005,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaPorudzbine/",
+			"name": "http://localhost:8080/api/stavkaPorudzbine",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaPorudzbine/",
+					"raw": "http://localhost:8080/api/stavkaPorudzbine",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -778,20 +1029,30 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"stavkaPorudzbine",
-						""
+						"stavkaPorudzbine"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -800,6 +1061,7 @@
 					"path": [
 						"api",
 						"stavkaPorudzbine",
+						"1",
 						"1"
 					]
 				}
@@ -807,12 +1069,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -821,6 +1094,7 @@
 					"path": [
 						"api",
 						"stavkaPorudzbine",
+						"1",
 						"1"
 					]
 				}
@@ -828,13 +1102,18 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaPorudzbine/",
+			"name": "http://localhost:8080/api/stavkaPorudzbine",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
 						"type": "text"
 					}
 				],
@@ -843,7 +1122,42 @@
 					"raw": "{\n\t\"porudzbinaID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicina\": 12\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaPorudzbine/",
+					"raw": "http://localhost:8080/api/stavkaPorudzbine",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stavkaPorudzbine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"kolicina\": 13\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -852,37 +1166,7 @@
 					"path": [
 						"api",
 						"stavkaPorudzbine",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"porudzbinaID\": 1, \n\t\"proizvodID\": 1, \n\t\"kolicina\": 13\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"stavkaPorudzbine",
+						"1",
 						"1"
 					]
 				}
@@ -890,12 +1174,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/dobavljac/",
+			"name": "http://localhost:8080/api/dobavljac",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/dobavljac/",
+					"raw": "http://localhost:8080/api/dobavljac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -903,8 +1198,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"dobavljac",
-						""
+						"dobavljac"
 					]
 				}
 			},
@@ -914,7 +1208,18 @@
 			"name": "http://localhost:8080/api/dobavljac/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/dobavljac/1",
 					"protocol": "http",
@@ -935,7 +1240,18 @@
 			"name": "http://localhost:8080/api/dobavljac/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/dobavljac/1",
 					"protocol": "http",
@@ -953,7 +1269,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/dobavljac/",
+			"name": "http://localhost:8080/api/dobavljac",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -961,14 +1277,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"dobavljacID\": 1, \n\t\"skraceniNaziv\": \"RAS\", \n\t\"punNaziv\": \"Ringier Axel Springier\", \n\t\"kontaktDobavljaca\": \"34523532\",\n\t\"adresaDobavljaca\": \"Delibadska 6\", \n\t\"grad\": \"Beograd\", \n\t\"drzava\": \"Srbija\", \n\t\"postanskiBroj\": \"435323\",\n\t\"PIB\": 100000015,\n\t\"kontaktOsoba\": \"Milan\", \n\t\"brojZiroRacuna\": \"302553523\"\n}"
+					"raw": "{\n\t\"dobavljacID\": 1, \n\t\"skraceniNaziv\": \"RAS\", \n\t\"punNaziv\": \"Ringier Axel Springier\", \n\t\"kontaktDobavljaca\": \"34523532\",\n\t\"adresaDobavljaca\": \"Delibadska 6\", \n\t\"grad\": \"Beograd\",\n\t\"drzava\": \"Srbija\", \n\t\"postanskiBroj\": \"435323\",\n\t\"PIB\": 107000015,\n\t\"kontaktOsoba\": \"Milan\", \n\t\"brojZiroRacuna\": \"302553523\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/dobavljac/",
+					"raw": "http://localhost:8080/api/dobavljac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -976,8 +1297,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"dobavljac",
-						""
+						"dobavljac"
 					]
 				}
 			},
@@ -992,11 +1312,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"dobavljacID\": 1, \n\t\"skraceniNaziv\": \"RAS\", \n\t\"punNaziv\": \"Ringier Axel Springier\", \n\t\"kontaktDobavljaca\": \"34523532\",\n\t\"adresaDobavljaca\": \"Delibadska 6\", \n\t\"grad\": \"Beograd\", \n\t\"drzava\": \"Srbija\", \n\t\"postanskiBroj\": \"435323\",\n\t\"PIB\": 100000415,\n\t\"kontaktOsoba\": \"Milan\", \n\t\"brojZiroRacuna\": \"302553523\"\n}"
+					"raw": "{\n\t\"skraceniNaziv\": \"RAS\", \n\t\"punNaziv\": \"Ringier Axel Springier\", \n\t\"kontaktDobavljaca\": \"34555555\",\n\t\"adresaDobavljaca\": \"Delibadska 6\", \n\t\"grad\": \"Beograd\", \n\t\"drzava\": \"Srbija\", \n\t\"postanskiBroj\": \"435323\",\n\t\"PIB\": 109010415,\n\t\"kontaktOsoba\": \"Milan\", \n\t\"brojZiroRacuna\": \"302553523\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/dobavljac/1",
@@ -1015,12 +1340,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/porudzbina/",
+			"name": "http://localhost:8080/api/porudzbina",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/porudzbina/",
+					"raw": "http://localhost:8080/api/porudzbina",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1028,8 +1364,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"porudzbina",
-						""
+						"porudzbina"
 					]
 				}
 			},
@@ -1039,7 +1374,18 @@
 			"name": "http://localhost:8080/api/porudzbina/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/porudzbina/1",
 					"protocol": "http",
@@ -1060,7 +1406,18 @@
 			"name": "http://localhost:8080/api/porudzbina/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/porudzbina/1",
 					"protocol": "http",
@@ -1078,7 +1435,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/porudzbina/",
+			"name": "http://localhost:8080/api/porudzbina",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -1086,14 +1443,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"porudzbinaID\": 1,\n\t\"datumPorucivanja\": \"16 November, 2019\",\n\t\"datumIsporuke\": \"18 November, 2019\",\n\t\"ukupanIznosPorudzbine\": 123,\n\t\"statusPorudzbine\": \"poruceno\",\n\t\"dobavljacID\": 1,\n\t\"menadzerID\": 1, \n\t\"prodavacID\": 1\n}"
+					"raw": "{\n\t\"datumPorucivanja\": \"2010-05-23\",\n\t\"datumIsporuke\": \"2010-05-27\",\n\t\"statusPorudzbine\": \"poruceno\",\n\t\"dobavljacID\": 1,\n\t\"menadzerID\": 1, \n\t\"prodavacID\": 1\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/porudzbina/",
+					"raw": "http://localhost:8080/api/porudzbina",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1101,8 +1463,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"porudzbina",
-						""
+						"porudzbina"
 					]
 				}
 			},
@@ -1117,11 +1478,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"porudzbinaID\": 1,\n\t\"datumPorucivanja\": \"16 November, 2019\",\n\t\"datumIsporuke\": \"19 November, 2019\",\n\t\"ukupanIznosPorudzbine\": 123,\n\t\"statusPorudzbine\": \"poruceno\",\n\t\"dobavljacID\": 1,\n\t\"menadzerID\": 1, \n\t\"prodavacID\": 1\n}"
+					"raw": "{\n\t\"datumPorucivanja\": \"2010-05-23\",\n\t\"datumIsporuke\": \"2011-05-27\",\n\t\"statusPorudzbine\": \"poruceno\",\n\t\"dobavljacID\": 1,\n\t\"menadzerID\": 1, \n\t\"prodavacID\": 1\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/porudzbina/1",
@@ -1140,12 +1506,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/prodavac/",
+			"name": "http://localhost:8080/api/prodavac",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/prodavac/",
+					"raw": "http://localhost:8080/api/prodavac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1153,8 +1530,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"prodavac",
-						""
+						"prodavac"
 					]
 				}
 			},
@@ -1164,7 +1540,18 @@
 			"name": "http://localhost:8080/api/prodavac/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/prodavac/1",
 					"protocol": "http",
@@ -1185,7 +1572,18 @@
 			"name": "http://localhost:8080/api/prodavac/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/prodavac/1",
 					"protocol": "http",
@@ -1203,7 +1601,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/prodavac/",
+			"name": "http://localhost:8080/api/prodavac",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -1211,14 +1609,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"prodavacID\": 1, \n\t\"ime\": \"Pera\",\n\t\"prezime\": \"Peric\",\n\t\"pol\": \"musko\",\n\t\"datumRodjenja\": \"16 November, 1996\",\n\t\"adresaStanovanja\": \"Batinska 5\",\n\t\"telefon\": \"325325235\",\n\t\"JMBG\": \"1122223453125\", \n\t\"datumZaposlenja\": \"16 November, 2019\",\n\t\"strucnaSprema\": \"Srednja skola\"\n}"
+					"raw": "{\n\t\"prodavacID\": 1, \n\t\"ime\": \"Pera\",\n\t\"prezime\": \"Peric\",\n\t\"pol\": \"musko\",\n\t\"datumRodjenja\": \"1990-05-27\",\n\t\"adresaStanovanja\": \"Batinska 5\",\n\t\"telefon\": \"325325235\",\n\t\"JMBG\": \"1122223453125\", \n\t\"datumZaposlenja\": \"2010-05-27\",\n\t\"strucnaSprema\": \"Srednja skola\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/prodavac/",
+					"raw": "http://localhost:8080/api/prodavac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1226,8 +1629,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"prodavac",
-						""
+						"prodavac"
 					]
 				}
 			},
@@ -1242,11 +1644,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"prodavacID\": 1, \n\t\"ime\": \"Pera\",\n\t\"prezime\": \"Peric\",\n\t\"pol\": \"musko\",\n\t\"datumRodjenja\": \"16 November, 1996\",\n\t\"adresaStanovanja\": \"Batinska 5\",\n\t\"telefon\": \"3235\",\n\t\"JMBG\": \"1122223453125\", \n\t\"datumZaposlenja\": \"16 November, 2019\",\n\t\"strucnaSprema\": \"Srednja skola\"\n}"
+					"raw": "{\n\t\"ime\": \"Pera\",\n\t\"prezime\": \"Peric\",\n\t\"pol\": \"musko\",\n\t\"datumRodjenja\": \"1990-05-27\",\n\t\"adresaStanovanja\": \"Batinska 5\",\n\t\"telefon\": \"3235\",\n\t\"JMBG\": \"1122223453125\", \n\t\"datumZaposlenja\": \"2010-05-27\",\n\t\"strucnaSprema\": \"Srednja skola\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/prodavac/1",
@@ -1265,12 +1672,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/menadzer/",
+			"name": "http://localhost:8080/api/menadzer",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/menadzer/",
+					"raw": "http://localhost:8080/api/menadzer",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1278,8 +1696,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"menadzer",
-						""
+						"menadzer"
 					]
 				}
 			},
@@ -1289,7 +1706,18 @@
 			"name": "http://localhost:8080/api/menadzer/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/menadzer/1",
 					"protocol": "http",
@@ -1310,7 +1738,18 @@
 			"name": "http://localhost:8080/api/menadzer/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/menadzer/1",
 					"protocol": "http",
@@ -1336,11 +1775,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"menadzerID\": 1, \n\t\"adresaKancelarije\": \"Prvomajska 1\", \n\t\"brojKancelarije\": 219\n}"
+					"raw": "{\n\t\"adresaKancelarije\": \"Prvomajska 1\", \n\t\"brojKancelarije\": 219\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/menadzer/1",
@@ -1359,7 +1803,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/menadzer/",
+			"name": "http://localhost:8080/api/menadzer",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -1367,14 +1811,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"menadzerID\": 1, \n\t\"adresaKancelarije\": \"Prvomajska 1\", \n\t\"brojKancelarije\": 214\n}"
+					"raw": "{\n\t\"menadzerID\": 1, \n\t\"adresaKancelarije\": \"Prvomajska 1\", \n\t\"brojKancelarije\": \"214\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/menadzer/",
+					"raw": "http://localhost:8080/api/menadzer",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1382,20 +1831,30 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"menadzer",
-						""
+						"menadzer"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/izvestaj/",
+			"name": "http://localhost:8080/api/izvestaj",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/izvestaj/",
+					"raw": "http://localhost:8080/api/izvestaj",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1403,8 +1862,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"izvestaj",
-						""
+						"izvestaj"
 					]
 				}
 			},
@@ -1414,7 +1872,18 @@
 			"name": "http://localhost:8080/api/izvestaj/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/izvestaj/1",
 					"protocol": "http",
@@ -1435,7 +1904,18 @@
 			"name": "http://localhost:8080/api/izvestaj/1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/izvestaj/1",
 					"protocol": "http",
@@ -1453,7 +1933,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/izvestaj/",
+			"name": "http://localhost:8080/api/izvestaj",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -1461,14 +1941,19 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"izvestajID\": 1,\n\t\"datumOd\": \"16 November, 2019\", \n\t\"datumDo\": \"22 November, 2019\", \n\t\"menadzerID\": 1\n}"
+					"raw": "{\n\t\"datumOd\": \"2015-05-23\", \n\t\"datumDo\": \"2017-05-23\", \n\t\"menadzerID\": 1\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/izvestaj/",
+					"raw": "http://localhost:8080/api/izvestaj",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1476,8 +1961,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"izvestaj",
-						""
+						"izvestaj"
 					]
 				}
 			},
@@ -1492,11 +1976,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"izvestajID\": 1,\n\t\"datumOd\": \"16 November, 2019\", \n\t\"datumDo\": \"22 November, 2019\", \n\t\"menadzerID\": 2\n}"
+					"raw": "{\n\t\"datumOd\": \"2010-05-23\", \n\t\"datumDo\": \"2017-06-23\", \n\t\"menadzerID\": 1\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/izvestaj/1",
@@ -1509,6 +1998,102 @@
 						"api",
 						"izvestaj",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"vukan.markovic97@gmail.com\", \n\t\"lozinka\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/updatePassword?code=$2a$10$h1eNLZDJsZKdyIJchNrN9.UmKMsu0SdNt4Ul6FzNsiujVF14SdIT2\n",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"lozinka\": \"hallooo\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/updatePassword?code=$2a$10$h1eNLZDJsZKdyIJchNrN9.UmKMsu0SdNt4Ul6FzNsiujVF14SdIT2\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"updatePassword"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "$2a$10$h1eNLZDJsZKdyIJchNrN9.UmKMsu0SdNt4Ul6FzNsiujVF14SdIT2\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/resetPassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"vukan.markovic97@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/resetPassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"resetPassword"
 					]
 				}
 			},

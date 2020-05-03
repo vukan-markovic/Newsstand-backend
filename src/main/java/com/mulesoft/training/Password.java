@@ -7,7 +7,7 @@ public class Password implements java.io.Serializable, Comparable<Password> {
 	public Password(String lozinka) {
 		this.lozinka = lozinka;
 	}
-	
+
 	public String getLozinka() {
 		return lozinka;
 	}

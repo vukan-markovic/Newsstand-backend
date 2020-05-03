@@ -795,14 +795,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	<flow name="post:/login:application/json:trafika-api-config">
 		<flow-ref name="loginFlow" doc:name="loginFlow" />
 	</flow>
-	<flow name="notAuthenticatedFlow">
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
-		<set-property propertyName="http.status" value="401"
-			doc:name="Property" />
-		<set-payload value="{  &quot;message&quot;: &quot;Not Authenticated&quot; }"
-			doc:name="Set Payload" />
-	</flow>
 	<flow name="post:/resetPassword:application/json:trafika-api-config">
 		<flow-ref name="resetPasswordFlow" doc:name="resetPasswordFlow" />
 	</flow>
@@ -811,6 +803,13 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	</flow>
 	<flow name="get:/emailVerification:trafika-api-config">
 		<flow-ref name="emailVerificationFlow" doc:name="emailVerificationFlow" />
+	</flow>
+	<flow name="notAuthenticatedFlow">
+
+		<set-property propertyName="http.status" value="401"
+			doc:name="Property" />
+		<set-payload value="{  &quot;message&quot;: &quot;Not Authenticated&quot; }"
+			doc:name="Set Payload" />
 	</flow>
 	<apikit:mapping-exception-strategy
 		name="trafika-api-apiKitGlobalExceptionMapping">

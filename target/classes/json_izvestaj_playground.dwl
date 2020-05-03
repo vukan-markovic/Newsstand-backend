@@ -7,5 +7,5 @@ payload map ((payload) -> {
 	(brojKupovina: payload.brojKupovina) when payload.brojKupovina != null,
 	datumOd: payload.datumOd,
 	datumDo: payload.datumDo,
-	menadzerID: payload.menadzerID 
+	menadzerID: payload.menadzerID
 })

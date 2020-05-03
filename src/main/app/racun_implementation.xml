@@ -37,8 +37,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:select>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
-				<set-property doc:name="Property" propertyName="Content-Type"
-					value="application/json" />
 				<set-payload doc:name="Set Payload"
 					value="{  &quot;message&quot;: &quot;Trenutno nema ra&#269;una u bazi podataka&quot; }" />
 			</when>
@@ -99,8 +97,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 					doc:name="Property" />
 			</when>
 			<otherwise>
-				<set-property propertyName="Content-Type" value="application/json"
-					doc:name="Property" />
 				<set-payload
 					value="{ &quot;message&quot;: &quot;A&#382;uriran ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
@@ -117,8 +113,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<flow-ref name="racunErrorFlow" doc:name="racunErrorFlow" />
 			</when>
 			<otherwise>
-				<set-property propertyName="Content-Type" value="application/json"
-					doc:name="Property" />
 				<set-payload
 					value="{ &quot;message&quot;: &quot;Obrisan ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
@@ -130,16 +124,12 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			doc:name="Database">
 			<db:template-query-ref name="insertRacun" />
 		</db:insert>
-		<set-property propertyName="Content-Type" value="application/json"
-			doc:name="Property" />
 		<set-payload
 			value="{ &quot;message&quot;: &quot;Dodat novi ra&#269;un&quot; }"
 			doc:name="Set Payload" />
 	</flow>
 	<flow name="racunErrorFlow">
 		<set-property propertyName="http.status" value="404"
-			doc:name="Property" />
-		<set-property propertyName="Content-Type" value="application/json"
 			doc:name="Property" />
 		<set-payload
 			value="{ &quot;message&quot;: &quot;Ne postoji ra&#269;un sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
