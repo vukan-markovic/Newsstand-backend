@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:schedulers="http://www.mulesoft.org/schema/mule/schedulers"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/schedulers http://www.mulesoft.org/schema/mule/schedulers/current/mule-schedulers.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
+
+	<spring:beans>
+		<spring:bean name="invokeJavaFunc" class="com.mulesoft.training.Authentication"></spring:bean>
+		<spring:bean name="invokeJWT" class="com.mulesoft.training.Authentication"></spring:bean>
+	</spring:beans>
+
+	<db:template-query name="selectAllKorisnik" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectAllKorisnik.sql" />
+	</db:template-query>
+	<db:template-query name="selectByIDKorisnik"
+		doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectByIDKorisnik.sql" />
+	</db:template-query>
+	<db:template-query name="insertKorisnik" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\insertKorisnik.sql" />
+	</db:template-query>
+	<db:template-query name="updateKorisnik" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\updateKorisnik.sql" />
+	</db:template-query>
+	<db:template-query name="deleteKorisnik" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\deleteKorisnik.sql" />
+	</db:template-query>
+	<db:template-query name="login" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\login.sql" />
+	</db:template-query>
+	<db:template-query name="emailVerified" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\emailVerified.sql" />
+	</db:template-query>
+	<db:template-query name="updatePassword" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\updatePassword.sql" />
+	</db:template-query>
+	<db:template-query name="selectLozinka" doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectLozinka.sql" />
+	</db:template-query>
+	<db:template-query name="selectByEmailKorisnik"
+		doc:name="Template Query">
+		<db:parameterized-query file="src\test\resources\selectByEmailKorisnik.sql" />
+	</db:template-query>
+	<flow name="getKorisniciFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectAllKorisnik" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-payload doc:name="Set Payload"
+					value="{  &quot;message&quot;: &quot;Trenutno nema korisnika u bazi podataka&quot; }" />
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="77ca259c-c726-4c0a-b760-6c9cbc9fdacb">
+					<dw:input-payload doc:sample="sample_data\Korisnik.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_korisnik_playground.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="getKorisnikByIDFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByIDKorisnik" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="korisnikErrorFlow" doc:name="korisnikErrorFlow" />
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="0fe42e8b-7777-4c96-b646-7e402c963723">
+					<dw:input-payload doc:sample="sample_data\Korisnik.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_korisnik_playground.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="getKorisnikByEmailFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByEmailKorisnik" />
+		</db:select>
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="0fe42e8b-7777-4c96-b646-7e402c963723">
+			<dw:input-payload doc:sample="sample_data\Korisnik.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:json_korisnik_playground.dwl" />
+		</dw:transform-message>
+	</flow>
+	<flow name="postKorisnikFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="48efdb66-70b0-4517-8ea5-070276a88acd">
+			<dw:input-payload doc:sample="korisnik-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_korisnik_playground.dwl" />
+		</dw:transform-message>
+		<choice doc:name="Choice">
+			<when expression="#[validator.validateEmail(payload.email)]">
+				<flow-ref name="registrationFlow" doc:name="registrationFlow" />
+			</when>
+			<otherwise>
+				<flow-ref name="invalidEmailFlow" doc:name="invalidEmailFlow" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="putKorisnikByIDFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="89c17348-7043-4111-a611-a88742c72419">
+			<dw:input-payload doc:sample="korisnik-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_korisnik_playground.dwl" />
+		</dw:transform-message>
+		<choice doc:name="Choice">
+			<when expression="#[validator.validateEmail(payload.email)]">
+				<enricher target="#[flowVars.result]" doc:name="Message Enricher">
+					<db:update config-ref="Generic_Database_Configuration"
+						doc:name="Database">
+						<db:template-query-ref name="updateKorisnik" />
+					</db:update>
+				</enricher>
+				<choice doc:name="Choice">
+					<when expression="#[flowVars.result == empty]">
+						<flow-ref name="registrationFlow" doc:name="registrationFlow" />
+						<set-property propertyName="http.status" value="201"
+							doc:name="Property" />
+					</when>
+					<otherwise>
+						<set-payload
+							value="{ &quot;message&quot;: &quot;A&#382;uriran korisnik sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+							doc:name="Set Payload" />
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<flow-ref name="invalidEmailFlow" doc:name="invalidEmailFlow" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="deleteKorisnikByIDFlow">
+		<db:delete config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="deleteKorisnik" />
+		</db:delete>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<flow-ref name="korisnikErrorFlow" doc:name="korisnikErrorFlow" />
+			</when>
+			<otherwise>
+				<set-payload
+					value="{ &quot;message&quot;: &quot;Obrisan korisnik sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="registrationFlow">
+		<set-variable variableName="code" value="#[payload.lozinka]"
+			doc:name="Variable" />
+		<set-variable variableName="email" value="#[payload.email]"
+			doc:name="Variable" />
+		<db:insert config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="insertKorisnik" />
+		</db:insert>
+		<async doc:name="Async">
+			<set-payload
+				value="Da verifikujete svoj nalog posetite slede&#263;u adresu: http://localhost:8080/api/emailVerification?code=#[flowVars.code]"
+				mimeType="text/plain" doc:name="Set Payload" />
+			<smtp:outbound-endpoint host="smtp.gmail.com"
+				port="587" user="trafika.app@gmail.com" password="********" to="#[flowVars.email]"
+				from="trafika.app@gmail.com" subject="Verify your account"
+				responseTimeout="10000" mimeType="text/plain" doc:name="SMTP">
+				<property key="mail.smtp.starttls.enable" value="true" />
+			</smtp:outbound-endpoint>
+		</async>
+		<set-payload
+			value="{ &quot;message&quot;: &quot;Kako bi uspe&#353;no zavr&#353;ili proces registracije naloga potrebno je da potvrdite svoju mejl adresu. Poslat vam je verifikacioni mejl.&quot; }"
+			doc:name="Set Payload" />
+	</flow>
+	<flow name="loginFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="c4aff249-03d2-4e70-8a11-f5e4e2213f8a">
+			<dw:input-payload doc:sample="login-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_playground.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="email" value="#[payload.email]"
+			doc:name="Variable" />
+		<set-variable variableName="password" value="#[payload.lozinka]"
+			doc:name="Variable" />
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="login" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload != empty]">
+				<flow-ref name="userExistFlow" doc:name="userExistFlow" />
+			</when>
+			<otherwise>
+				<set-property propertyName="http.status" value="404"
+					doc:name="Property" />
+				<set-payload
+					value="{  &quot;message&quot;: &quot;U bazi podataka ne postoji korisnik sa navedenom email adresom&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="userExistFlow">
+		<set-variable variableName="korisnikID" value="#[payload[0].korisnikID]"
+			doc:name="Variable" />
+		<set-variable variableName="verifikovan" value="#[payload[0].verifikovan]"
+			doc:name="Variable" />
+
+		<invoke object-ref="invokeJavaFunc" method="decrypt"
+			methodArguments="#[flowVars.password], #[payload[0].lozinka]"
+			doc:name="Invoke" />
+		<choice doc:name="Choice">
+			<when expression="#[payload == &quot;It does not match&quot;]">
+				<set-property propertyName="http.status" value="400"
+					doc:name="Property" />
+				<set-payload
+					value="{  &quot;message&quot;: &quot;Pogre&#353;na lozinka&quot; }"
+					doc:name="Set Payload" />
+			</when>
+			<otherwise>
+				<choice doc:name="Choice">
+					<when expression="#[flowVars.verifikovan == 'false']">
+						<set-property propertyName="http.status" value="400"
+							doc:name="Property" />
+						<set-payload
+							value="{  &quot;message&quot;: &quot;Morate prvo verifikovati svoj nalog!&quot; }"
+							doc:name="Set Payload" />
+					</when>
+					<otherwise>
+						<invoke object-ref="invokeJWT" method="createJWT" methodArguments="#[flowVars.password], #[flowVars.email]" doc:name="Invoke"/>
+						<set-payload value="{    &quot;token&quot;: &quot;#[payload]&quot;,   &quot;korisnikID&quot;: #[flowVars.korisnikID] }" doc:name="Set Payload"/>
+					</otherwise>
+				</choice>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="emailVerificationFlow">
+		<db:update config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="emailVerified" />
+		</db:update>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-property propertyName="http.status" value="400"
+					doc:name="Property" />
+				<set-payload value="Zahtev za aktiviranjem naloga nije validan"
+					doc:name="Set Payload" encoding="UTF-8" mimeType="text/plain" />
+			</when>
+			<otherwise>
+				<set-payload
+					value="Email adresa je potvr&#273;ena. Sada se mo&#382;ete ulogovati na svoj nalog."
+					encoding="UTF-8" mimeType="text/plain" doc:name="Set Payload" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="resetPasswordFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="cf3b92e4-e5a4-40a2-a096-4d2428f36815">
+			<dw:input-payload doc:sample="resetPassword-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_playground.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="emailAddress" value="#[payload.email]"
+			doc:name="Variable" />
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectLozinka" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-property propertyName="http.status" value="404"
+					doc:name="Property" />
+				<set-payload
+					value="{  &quot;message&quot;: &quot;Ne postoji nalog sa datom email adresom!&quot; }"
+					doc:name="Set Payload" />
+			</when>
+			<otherwise>
+				<flow-ref name="resetPasswordEmailFlow" doc:name="resetPasswordEmailFlow" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="resetPasswordEmailFlow">
+		<async doc:name="Async">
+			<set-payload
+				value="Da bi ste resetovali va&#353;u lozinku posetite slede&#263;u adresu: http://localhost:4200/resetPassword?code=#[payload[0].lozinka]"
+				encoding="UTF-8" mimeType="text/plain" doc:name="Set Payload" />
+			<smtp:outbound-endpoint host="smtp.gmail.com"
+				port="587" user="trafika.app@gmail.com" password="********"
+				to="#[flowVars.emailAddress]" from="trafika.app@gmail.com" subject="Reset your password"
+				responseTimeout="10000" mimeType="text/plain" doc:name="SMTP">
+				<property key="mail.smtp.starttls.enable" value="true" />
+			</smtp:outbound-endpoint>
+		</async>
+		<set-payload
+			value="{  &quot;message&quot;: &quot;Potrebno je da potvrdite svoju mejl adresu. Poslat vam je verifikacioni mejl&quot; }"
+			doc:name="Set Payload" />
+	</flow>
+	<flow name="passwordUpdateFlow">
+		<dw:transform-message doc:name="Transform Message"
+			metadata:id="48efdb66-70b0-4522-8ea5-070276a88acd">
+			<dw:input-payload doc:sample="password-example.json"
+				mimeType="application/json" />
+			<dw:set-payload resource="classpath:java_password_playground.dwl" />
+		</dw:transform-message>
+		<db:update config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="updatePassword" />
+		</db:update>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-property propertyName="http.status" value="400"
+					doc:name="Property" />
+				<set-payload
+					value="{  &quot;message&quot;: &quot;Zahtev za promenom lozinke nije validan&quot; }"
+					doc:name="Set Payload" />
+			</when>
+			<otherwise>
+				<set-payload
+					value="{  &quot;message&quot;: &quot;Lozinka je promenjena. Sada se mo&#382;ete ulogovati sa novom lozinkom&quot; }"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="invalidEmailFlow">
+		<set-property propertyName="http.status" value="400"
+			doc:name="Property" />
+		<set-payload
+			value="{  &quot;message&quot;: &quot;Unesite validnu email adresu&quot; }"
+			doc:name="Set Payload" />
+	</flow>
+	<flow name="korisnikErrorFlow">
+		<set-property propertyName="http.status" value="404"
+			doc:name="Property" />
+		<set-payload
+			value="{  &quot;message&quot;: &quot;Ne postoji korisnik sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
+			doc:name="Set Payload" />
+	</flow>
+</mule>
