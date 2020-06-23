@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:cors="http://www.mulesoft.org/schema/mule/cors"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
 	xmlns:spring="http://www.springframework.org/schema/beans"
 	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/cors http://www.mulesoft.org/schema/mule/cors/current/mule-cors.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -20,6 +22,8 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	<flow name="trafika-api-main">
 		<http:listener config-ref="HTTP_Listener_Configuration"
 			path="/api/*" doc:name="HTTP" />
+		<cors:validate config-ref="Cors_Configuration"
+			publicResource="true" acceptsCredentials="false" doc:name="CORS Validate" />
 		<apikit:router config-ref="trafika-api-config" doc:name="APIkit Router" />
 		<exception-strategy ref="trafika-api-apiKitGlobalExceptionMapping"
 			doc:name="Reference Exception Strategy" />
@@ -27,6 +31,8 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	<flow name="trafika-api-console">
 		<http:listener config-ref="HTTP_Listener_Configuration"
 			path="/console/*" doc:name="HTTP" />
+		<cors:validate config-ref="Cors_Configuration"
+			publicResource="true" acceptsCredentials="false" doc:name="CORS Validate" />
 		<apikit:console config-ref="trafika-api-config"
 			doc:name="APIkit Console" />
 	</flow>
@@ -537,6 +543,18 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 			</otherwise>
 		</choice>
 	</flow>
+	<flow name="get:/porudzbina/dobavljac/{ID}:trafika-api-config">
+		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
+			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
+		<choice doc:name="Choice">
+			<when expression="#[payload == &quot;valid&quot;]">
+				<flow-ref name="getPorudzbinaByDobavljacIDFlow" doc:name="getPorudzbinaByDobavljacIDFlow" />
+			</when>
+			<otherwise>
+				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
+			</otherwise>
+		</choice>
+	</flow>
 	<flow name="get:/proizvod/{ID}:trafika-api-config">
 		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
 			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
@@ -609,8 +627,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 			</otherwise>
 		</choice>
 	</flow>
-	<flow
-		name="get:/stavkaPorudzbine/{porudzbinaID}/{proizvodID}:trafika-api-config">
+	<flow name="get:/stavkaPorudzbine/{ID}:trafika-api-config">
 		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
 			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
 		<choice doc:name="Choice">
@@ -622,7 +639,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 			</otherwise>
 		</choice>
 	</flow>
-	<flow name="get:/stavkaRacuna/{racunID}/{proizvodID}:trafika-api-config">
+	<flow name="get:/stavkaRacuna/{ID}:trafika-api-config">
 		<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
 			methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
 		<choice doc:name="Choice">
@@ -635,19 +652,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 		</choice>
 	</flow>
 	<flow name="post:/dobavljac:application/json:trafika-api-config">
-		<enricher target="#[flowVars.output]" doc:name="Message Enricher">
-			<invoke object-ref="validateJWT" method="parseJWT"
-				methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]"
-				doc:name="Invoke" metadata:id="efb54277-8a53-4617-9f4e-5df615156cc9" />
-		</enricher>
-		<choice doc:name="Choice">
-			<when expression="#[flowVars.output == &quot;valid&quot;]">
-				<flow-ref name="postDobavljacFlow" doc:name="postDobavljacFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
+		<flow-ref name="postDobavljacFlow" doc:name="postDobavljacFlow" />
 	</flow>
 	<flow name="post:/izvestaj:application/json:trafika-api-config">
 		<enricher target="#[flowVars.output]" doc:name="Message Enricher">
@@ -667,18 +672,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 		<flow-ref name="postKorisnikFlow" doc:name="postKorisnikFlow" />
 	</flow>
 	<flow name="post:/menadzer:application/json:trafika-api-config">
-		<enricher target="#[flowVars.output]" doc:name="Message Enricher">
-			<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-				methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		</enricher>
-		<choice doc:name="Choice">
-			<when expression="#[flowVars.output == &quot;valid&quot;]">
-				<flow-ref name="postMenadzerFlow" doc:name="postMenadzerFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
+		<flow-ref name="postMenadzerFlow" doc:name="postMenadzerFlow" />
 	</flow>
 	<flow name="post:/porudzbina:application/json:trafika-api-config">
 		<enricher target="#[flowVars.output]" doc:name="Message Enricher">
@@ -695,18 +689,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 		</choice>
 	</flow>
 	<flow name="post:/prodavac:application/json:trafika-api-config">
-		<enricher target="#[flowVars.output]" doc:name="Message Enricher">
-			<invoke object-ref="validateJWT" method="parseJWT" doc:name="Invoke"
-				methodArguments="#[(message.inboundProperties.Authorization == empty) ? ' ' : message.inboundProperties.Authorization]" />
-		</enricher>
-		<choice doc:name="Choice">
-			<when expression="#[flowVars.output == &quot;valid&quot;]">
-				<flow-ref name="postProdavacFlow" doc:name="postProdavacFlow" />
-			</when>
-			<otherwise>
-				<flow-ref name="notAuthenticatedFlow" doc:name="notAuthenticatedFlow" />
-			</otherwise>
-		</choice>
+		<flow-ref name="postProdavacFlow" doc:name="postProdavacFlow" />
 	</flow>
 	<flow name="post:/proizvod:application/json:trafika-api-config">
 		<enricher target="#[flowVars.output]" doc:name="Message Enricher">
@@ -804,13 +787,16 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	<flow name="get:/emailVerification:trafika-api-config">
 		<flow-ref name="emailVerificationFlow" doc:name="emailVerificationFlow" />
 	</flow>
+	<flow name="get:/korisnik/email/{email}:trafika-api-config">
+		<flow-ref name="getKorisnikByEmailFlow" doc:name="getKorisnikByEmailFlow" />
+	</flow>
 	<flow name="notAuthenticatedFlow">
-
 		<set-property propertyName="http.status" value="401"
 			doc:name="Property" />
 		<set-payload value="{  &quot;message&quot;: &quot;Not Authenticated&quot; }"
 			doc:name="Set Payload" />
 	</flow>
+
 	<apikit:mapping-exception-strategy
 		name="trafika-api-apiKitGlobalExceptionMapping">
 		<apikit:mapping statusCode="404">

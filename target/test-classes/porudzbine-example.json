@@ -1,8 +1,8 @@
 [
 	{
 		"porudzbinaID": 1,
-		"datumPorucivanja": "2015-05-25",
-		"datumIsporuke": "2015-05-30",
+		"datumPorucivanja": "2016-02-28T16:41:41.090Z",
+		"datumIsporuke": "2017-02-28T16:41:41.090Z",
 		"ukupanIznosPorudzbine": 12323,
 		"statusPorudzbine": "poruceno",
 		"dobavljacID": 1,
@@ -10,8 +10,8 @@
 		"prodavacID": 1
 	},
 	{
-		"datumPorucivanja": "2014-05-25",
-		"datumIsporuke": "2015-05-30",
+		"datumPorucivanja": "2016-02-28T16:41:41.090Z",
+		"datumIsporuke": "2017-02-28T16:41:41.090Z",
 		"ukupanIznosPorudzbine": 120,
 		"statusPorudzbine": "poruceno",
 		"dobavljacID": 1,

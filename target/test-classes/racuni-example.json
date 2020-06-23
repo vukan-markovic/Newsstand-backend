@@ -1,7 +1,7 @@
 [
 	{
 		"racunID": 1,
-		"vremeIzdavanja": "2016-02-28T16:41:41",
+		"vremeIzdavanja": "2016-02-28T16:41:41.090Z",
 		"mestoIzdavanja": "Sombor",
 		"ukupanIznosRacuna": 120,
 		"nazivProdavnice": "Trafika BMB",
@@ -11,7 +11,7 @@
 	},
 	{
 		"racunID": 2,
-		"vremeIzdavanja": "2015-07-28T16:47:41",
+		"vremeIzdavanja": "2016-02-28T16:41:41.090Z",
 		"mestoIzdavanja": "Beograd",
 		"ukupanIznosRacuna": 200,
 		"nazivProdavnice": "Trafika",

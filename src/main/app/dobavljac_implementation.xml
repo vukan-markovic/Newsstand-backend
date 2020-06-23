@@ -31,9 +31,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<db:template-query name="updateDobavljac" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\updateDobavljac.sql" />
 	</db:template-query>
-	<db:template-query name="deleteDobavljac" doc:name="Template Query">
-		<db:parameterized-query file="src\test\resources\deleteDobavljac.sql" />
-	</db:template-query>
 	<db:template-query name="insertDobavljac2" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\insertDobavljac2.sql" />
 	</db:template-query>
@@ -92,7 +89,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 			doc:name="Database">
 			<db:template-query-ref name="insertDobavljac" />
 		</db:insert>
-		<set-payload value="{ &quot;message&quot;: &quot;Dodat novi dobavlja&#269;&quot; }"  doc:name="Set Payload"/>
+		<set-payload
+			value="{ &quot;message&quot;: &quot;Dodat novi dobavlja&#269;&quot; }"
+			doc:name="Set Payload" />
 	</flow>
 	<flow name="putDobavljacByIDFlow">
 		<dw:transform-message doc:name="Transform Message"
@@ -115,7 +114,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				</db:insert>
 				<set-property propertyName="http.status" value="201"
 					doc:name="Property" />
-				<set-payload value="{ &quot;message&quot;: &quot;Dodat novi dobavlja&#269;&quot; }"  doc:name="Set Payload"/>
+				<set-payload
+					value="{ &quot;message&quot;: &quot;Dodat novi dobavlja&#269;&quot; }"
+					doc:name="Set Payload" />
 			</when>
 			<otherwise>
 				<set-payload
@@ -126,16 +127,14 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	</flow>
 
 	<flow name="deleteDobavljacByIDFlow">
-		<db:delete config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="deleteDobavljac" />
-		</db:delete>
+		<db:bulk-execute config-ref="Generic_Database_Configuration"
+			doc:name="Database"><![CDATA[delete from it20g2016.trafika.Dobavljac where dobavljacID=#[message.inboundProperties.'http.uri.params'.ID];]]>
+		</db:bulk-execute>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<flow-ref name="dobavljacErrorFlow" doc:name="dobavljacErrorFlow" />
 			</when>
 			<otherwise>
-
 				<set-payload
 					value="{ &quot;message&quot;: &quot;Obrisan dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
@@ -144,11 +143,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 
 	</flow>
 
-
 	<flow name="dobavljacErrorFlow">
 		<set-property propertyName="http.status" value="404"
 			doc:name="Property" />
-
 		<set-payload
 			value="{ &quot;message&quot;: &quot;Ne postoji dobavlja&#269; sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 			doc:name="Set Payload" />

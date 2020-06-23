@@ -10,6 +10,6 @@ payload map ((payload) -> {
 	(adresaStanovanja: payload.adresaStanovanja) when payload.adresaStanovanja != null,
 	(telefon: payload.telefon) when payload.telefon != null,
 	JMBG: payload.JMBG,
-	(datumZaposlenja: payload.datumZaposlenja) when payload.datumZaposlenja != null,
-	strucnaSprema: payload.strucnaSprema
+	datumZaposlenja: payload.datumZaposlenja,
+	(strucnaSprema: payload.strucnaSprema) when payload.strucnaSprema != null
 })

@@ -12,5 +12,5 @@ payload map ((payload) -> {
 	postanskiBroj: payload.postanskiBroj,
 	PIB: payload.PIB,
 	(kontaktOsoba: payload.kontaktOsoba) when payload.kontaktOsoba != null,
-	(brojZiroRacuna: payload.brojZiroRacuna) when payload.brojZiroRacuna != null
+	brojZiroRacuna: payload.brojZiroRacuna
 })

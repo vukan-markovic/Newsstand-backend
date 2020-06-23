@@ -115,7 +115,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<flow-ref name="izvestajErrorFlow" doc:name="izvestajErrorFlow" />
 			</when>
 			<otherwise>
-
 				<set-payload
 					value="{ &quot;message&quot;: &quot;Obrisan izve&#353;taj sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />

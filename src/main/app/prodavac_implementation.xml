@@ -28,9 +28,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<db:template-query name="updateProdavac" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\updateProdavac.sql" />
 	</db:template-query>
-	<db:template-query name="deleteProdavac" doc:name="Template Query">
-		<db:parameterized-query file="src\test\resources\deleteProdavac.sql" />
-	</db:template-query>
 	<db:template-query name="insertProdavac2" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\insertProdavac2.sql" />
 	</db:template-query>
@@ -110,8 +107,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<set-property propertyName="http.status" value="201"
 					doc:name="Property" />
 				<set-payload
-			value="{ &quot;message&quot;: &quot;Dodat novi prodavac&quot; }"
-			doc:name="Set Payload" />
+					value="{ &quot;message&quot;: &quot;Dodat novi prodavac&quot; }"
+					doc:name="Set Payload" />
 			</when>
 			<otherwise>
 				<set-payload
@@ -121,16 +118,14 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</choice>
 	</flow>
 	<flow name="deleteProdavacByIDFlow">
-		<db:delete config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="deleteProdavac" />
-		</db:delete>
+		<db:bulk-execute config-ref="Generic_Database_Configuration"
+			doc:name="Database"><![CDATA[delete from it20g2016.trafika.Prodavac where prodavacID=#[message.inboundProperties.'http.uri.params'.ID];]]>
+		</db:bulk-execute>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<flow-ref name="prodavacErrorFlow" doc:name="prodavacErrorFlow" />
 			</when>
 			<otherwise>
-
 				<set-payload
 					value="{ &quot;message&quot;: &quot;Obrisan prodavac sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />

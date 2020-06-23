@@ -28,9 +28,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<db:template-query name="updateMenadzer" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\updateMenadzer.sql" />
 	</db:template-query>
-	<db:template-query name="deleteMenadzer" doc:name="Template Query">
-		<db:parameterized-query file="src\test\resources\deleteMenadzer.sql" />
-	</db:template-query>
 	<db:template-query name="insertMenadzer2" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\insertMenadzer2.sql" />
 	</db:template-query>
@@ -61,7 +58,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:select>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
-				<flow-ref name="menadzerErrorFlow" doc:name="menadzerErrorFlow" />
+				<set-payload value="{ &quot;message&quot;: &quot;Ne postoji menad&#382;er sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" doc:name="Set Payload"/>
 			</when>
 			<otherwise>
 				<dw:transform-message doc:name="Transform Message"
@@ -121,10 +118,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</choice>
 	</flow>
 	<flow name="deleteMendzerByIDFlow">
-		<db:delete config-ref="Generic_Database_Configuration"
-			doc:name="Database">
-			<db:template-query-ref name="deleteMenadzer" />
-		</db:delete>
+		<db:bulk-execute config-ref="Generic_Database_Configuration"
+			doc:name="Database"><![CDATA[delete from it20g2016.trafika.Menadzer where menadzerID=#[message.inboundProperties.'http.uri.params'.ID];]]>
+		</db:bulk-execute>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<flow-ref name="menadzerErrorFlow" doc:name="menadzerErrorFlow" />

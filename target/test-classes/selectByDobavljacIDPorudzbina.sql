@@ -1,0 +1,1 @@
+select * from it20g2016.trafika.Porudzbina where dobavljacID=#[message.inboundProperties.'http.uri.params'.ID];

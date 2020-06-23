@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "32a2d7f0-1716-4e63-aaef-f88702d661f0",
+		"_postman_id": "c1fd10a5-5ddc-44c0-bfee-b08259352101",
 		"name": "Trafika",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -407,7 +407,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaRacuna/1/1",
+			"name": "http://localhost:8080/api/stavkaRacuna/1",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -423,7 +423,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaRacuna/1/1",
+					"raw": "http://localhost:8080/api/stavkaRacuna/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -432,7 +432,6 @@
 					"path": [
 						"api",
 						"stavkaRacuna",
-						"1",
 						"1"
 					]
 				}
@@ -1036,23 +1035,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/stavkaPorudzbine/1/1",
+			"name": "http://localhost:8080/api/stavkaPorudzbine/1",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					},
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
-						"type": "text"
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/stavkaPorudzbine/1/1",
+					"raw": "http://localhost:8080/api/stavkaPorudzbine/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1061,7 +1060,6 @@
 					"path": [
 						"api",
 						"stavkaPorudzbine",
-						"1",
 						"1"
 					]
 				}
@@ -2098,6 +2096,75 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/korisnik/vukan.markovic97@gmail.com",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/korisnik/email/vukan.markovic97@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"korisnik",
+						"email",
+						"vukan.markovic97@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/porudzbina/dobavljac/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjM0NTYiLCJpYXQiOjE1ODgxNjExOTEsInN1YiI6Imp3dCIsImlzcyI6InZ1a2FuLm1hcmtvdmljOTdAZ21haWwuY29tIn0.EVRFhZUfOBGlG9XBngydZNAlnQtco45PfslD6LZDor0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/porudzbina/dobavljac/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"porudzbina",
+						"dobavljac",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {
+		
+	}
 }

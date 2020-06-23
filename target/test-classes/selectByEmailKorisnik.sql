@@ -1,0 +1,1 @@
+select * from it20g2016.trafika.Korisnik where email=#[message.inboundProperties.'http.uri.params'.email];

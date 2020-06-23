@@ -67,7 +67,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:select>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
-				<flow-ref name="stavkaRacunaErrorFlow" doc:name="stavkaRacunaErrorFlow" />
+				<set-payload value="{ &quot;message&quot;: &quot;Ne postoje stavke ra&#269;una na ra&#269;unu sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }" doc:name="Set Payload"/>
 			</when>
 			<otherwise>
 				<dw:transform-message doc:name="Transform Message"
@@ -133,7 +133,8 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</db:delete>
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
-				<flow-ref name="stavkaRacunaErrorFlow" doc:name="stavkaRacunaErrorFlow" />
+				<set-property propertyName="http.status" value="404" doc:name="Property"/>
+				<set-payload value="{ &quot;message&quot;: &quot;Ne postoji stavka ra&#269;una sa ra&#269;un id: #[message.inboundProperties.'http.uri.params'.racunID] i proizvod id: #[message.inboundProperties.'http.uri.params'.proizvodID]&quot; }" doc:name="Set Payload"/>
 			</when>
 			<otherwise>
 				<set-payload
@@ -143,11 +144,4 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		</choice>
 	</flow>
 
-	<flow name="stavkaRacunaErrorFlow">
-		<set-property propertyName="http.status" value="404"
-			doc:name="Property" />
-		<set-payload
-			value="{ &quot;message&quot;: &quot;Ne postoji stavka ra&#269;una sa ra&#269;un id: #[message.inboundProperties.'http.uri.params'.racunID] i proizvod id: #[message.inboundProperties.'http.uri.params'.proizvodID]&quot; }"
-			doc:name="Set Payload" />
-	</flow>
 </mule>

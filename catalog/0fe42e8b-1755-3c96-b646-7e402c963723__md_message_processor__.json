@@ -5,7 +5,12 @@
             "typeId": "porudzbina"
         }
     },
-    "outputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "porudzbine"
+        }
+    },
     "id": "0fe42e8b-1755-3c96-b646-7e402c963723",
     "version": "5.2.0.0"
 }

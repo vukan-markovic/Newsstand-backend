@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
-	xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:cors="http://www.mulesoft.org/schema/mule/cors"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:db="http://www.mulesoft.org/schema/mule/db"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -13,7 +13,8 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/cors http://www.mulesoft.org/schema/mule/cors/current/mule-cors.xsd">
 	<http:listener-config name="HTTP_Listener_Configuration"
 		host="localhost" port="${http.port}" doc:name="HTTP Listener Configuration" />
 	<context:property-placeholder location="trafika-DEV.properties" />
@@ -36,4 +37,20 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
 			</global-functions>
 		</expression-language>
 	</configuration>
+	<cors:config name="Cors_Configuration" doc:name="Cors Configuration">
+		<cors:origins>
+			<cors:origin url="*" accessControlMaxAge="180">
+				<cors:methods>
+					<cors:method>GET</cors:method>
+					<cors:method>POST</cors:method>
+					<cors:method>PUT</cors:method>
+					<cors:method>DELETE</cors:method>
+					<cors:method>OPTIONS</cors:method>
+				</cors:methods>
+				<cors:headers>
+					<cors:header>X-Allow-Origin</cors:header>
+				</cors:headers>
+			</cors:origin>
+		</cors:origins>
+	</cors:config>
 </mule>

@@ -31,6 +31,7 @@ types:
           application/json:
             example: 
               token: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+              korisnikID: 1
               
 /resetPassword: 
   post:
@@ -390,11 +391,6 @@ types:
             example: !include examples/ProdavciExample.raml
 
   post:
-    headers:
-      Authorization:
-        type: string
-        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
-        required: false
     body: 
       application/json:
         type: Prodavac
@@ -476,11 +472,6 @@ types:
             example: !include examples/MenadzeriExample.raml
 
   post:
-    headers:
-      Authorization:
-        type: string
-        example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
-        required: false
     body: 
       application/json:
         type: Menadzer
@@ -610,11 +601,6 @@ types:
             example: !include examples/DobavljaciExample.raml
 
   post:
-    headers:
-        Authorization:
-          type: string
-          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
-          required: false
     body: 
       application/json:
         type: Dobavljac
@@ -758,6 +744,7 @@ types:
             application/json:
               type: Porudzbina
               example: !include examples/PorudzbinaExample.raml
+             
     delete:
       headers:
         Authorization:
@@ -786,6 +773,20 @@ types:
             application/json:
               example:
                 message: 'Ažurirana porudžbina sa id: 1'
+                
+  /dobavljac/{ID}:
+    get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Porudzbina
+              example: !include examples/PorudzbinaExample.raml 
                 
 /izvestaj:
   get:
@@ -935,7 +936,7 @@ types:
             example: 
               message: Dodata nova stavka računa
 
-  /{racunID}/{proizvodID}:
+  /{ID}:
     get:
       headers:
         Authorization:
@@ -948,6 +949,8 @@ types:
             application/json:
               type: StavkaRacuna
               example: !include examples/StavkaRacunaExample.raml
+  
+  /{racunID}/{proizvodID}:
     delete:
       headers:
         Authorization:
@@ -1021,7 +1024,7 @@ types:
             example: 
               message: Dodata nova stavka porudžbine
 
-  /{porudzbinaID}/{proizvodID}:
+  /{ID}:
     get:
       headers:
         Authorization:
@@ -1034,6 +1037,8 @@ types:
             application/json:
               type: StavkaPorudzbine
               example: !include examples/StavkaPorudzbineExample.raml
+              
+  /{porudzbinaID}/{proizvodID}:
     delete:
       headers:
         Authorization:
@@ -1104,6 +1109,20 @@ types:
           application/json:
             example: 
               message: Kako bi uspešno završili proces registracije naloga potrebno je da potvrdite svoju mejl adresu. Poslat vam je verifikacioni mejl.
+
+  /email/{email}:
+    get:
+      headers:
+        Authorization:
+          type: string
+          example: OjUyMmZkYjhiYzJjZWRiZGM4MzFlMmUyMmE4ZWIzNzNm
+          required: false
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: Korisnik
+              example: !include examples/KorisnikExample.raml
 
   /{ID}:
     get:

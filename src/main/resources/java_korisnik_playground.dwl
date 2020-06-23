@@ -6,5 +6,5 @@
 	email: payload.email,
 	lozinka: encrypt(payload.lozinka),
 	uloga: payload.uloga,
-	verifikovan: payload.verifikovan
+	(verifikovan: payload.verifikovan) when payload.verifikovan != null
 } 

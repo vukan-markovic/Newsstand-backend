@@ -32,6 +32,11 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	<db:template-query name="deletePorudzbina" doc:name="Template Query">
 		<db:parameterized-query file="src\test\resources\deletePorudzbina.sql" />
 	</db:template-query>
+	<db:template-query name="selectByDobavljacIDPorudzbina"
+		doc:name="Template Query">
+		<db:parameterized-query
+			file="src\test\resources\selectByDobavljacIDPorudzbina.sql" />
+	</db:template-query>
 	<flow name="getPorudzbineFlow">
 		<db:select config-ref="Generic_Database_Configuration"
 			doc:name="Database">
@@ -60,6 +65,27 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 		<choice doc:name="Choice">
 			<when expression="#[payload == empty]">
 				<flow-ref name="porudzbinaErrorFlow" doc:name="porudzbinaErrorFlow" />
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message"
+					metadata:id="0fe42e8b-1755-3c96-b646-7e402c963723">
+					<dw:input-payload doc:sample="sample_data\Porudzbina.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:json_porudzbina_playground.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="getPorudzbinaByDobavljacIDFlow">
+		<db:select config-ref="Generic_Database_Configuration"
+			doc:name="Database">
+			<db:template-query-ref name="selectByDobavljacIDPorudzbina" />
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload == empty]">
+				<set-payload
+					value="{  &quot;message&quot;: &quot;Trenutno nema va&#353;ih porud&#382;bina u bazi podataka&quot; }"
+					doc:name="Set Payload" />
 			</when>
 			<otherwise>
 				<dw:transform-message doc:name="Transform Message"
@@ -116,7 +142,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 				<flow-ref name="porudzbinaErrorFlow" doc:name="porudzbinaErrorFlow" />
 			</when>
 			<otherwise>
-
 				<set-payload
 					value="{ &quot;message&quot;: &quot;Obrisana porud&#382;bina sa id: #[message.inboundProperties.'http.uri.params'.ID]&quot; }"
 					doc:name="Set Payload" />
